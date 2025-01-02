@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Medical_Event_vod</fullName>
+    <active>true</active>
+    <description>Standard record type for Medical Events</description>
+    <label>Medical_Event_vod</label>
+    <picklistValues>
+        <picklist>VIA_Type__c</picklist>
+        <values>
+            <fullName>3rd Party Event Registration</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Commercial Advisory Board</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Conference</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Congress</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Master Class</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Meeting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Roundtable</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Site Visit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Symposium</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

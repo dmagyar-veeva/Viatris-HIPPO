@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Type --></label>
+    <name>VIA_Type__c</name>
+    <picklistValues>
+        <masterLabel>3rd Party Event Registration</masterLabel>
+        <translation><!-- 3rd Party Event Registration --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Commercial Advisory Board</masterLabel>
+        <translation><!-- Commercial Advisory Board --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Conference</masterLabel>
+        <translation><!-- Conference --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Congress</masterLabel>
+        <translation><!-- Congress --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Lunch &amp; Learn</masterLabel>
+        <translation><!-- Lunch &amp; Learn --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Master Class</masterLabel>
+        <translation><!-- Master Class --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Meeting</masterLabel>
+        <translation><!-- Meeting --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Other</masterLabel>
+        <translation><!-- Other --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Roundtable</masterLabel>
+        <translation><!-- Roundtable --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Site Visit</masterLabel>
+        <translation><!-- Site Visit --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Symposium</masterLabel>
+        <translation><!-- Symposium --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

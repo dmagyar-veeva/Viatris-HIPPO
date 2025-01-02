@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Override_Action_Approve</fullName>
+        <categories>Custom Items to Approve</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Override Action - Approve Button</shortDescription>
+        <value>Approve</value>
+    </labels>
+    <labels>
+        <fullName>Override_Action_Approve_Txt</fullName>
+        <categories>Custom Items to Approve</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Override Action - Approve Text</shortDescription>
+        <value>Approve</value>
+    </labels>
+    <labels>
+        <fullName>Override_Action_Cancel</fullName>
+        <categories>Custom Items to Approve</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Override Action - Cancel Button</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>Override_Action_Close_Modal</fullName>
+        <categories>Custom Items to Approve</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Override Action - Close Modal Box</shortDescription>
+        <value>Close</value>
+    </labels>
+    <labels>
+        <fullName>Override_Action_Comment_Placeholder</fullName>
+        <categories>Custom Items to Approve</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Override Action - View  Approve Event</shortDescription>
+        <value>Enter Comments Here</value>
+    </labels>
+    <labels>
+        <fullName>Override_Action_Event_Message</fullName>
+        <categories>Custom Items to Approve</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Override Action - Message for Event Approvals</shortDescription>
+        <value>Event records may only be approved or rejected from their Detail Pages. Click &apos;View Event&apos; to be directed to the Event Detail page.</value>
+    </labels>
+    <labels>
+        <fullName>Override_Action_Reject</fullName>
+        <categories>Custom Items to Approve</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Override Action - Reject Button</shortDescription>
+        <value>Reject</value>
+    </labels>
+    <labels>
+        <fullName>Override_Action_Reject_Txt</fullName>
+        <categories>Custom Items to Approve</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Override Action - Reject Text</shortDescription>
+        <value>Reject</value>
+    </labels>
+    <labels>
+        <fullName>Override_Action_View_Event</fullName>
+        <categories>Custom Items to Approve</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Override Action - View Event Button</shortDescription>
+        <value>View Event Details</value>
+    </labels>
+</CustomLabels>

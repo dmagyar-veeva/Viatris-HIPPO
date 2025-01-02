@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VIA_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Commercial Advisory Board</fullName>
+                <default>false</default>
+                <label>Commercial Advisory Board</label>
+            </value>
+            <value>
+                <fullName>Master Class</fullName>
+                <default>false</default>
+                <label>Master Class</label>
+            </value>
+            <value>
+                <fullName>Roundtable</fullName>
+                <default>false</default>
+                <label>Roundtable</label>
+            </value>
+            <value>
+                <fullName>Symposium</fullName>
+                <default>false</default>
+                <label>Symposium</label>
+            </value>
+            <value>
+                <fullName>Site Visit</fullName>
+                <default>false</default>
+                <label>Site Visit</label>
+            </value>
+            <value>
+                <fullName>Conference</fullName>
+                <default>false</default>
+                <label>Conference</label>
+            </value>
+            <value>
+                <fullName>Congress</fullName>
+                <default>false</default>
+                <label>Congress</label>
+            </value>
+            <value>
+                <fullName>Meeting</fullName>
+                <default>false</default>
+                <label>Meeting</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>3rd Party Event Registration</fullName>
+                <default>false</default>
+                <label>3rd Party Event Registration</label>
+            </value>
+            <value>
+                <fullName>Lunch &amp; Learn</fullName>
+                <default>false</default>
+                <label>Lunch &amp; Learn</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

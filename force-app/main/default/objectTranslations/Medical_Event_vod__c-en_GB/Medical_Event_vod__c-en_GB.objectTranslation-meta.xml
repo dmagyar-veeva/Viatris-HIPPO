@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Meeting</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Meetings</value>
+    </caseValues>
+    <layouts>
+        <layout>EPD EU Medical Event Layout</layout>
+        <sections>
+            <label><!-- Disclaimer --></label>
+            <section>Disclaimer</section>
+        </sections>
+        <sections>
+            <label><!-- Unnamed Attendees Summary (no Account page) --></label>
+            <section>Unnamed Attendees Summary (no Account page)</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>EPD IBE Medical Event Layout</layout>
+        <sections>
+            <label><!-- Expenses Summary --></label>
+            <section>Expenses Summary</section>
+        </sections>
+        <sections>
+            <label><!-- Unnamed Attendees Summary (no Account page) --></label>
+            <section>Unnamed Attendees Summary (no Account page)</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>VIA_UK_Hippo_Medical_Event_End_User</layout>
+        <sections>
+            <label><!-- Expenses Summary --></label>
+            <section>Expenses Summary</section>
+        </sections>
+        <sections>
+            <label><!-- Unnamed Attendees Summary (no Account page) --></label>
+            <section>Unnamed Attendees Summary (no Account page)</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>VIA_UK_Hippo_Medical_Event_End_User_Read_Only</layout>
+        <sections>
+            <label><!-- Expenses Summary --></label>
+            <section>Expenses Summary</section>
+        </sections>
+        <sections>
+            <label><!-- Unnamed Attendees Summary (no Account page) --></label>
+            <section>Unnamed Attendees Summary (no Account page)</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Meeting Name</nameFieldLabel>
+    <recordTypes>
+        <description><!-- Used for events where primary focus is awards --></description>
+        <label><!-- Award_vod --></label>
+        <name>Award_vod</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- BE Medical Event --></label>
+        <name>BE_Medical_Event</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- &quot;Congress&quot; type Medical Event for France on a base of Global Event --></description>
+        <label><!-- Congress --></label>
+        <name>Congress</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Congress --></description>
+        <label><!-- Congress_vod --></label>
+        <name>Congress_vod</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Separated layout for Global Events --></description>
+        <label><!-- FR Global Event --></label>
+        <name>EPD_FR_MED_Global_Event</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- 20130720 CV - UK: Created to differentiate the UK Medical Events --></description>
+        <label><!-- UK Medical Event --></label>
+        <name>EPD_UK_Medical_Event</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Used for events created from Hippo, where status is completed. --></description>
+        <label><!-- ES Completed Hippo Event --></label>
+        <name>ES_Completed_Hippo_Event</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Record Type for events created automatically from Hippo Events. --></description>
+        <label><!-- ES Hippo Event --></label>
+        <name>ES_Hippo_Event</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- FR Completed Hippo Event --></label>
+        <name>FR_Completed_Hippo_Event</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Separated layout for Donations --></description>
+        <label><!-- FR Donation --></label>
+        <name>FR_Donation</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- FR Hippo Event --></label>
+        <name>FR_Hippo_Event</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- RPS and Opportunity Medical Events --></description>
+        <label><!-- FR Medical Event --></label>
+        <name>FR_Medical_Event</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Investigator Meeting --></description>
+        <label><!-- Investigator_Meeting_vod --></label>
+        <name>Investigator_Meeting_vod</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- New medical event record type for Pharmacy channel users --></description>
+        <label><!-- FR Pharma Medical Event --></label>
+        <name>MYL_FR_Pharma_Medical_Event</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Standard record type for Medical Events --></description>
+        <label><!-- Medical_Event_vod --></label>
+        <name>Medical_Event_vod</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Event Record Type created for Medical Sales --></description>
+        <label><!-- Medical event --></label>
+        <name>Medical_event</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Record Type created for Pharmacies --></description>
+        <label><!-- Pharmacy event --></label>
+        <name>Pharmacy_event</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Round Table --></description>
+        <label><!-- Round_Table_vod --></label>
+        <name>Round_Table_vod</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Used for remote symposium events --></description>
+        <label><!-- Satellite_Symposium_vod --></label>
+        <name>Satellite_Symposium_vod</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Speaker Program --></description>
+        <label><!-- Speaker_Program_vod --></label>
+        <name>Speaker_Program_vod</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Educational materials, medically useful items and gifts of negligible value --></label>
+        <name>VIA_Educational_materials_medically_useful_items_and_gifts_of_negligible_value</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- SFA Integration -  For Greece Medical events --></description>
+        <label><!-- GR Medical Event --></label>
+        <name>VIA_GR_Medical_Event</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- UK Completed Medical Events for Read-Only Profile --></description>
+        <label><!-- UK Completed Medical Event --></label>
+        <name>VIA_UK_Completed_Medical_Event</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Used for workshop events --></description>
+        <label><!-- Workshop_vod --></label>
+        <name>Workshop_vod</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EPD_UK_Medical_Event</fullName>
+    <active>true</active>
+    <description>20130720 CV - UK: Created to differentiate the UK Medical Events</description>
+    <label>UK Medical Event</label>
+    <picklistValues>
+        <picklist>VIA_Type__c</picklist>
+        <values>
+            <fullName>Lunch %26 Learn</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

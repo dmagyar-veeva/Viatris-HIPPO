@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EPD_UK_Planned_Cost_Lock_Lunch_Learn</fullName>
+    <active>true</active>
+    <description>UK - If the Event Expense is an Approved Lunch &amp; Learn the Planned Cost cannot be edited.  daniel.magyar@veeva.com</description>
+    <errorConditionFormula>AND(
+ISCHANGED(EPD_Planned_Cost__c),
+ISPICKVAL(EPD_Medical_Event__r.VIA_Type__c, &apos;Lunch &amp; Learn&apos;),
+EPD_Medical_Event__r.VIA_Country_Code__c = &apos;UK&apos;,
+ISPICKVAL(EPD_Medical_Event__r.VIA_Approval_Status__c, &apos;Approved&apos;)
+)</errorConditionFormula>
+    <errorDisplayField>EPD_Planned_Cost__c</errorDisplayField>
+    <errorMessage>You cannot modify the Planned Cost of an Approved &apos;Lunch &amp; Learn&apos; event.</errorMessage>
+</ValidationRule>

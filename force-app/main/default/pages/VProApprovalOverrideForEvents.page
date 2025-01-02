@@ -1,0 +1,63 @@
+<apex:page standardController="ProcessInstanceWorkitem" extensions="VproApprovalProcessOverrideController" language="{!UserLang}">
+    <apex:slds />
+    <div class="slds-scope">
+        <apex:form >
+
+            <apex:pageBlock id="emobjectapprovalblock" rendered="{!isMedicalEventRecord}">
+                <section role="dialog" tabindex="-1" aria-label="Meaningful description of the modal content" aria-modal="true" aria-describedby="modal-content-id-1"
+                    class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header slds-modal__header_empty">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="{!$Label.Override_Action_Close_Modal}">
+                                <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                                </svg>
+                                <span class="slds-assistive-text">{!$Label.Override_Action_Close_Modal}</span>
+                            </button>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                            <p>{!$Label.Override_Action_Event_Message}</p>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <apex:commandButton value="{!$Label.Override_Action_Cancel}" action="{!cancelRequest}" styleClass="slds-button slds-button_neutral"
+                                rerender="#" status="status" />
+                            <apex:commandButton value="{!$Label.Override_Action_View_Event}" action="{!approveRequest}" styleClass="slds-button slds-button_brand"
+                            />
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+
+            </apex:pageBlock>
+
+            <apex:pageBlock id="otherobjectapprovalblock" rendered="{!NOT(isMedicalEventRecord)}">
+                <apex:pageBlockButtons location="bottom">
+                    <apex:commandButton value="{!$Label.Override_Action_Cancel}" action="{!cancelRequest}" styleClass="slds-button slds-button_neutral"
+                        rerender="otherobjectapprovalblock" status="status" />
+                    <apex:commandButton value="{!$Label.Override_Action_Approve}" action="{!approveRequest}" styleClass="slds-button slds-button_brand"
+                        rerender="otherobjectapprovalblock" status="status" />
+                </apex:pageBlockButtons>
+
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="textarea-id-01">{!$Label.Override_Action_Approve_Txt} {!sObjectTypeLabel}: {!theApprovalRequest.ProcessInstance.TargetObject.Name}</label>
+                    <div class="slds-form-element__control">
+                        <apex:inputTextarea value="{!approvalComments}" id="textarea-id-01" styleClass="slds-textarea" html-placeholder="{!$Label.Override_Action_Comment_Placeholder}">
+                        </apex:inputTextarea>
+                    </div>
+                </div>
+            </apex:pageBlock>
+            <!-- SPINNER -->
+            <apex:actionStatus id="status">
+                <apex:facet name="start">
+                    <div class="slds-spinner_container" style="position: fixed;">
+                        <div role="status" class="slds-spinner slds-spinner--large slds-spinner--brand">
+                            <div class="slds-spinner__dot-a"></div>
+                            <div class="slds-spinner__dot-b"></div>
+                        </div>
+                    </div>
+                </apex:facet>
+            </apex:actionStatus>
+
+        </apex:form>
+    </div>
+</apex:page>

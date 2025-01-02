@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EPD_UK_Planned_Cost_Lock_Hippo_Event</fullName>
+    <active>true</active>
+    <description>UK - If the Event Expense is NOT Lunch &amp; Learn and the Event was created from a Hippo Event, the Planned Cost cannot be edited. This is to make sure that Hippo Event Expenses Planned Costs are not modified for Hippo-related Events. daniel.magyar@veeva.com</description>
+    <errorConditionFormula>AND(
+    ISCHANGED(EPD_Planned_Cost__c),
+    NOT(ISPICKVAL(EPD_Medical_Event__r.VIA_Type__c, &apos;Lunch &amp; Learn&apos;)),
+    EPD_Medical_Event__r.VIA_Country_Code__c = &apos;UK&apos;
+)</errorConditionFormula>
+    <errorDisplayField>EPD_Planned_Cost__c</errorDisplayField>
+    <errorMessage>You cannot modify the Planned Cost of a Hippo-related Event, except if the Type is &apos;Lunch &amp; Learn&apos;.</errorMessage>
+</ValidationRule>
