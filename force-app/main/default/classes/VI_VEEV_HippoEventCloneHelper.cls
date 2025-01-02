@@ -483,9 +483,6 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
                 } else {
                     eventAttendee.Status_vod__c = attendeeStatus;
                 }
-                if (eventAttendee != null) {
-                    System.debug('>>> Just created/updated eventAttendee. Account_vod__c: ' + eventAttendee.Account_vod__c);
-                }
 
                 attendeesToUpsert.add(eventAttendee);
 
@@ -755,7 +752,8 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
 
             //change status to Hippo approved
             if (hippoEvent.Status__c == 'Approved') {
-                medEvent.put('VIA_Status__c', 'Hippo approved');
+                medEvent.put('VIA_Status__c', 'Hippo Approved');
+                medEvent.put('EPD_FR_MED_Event_Status__c', 'Hippo approved');
             }
         } else if (countryName.equals(UK_ONLY)) {
             //daniel.magyar@veeva.com - UK requirements 05.10.2024

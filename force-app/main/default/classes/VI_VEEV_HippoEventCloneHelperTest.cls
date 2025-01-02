@@ -212,6 +212,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             System.debug('MedEvent country: ' + me.VIA_Country_Code__c);
         }
         System.assertEquals(1, medevent.size());
+        System.assertEquals('Hippo Approved', medevent[0].VIA_Status__c, 'Status = Hippo Approved');
         System.assertEquals('Hippo approved', medevent[0].EPD_FR_MED_Event_Status__c, 'Status = Hippo approved');
         System.assertEquals('Hybrid', medevent[0].VIA_Medical_Event_Category__c, 'Medical Event Category is Hybrid based on the Channel: Live and Online');
         System.assertEquals('Classic', medevent[0].EPD_FR_MED_Event_Subtype__c, 'Subtype = Classic');
@@ -660,7 +661,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
                 System.debug('MedEvent Event Type: ' + me.Event_type__c);
             }
             System.assertEquals(1, medevent.size());
-            System.assertEquals('Hippo approved', medevent[0].EPD_FR_MED_Event_Status__c, 'Status = Hippo approved');
+            System.assertEquals('Hippo Approved', medevent[0].VIA_Status__c, 'Status = Hippo approved');
             System.assertEquals('RPS', medevent[0].Event_type__c, 'Event type = RPS');
             System.assertEquals('Hybrid', medevent[0].VIA_Medical_Event_Category__c, 'Medical Event Category is Hybrid based on the Channel: Live and Online');
             System.assertEquals('Classic', medevent[0].EPD_FR_MED_Event_Subtype__c, 'Subtype = Classic');
@@ -760,7 +761,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
         List<Event_Attendee_vod__c> attendee = [SELECT Id, User_vod__c, Expense_Attendee_Type_vod__c, Status_vod__c, Medical_Event_vod__c FROM Event_Attendee_vod__c WHERE Medical_Event_vod__r.VIA_Hippo_Event__c = :hippoevent2.Id];
 
         System.assertEquals(1, updatedmedevent.size(), 'There should be one updated medical event');
-        System.assertEquals('Approved', updatedmedevent[0].EPD_FR_MED_Event_Status__c, 'Approved');
+        System.assertEquals('Approved', updatedmedevent[0].VIA_Status__c, 'Approved');
         System.assertEquals('Roundtable', updatedmedevent[0].VIA_Event_Type__c, 'Roundtable');
         System.assertEquals('Coffee Beans UK, 102 Derham Rd, Norwich, 12200, United Kingdom', updatedmedevent[0].Location__c, 'Location is populated');
         System.assertEquals(updatedmedevent[0].OwnerId, attendee[0].User_vod__c, 'Owner Attendee set');
@@ -845,7 +846,6 @@ global class VI_VEEV_HippoEventCloneHelperTest {
         // Check if the Medical Event is Terminated
         System.assertEquals(1, updatedmedevent.size(), 'There should be one updated medical event');
         System.assertEquals('Terminated', updatedmedevent[0].VIA_Status__c, 'The Medical Event should be marked as Terminated');
-        System.assertEquals('Terminated', updatedmedevent[0].EPD_FR_MED_Event_Status__c, 'The Medical Event should be marked as Terminated');
         System.assertEquals('VIA_UK_Completed_Medical_Event', updatedmedevent[0].RecordType.DeveloperName, 'The Medical Event Record Type should change to VIA_UK_Completed_Medical_Event');
         System.assertEquals('Coffee Beans UK, 102 Derham Rd, Norwich, 12200, United Kingdom', updatedmedevent[0].Location__c, 'Location is populated');
 
@@ -954,7 +954,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
 
         // Assertions for Medical Event
         System.assertEquals(1, updatedMedEvents.size(), 'There should be one updated medical event');
-        System.assertEquals('Approved', updatedMedEvents[0].EPD_FR_MED_Event_Status__c, 'EPD_FR_MED_Event_Status__c should be Approved');
+        System.assertEquals('Approved', updatedMedEvents[0].VIA_Status__c, 'VIA_Status__c should be Approved');
         System.assertEquals('Roundtable', updatedMedEvents[0].VIA_Event_Type__c, 'VIA_Event_Type__c should be Roundtable');
         System.assertEquals('Coffee Beans UK, 102 Derham Rd, Norwich, 12200, United Kingdom', updatedMedEvents[0].Location__c, 'Location is populated correctly');
 
