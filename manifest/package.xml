@@ -8,6 +8,8 @@
 		<members>VI_VEEV_HippoInteractionTriggerHandler</members>
 		<members>VI_VEEV_IFACE_TriggerHandler</members>
 		<members>VI_VEEV_TriggerDispatcher</members>
+		<members>VS_InteractionTriggerHandler</members>
+		<members>VS_InteractionTriggerHandlerTest</members>
 		<members>VproApprovalProcessOverrideController</members>
 		<name>ApexClass</name>
 	</types>
@@ -20,7 +22,17 @@
 		<members>VI_VEEV_HippoEventTrigger</members>
 		<members>VI_VEEV_HippoHCPTrigger</members>
 		<members>VI_VEEV_HippoInteractionTrigger</members>
+		<members>VS_InteractionTrigger</members>
 		<name>ApexTrigger</name>
+	</types>
+	<types>
+		<members>Event_Attendee_vod__c.VIA_Hippo_Interaction__c</members>
+		<members>Event_Attendee_vod__c.VIA_Hippo_Source__c</members>
+		<members>Medical_Event_vod__c.EPD_FR_MED_Organization_Name__c</members>
+		<members>Medical_Event_vod__c.Location__c</members>
+		<members>Medical_Event_vod__c.VIA_Requesting_Party_Name__c</members>
+		<members>Medical_Event_vod__c.VIA_Type__c</members>
+		<name>CustomField</name>
 	</types>
 	<types>
 		<members>Override_Action_Approve</members>
@@ -33,15 +45,6 @@
 		<members>Override_Action_Reject_Txt</members>
 		<members>Override_Action_View_Event</members>
 		<name>CustomLabel</name>
-	</types>
-	<types>
-		<members>Event_Attendee_vod__c.VIA_Hippo_Interaction__c</members>
-		<members>Event_Attendee_vod__c.VIA_Hippo_Source__c</members>
-		<members>Medical_Event_vod__c.EPD_FR_MED_Organization_Name__c</members>
-		<members>Medical_Event_vod__c.Location__c</members>
-		<members>Medical_Event_vod__c.VIA_Requesting_Party_Name__c</members>
-		<members>Medical_Event_vod__c.VIA_Type__c</members>
-		<name>CustomField</name>
 	</types>
 	<types>
 		<members>ProcessInstanceWorkitem</members>
@@ -111,5 +114,5 @@
 		<members>EPD_Event_Expense__c.EPD_UK_Planned_Cost_Lock_Lunch_Learn</members>
 		<name>ValidationRule</name>
 	</types>
-	<version>60.0</version>
+	<version>63.0</version>
 </Package>

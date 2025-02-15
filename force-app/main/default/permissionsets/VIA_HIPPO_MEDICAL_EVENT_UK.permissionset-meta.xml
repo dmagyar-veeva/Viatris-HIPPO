@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <classAccesses>
+        <apexClass>VproApprovalProcessOverrideController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
     <description>Permission set to create and edit Hippo &amp; Lunch &amp; Learn Medical Events.</description>
     <fieldPermissions>
         <editable>true</editable>
@@ -340,6 +344,7 @@
         <allowRead>true</allowRead>
         <modifyAllRecords>false</modifyAllRecords>
         <object>Event_Attendee_vod__c</object>
+        <viewAllFields>false</viewAllFields>
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -349,8 +354,17 @@
         <allowRead>true</allowRead>
         <modifyAllRecords>false</modifyAllRecords>
         <object>Medical_Event_vod__c</object>
+        <viewAllFields>false</viewAllFields>
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
+    <pageAccesses>
+        <apexPage>VProApprovalOverrideForEvents</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>VProRejectionOverrideForEvents</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
     <pageAccesses>
         <apexPage>View_Event_Signatures_vod</apexPage>
         <enabled>true</enabled>

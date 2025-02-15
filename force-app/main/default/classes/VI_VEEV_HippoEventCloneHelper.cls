@@ -2,7 +2,7 @@
  * @description       : Application logic for creating edical Events and Atendies out from  Hippo events and Attendees.
  * @author            : zoltan.nagy@veeva.com
  * @group             :
- * @last modified on  : 27-08-2024
+ * @last modified on  : 12-02-2025
  * @last modified by  : daniel.magyar@veeva.com
  **/
 public without sharing class VI_VEEV_HippoEventCloneHelper {
@@ -1086,61 +1086,88 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
 
     /**
      * @description create Medical_Event_vod__c.EPD_Event_Expense__c records based on Hippo_Interaction__c.Hippo_Interaction_Amount__c records for UK
-     * @author daniel.magyar@veeva.com | 10-23-2024
+     * @author daniel.magyar@veeva.com | 12-02-2025
      * @param interactions
      * @param attendees
      **/
     private static void createEPDEventExpensesFromInteraction(Map<Id, Hippo_Interaction__c> interactions, List<Event_Attendee_vod__c> attendees) {
-        // Build maps for interactions to attendees and medical events
-        Map<Id, Id> interactionIdToAttendeeIdMap = new Map<Id, Id>();
-        Map<Id, Id> interactionIdToMedEventIdMap = new Map<Id, Id>();
-        Map<Id, String> interactionIdToCountryNameMap = new Map<Id, String>();
-        Set<Id> hippoEventIds = new Set<Id>();
+        System.debug('>>> Entering createEPDEventExpensesFromInteraction');
+        System.debug('>>> Number of Hippo_Interaction__c records passed in: ' + interactions.size());
+        System.debug('>>> Number of Event_Attendee_vod__c records passed in: ' + attendees.size());
 
+        // Build maps from ALL provided interactions—not just those with attendees—to ensure expense creation is decoupled.
+        // 1. Build a map from Interaction Id -> Attendee Id (if any)
+        Map<Id, Id> interactionIdToAttendeeIdMap = new Map<Id, Id>();
         for (Event_Attendee_vod__c attendee : attendees) {
             interactionIdToAttendeeIdMap.put(attendee.VIA_Hippo_Interaction__c, attendee.Id);
-            interactionIdToMedEventIdMap.put(attendee.VIA_Hippo_Interaction__c, attendee.Medical_Event_vod__c);
         }
 
-        // Collect interaction IDs and related Hippo_Event__c IDs
-        Set<Id> interactionIds = interactionIdToAttendeeIdMap.keySet();
-        Map<Id, Hippo_Interaction__c> interactionsToProcess = new Map<Id, Hippo_Interaction__c>();
+        System.debug('>>> interactionIdToAttendeeIdMap created with size: ' + interactionIdToAttendeeIdMap.size());
 
-        for (Id interactionId : interactionIds) {
-            Hippo_Interaction__c interaction = interactions.get(interactionId);
-            if (interaction != null) {
-                interactionsToProcess.put(interactionId, interaction);
-                if (interaction.Hippo_Event__c != null) {
-                    hippoEventIds.add(interaction.Hippo_Event__c);
+        // 2. Use the entire interactions map
+        Map<Id, Hippo_Interaction__c> interactionsToProcess = interactions;
+        System.debug('>>> interactionsToProcess keys: ' + interactionsToProcess.keySet());
+
+        // 3. If an attendee exists, we also know the Medical_Event_vod__c for that Interaction
+        Map<Id, Id> interactionIdToMedEventIdMap = new Map<Id, Id>();
+        for (Event_Attendee_vod__c attendee : attendees) {
+            interactionIdToMedEventIdMap.put(attendee.VIA_Hippo_Interaction__c, attendee.Medical_Event_vod__c);
+        }
+        System.debug('>>> interactionIdToMedEventIdMap initial size (from Attendees): ' + interactionIdToMedEventIdMap.size());
+
+        // 4. Collect Hippo_Event__c IDs so we can look up the country names
+        Map<Id, String> interactionIdToCountryNameMap = new Map<Id, String>();
+        Set<Id> hippoEventIds = new Set<Id>();
+        for (Hippo_Interaction__c inter : interactionsToProcess.values()) {
+            if (inter.Hippo_Event__c != null) {
+                hippoEventIds.add(inter.Hippo_Event__c);
+            }
+        }
+        System.debug('>>> Found Hippo_Event__c IDs: ' + hippoEventIds);
+
+        // 5. Query those Hippo_Event__c records to get the Country_name__c
+        Map<Id, String> hippoEventIdToCountryNameMap = new Map<Id, String>();
+        if (!hippoEventIds.isEmpty()) {
+            for (Hippo_Event__c he : [SELECT Id, Country_name__c FROM Hippo_Event__c WHERE Id IN :hippoEventIds]) {
+                hippoEventIdToCountryNameMap.put(he.Id, he.Country_name__c);
+            }
+        }
+        System.debug('>>> hippoEventIdToCountryNameMap: ' + hippoEventIdToCountryNameMap);
+
+        // 6. Populate interactionIdToCountryNameMap
+        for (Hippo_Interaction__c inter : interactionsToProcess.values()) {
+            if (inter.Hippo_Event__c != null) {
+                String countryName = hippoEventIdToCountryNameMap.get(inter.Hippo_Event__c);
+                interactionIdToCountryNameMap.put(inter.Id, countryName);
+            }
+        }
+        System.debug('>>> interactionIdToCountryNameMap: ' + interactionIdToCountryNameMap);
+
+        // 7. Filter down to UK interactions
+        List<EPD_Event_Expense__c> expensesToInsert = new List<EPD_Event_Expense__c>();
+        Set<Id> interactionIdsToProcess = new Set<Id>();
+        for (Id interId : interactionIdToCountryNameMap.keySet()) {
+            if (UK_ONLY.equals(interactionIdToCountryNameMap.get(interId))) {
+                interactionIdsToProcess.add(interId);
+            }
+        }
+        System.debug('>>> UK interactionIdsToProcess: ' + interactionIdsToProcess);
+
+        // 8. For each UK interaction that does not have a Medical_Event_vod__c from attendee data, attempt to fill it
+        for (Id interactionId : interactionIdsToProcess) {
+            if (!interactionIdToMedEventIdMap.containsKey(interactionId)) {
+                Hippo_Interaction__c interTemp = interactions.get(interactionId);
+                if (interTemp != null && interTemp.Hippo_Event__c != null) {
+                    Map<Id, Id> missingMedEventMap = getHippoEventMedEventMapFromInteraction(interactions);
+                    if (missingMedEventMap.containsKey(interTemp.Hippo_Event__c)) {
+                        interactionIdToMedEventIdMap.put(interactionId, missingMedEventMap.get(interTemp.Hippo_Event__c));
+                    }
                 }
             }
         }
+        System.debug('>>> Final interactionIdToMedEventIdMap: ' + interactionIdToMedEventIdMap);
 
-        // Get country names from Hippo_Event__c
-        Map<Id, String> hippoEventIdToCountryNameMap = new Map<Id, String>();
-
-        if (!hippoEventIds.isEmpty()) {
-            for (Hippo_Event__c hippoEvent : [SELECT Id, Country_name__c FROM Hippo_Event__c WHERE Id IN :hippoEventIds]) {
-                hippoEventIdToCountryNameMap.put(hippoEvent.Id, hippoEvent.Country_name__c);
-            }
-        }
-
-        for (Id interactionId : interactionsToProcess.keySet()) {
-            Hippo_Interaction__c interaction = interactionsToProcess.get(interactionId);
-            String countryName = hippoEventIdToCountryNameMap.get(interaction.Hippo_Event__c);
-            interactionIdToCountryNameMap.put(interactionId, countryName);
-        }
-
-        List<EPD_Event_Expense__c> expensesToInsert = new List<EPD_Event_Expense__c>();
-        Set<Id> interactionIdsToProcess = new Set<Id>();
-
-        for (Id interactionId : interactionsToProcess.keySet()) {
-            String countryName = interactionIdToCountryNameMap.get(interactionId);
-            if (UK_ONLY.equals(countryName)) {
-                interactionIdsToProcess.add(interactionId);
-            }
-        }
-
+        // 9. Query Hippo_Interaction_Amount__c for these UK interactions
         if (!interactionIdsToProcess.isEmpty()) {
             // Get related Hippo_Interaction_Amount__c records
             List<Hippo_Interaction_Amount__c> interactionAmounts = [
@@ -1148,6 +1175,7 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
                 FROM Hippo_Interaction_Amount__c
                 WHERE Interaction__c IN :interactionIdsToProcess
             ];
+            System.debug('>>> Number of Hippo_Interaction_Amount__c records found: ' + interactionAmounts.size());
 
             for (Hippo_Interaction_Amount__c amount : interactionAmounts) {
                 Id interactionId = amount.Interaction__c;
@@ -1155,10 +1183,15 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
                 Id attendeeId = interactionIdToAttendeeIdMap.get(interactionId);
                 Hippo_Interaction__c interaction = interactions.get(interactionId);
 
-                if (medEventId != null && attendeeId != null && interaction != null) {
+                System.debug('>>> Processing amount for Interaction: ' + interactionId + '. medEventId=' + medEventId + ', attendeeId=' + attendeeId + ', interaction=' + interaction);
+
+                // If we have a medEventId and a valid interaction record, create an expense
+                if (medEventId != null && interaction != null) {
                     EPD_Event_Expense__c expense = new EPD_Event_Expense__c();
                     expense.EPD_Medical_Event__c = medEventId;
-                    expense.VIA_Event_Attendee__c = attendeeId;
+                    if (attendeeId != null) {
+                        expense.VIA_Event_Attendee__c = attendeeId;
+                    }
                     expense.EPD_Comments__c = interaction.Type__c;
 
                     // Map fields from amount to expense
@@ -1193,16 +1226,23 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
                         }
                     }
                     expensesToInsert.add(expense);
+                } else {
+                    System.debug('>>> Skipping expense creation because medEventId or interaction is null.');
                 }
             }
 
             if (!expensesToInsert.isEmpty()) {
+                System.debug('>>> Inserting ' + expensesToInsert.size() + ' EPD_Event_Expense__c records.');
                 try {
                     insert expensesToInsert;
                 } catch (DmlException e) {
                     System.debug('Error inserting expenses: ' + e.getMessage());
                 }
+            } else {
+                System.debug('>>> No EPD_Event_Expense__c records to insert (expensesToInsert is empty).');
             }
+        } else {
+            System.debug('>>> No UK interactions to process for expenses (interactionIdsToProcess is empty).');
         }
     }
 

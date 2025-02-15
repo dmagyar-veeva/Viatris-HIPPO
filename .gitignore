@@ -46,3 +46,9 @@ $RECYCLE.BIN/
 force-app/main/default/profiles/Dataload Automation.profile-meta.xml
 force-app/main/default/profiles/Admin.profile-meta.xml
 force-app/main/default/profiles/System Administrator DevOps.profile-meta.xml
+force-app/main/default/triggers/VS_InteractionTrigger.trigger
+force-app/main/default/triggers/VS_InteractionTrigger.trigger-meta.xml
+force-app/main/default/classes/VS_InteractionTriggerHandler.cls
+force-app/main/default/classes/VS_InteractionTriggerHandler.cls-meta.xml
+force-app/main/default/classes/VS_InteractionTriggerHandlerTest.cls
+force-app/main/default/classes/VS_InteractionTriggerHandlerTest.cls-meta.xml

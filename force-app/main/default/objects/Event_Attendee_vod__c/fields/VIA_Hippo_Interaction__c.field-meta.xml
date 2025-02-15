@@ -2,7 +2,6 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>VIA_Hippo_Interaction__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
-    <externalId>false</externalId>
     <label>Interaction</label>
     <referenceTo>Hippo_Interaction__c</referenceTo>
     <relationshipLabel>Event Attendees</relationshipLabel>
