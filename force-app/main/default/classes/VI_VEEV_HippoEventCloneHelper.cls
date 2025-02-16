@@ -378,9 +378,9 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
 
         if (!attendeesToInsert.isEmpty()) {
             insert attendeesToInsert;
-
-            createEPDEventExpensesFromInteraction((Map<Id, Hippo_Interaction__c>) newItemsMap, attendeesToInsert);
         }
+
+        createEPDEventExpensesFromInteraction((Map<Id, Hippo_Interaction__c>) newItemsMap, attendeesToInsert);
 
         if (!medEventsToUpdate.isEmpty()) {
             update medEventsToUpdate;
@@ -395,11 +395,15 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
      * @param newItemsMap
      **/
     public static void upsertMedicalEventAttendeesFromInteraction(Map<Id, SObject> oldItemsMap, Map<Id, SObject> newItemsMap) {
+        System.debug('Entering upsertMedicalEventAttendeesFromInteraction');
         List<Event_Attendee_vod__c> attendeesToUpsert = new List<Event_Attendee_vod__c>();
         List<Medical_Event_vod__c> medEventsToUpdate = new List<Medical_Event_vod__c>();
 
+        System.debug('Retrieving account and event mappings');
         Map<Id, HCP_Account__c> accountMap = getHippoAccMapFromInteraction((Map<Id, Hippo_Interaction__c>) newItemsMap);
+        System.debug('Account map retrieved: ' + accountMap);
         Map<Id, Id> eventMap = getHippoEventMedEventMapFromInteraction((Map<Id, Hippo_Interaction__c>) newItemsMap);
+        System.debug('Event map retrieved: ' + eventMap);
 
         Set<Id> hippoEventIds = new Set<Id>();
         Map<Id, String> hippoEventIdCountryNameMap = new Map<Id, String>();
@@ -407,42 +411,55 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
         for (Hippo_Interaction__c interaction : (List<Hippo_Interaction__c>) newItemsMap.values()) {
             if (String.isNotBlank(interaction.Hippo_Event__c)) {
                 hippoEventIds.add(interaction.Hippo_Event__c);
+                System.debug('Added Hippo Event ID: ' + interaction.Hippo_Event__c);
             }
         }
 
         if (!hippoEventIds.isEmpty()) {
             hippoEventIdCountryNameMap = getHippoEventIdCountryNameMap(hippoEventIds);
+            System.debug('Country name map retrieved: ' + hippoEventIdCountryNameMap);
         }
 
         Set<Id> interactionIds = new Set<Id>();
         for (Hippo_Interaction__c interaction : (List<Hippo_Interaction__c>) newItemsMap.values()) {
             interactionIds.add(interaction.Id);
+            System.debug('Added Interaction ID: ' + interaction.Id);
         }
 
         Map<Id, Event_Attendee_vod__c> existingAttendeesMap = new Map<Id, Event_Attendee_vod__c>();
         for (Event_Attendee_vod__c attendee : [SELECT Id, Status_vod__c, VIA_Hippo_Interaction__c, Medical_Event_vod__c FROM Event_Attendee_vod__c WHERE VIA_Hippo_Interaction__c IN :interactionIds]) {
             existingAttendeesMap.put(attendee.VIA_Hippo_Interaction__c, attendee);
+            System.debug('Added attendee to map: ' + attendee.Id);
         }
 
         for (Hippo_Interaction__c interaction : (List<Hippo_Interaction__c>) newItemsMap.values()) {
             if (!hippoEventIdCountryNameMap.containsKey(interaction.Hippo_Event__c)) {
                 continue;
+                System.debug('Skipping interaction with unknown country name: ' + interaction.Id);
             }
 
             String countryName = hippoEventIdCountryNameMap.get(interaction.Hippo_Event__c);
+            System.debug('Country Name for Hippo Event ID ' + interaction.Hippo_Event__c + ': ' + countryName);
 
             if (!FRANCE_ONLY.equals(countryName) && !UK_ONLY.equals(countryName)) {
                 continue;
+                System.debug('Country Name for Hippo Event ID ' + interaction.Hippo_Event__c + ': ' + countryName);
             }
 
             if (!HIPPO_EVENT_RT_NAME_MAP.containsKey(countryName)) {
+                System.debug('Record Type Name exists for country: ' + countryName);
                 continue;
+                System.debug('Record Type Name does not exist for country: ' + countryName);
             }
 
+            System.debug('Before getHippoAttendeeRTId, completedHipoEventRTId=' + completedHipoEventRTId);
             Id rtId = getHippoAttendeeRTId(HIPPO_ATTENDEE_RT_NAME);
+            System.debug('Record Type ID for Hippo Attendee Record Type: ' + rtId);
+            System.debug('After getHippoAttendeeRTId, completedHipoEventRTId=' + completedHipoEventRTId);
 
             if (!accountMap.containsKey(interaction.HCP_Account__c) || !eventMap.containsKey(interaction.Hippo_Event__c)) {
                 continue;
+                System.debug('Skipping interaction due to missing account or event mapping: ' + interaction.Id);
             }
 
             if (accountMap.get(interaction.HCP_Account__c).Account__c == null) {
@@ -461,7 +478,9 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
                     attendeeStatus = interaction.Status__c;
                 } else {
                     continue;
+                    System.debug('Skipping interaction due to unsupported status change: ' + interaction.Id);
                 }
+                System.debug('Interaction ID: ' + interaction.Id + ', Status Change to: ' + attendeeStatus);
 
                 System.debug('interaction: ' + interaction);
                 System.debug('interaction.HCP_Account__c: ' + interaction.HCP_Account__c);
@@ -496,12 +515,15 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
         if (!attendeesToUpsert.isEmpty()) {
             System.debug('Attendees to upsert: ' + attendeesToUpsert);
             upsert attendeesToUpsert;
-
-            createEPDEventExpensesFromInteraction((Map<Id, Hippo_Interaction__c>) newItemsMap, attendeesToUpsert);
+            System.debug('Attendees successfully upserted');
         }
+
+        createEPDEventExpensesFromInteraction((Map<Id, Hippo_Interaction__c>) newItemsMap, attendeesToUpsert);
+        System.debug('EPD expenses created successfully');
 
         if (!medEventsToUpdate.isEmpty()) {
             update medEventsToUpdate;
+            System.debug('Medical events updated successfully');
         }
     }
 
@@ -715,6 +737,7 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
     private static String getHippoAttendeeRTId(String recTypeName) {
         if (completedHipoEventRTId == null) {
             completedHipoEventRTId = Schema.getGlobalDescribe().get('Event_Attendee_vod__c').getDescribe().getRecordTypeInfosByDeveloperName().get(recTypeName).getRecordTypeId();
+            System.debug('Completed Hippo Event RT ID set: ' + completedHipoEventRTId);
         }
 
         return completedHipoEventRTId;
@@ -1085,47 +1108,65 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
     }
 
     /**
-     * @description create Medical_Event_vod__c.EPD_Event_Expense__c records based on Hippo_Interaction__c.Hippo_Interaction_Amount__c records for UK
-     * @author daniel.magyar@veeva.com | 12-02-2025
-     * @param interactions
-     * @param attendees
+     * @description create Medical_Event_vod__c.EPD_Event_Expense__c records based on
+     *              Hippo_Interaction__c.Hippo_Interaction_Amount__c records for UK.
+     *              Deduplicates records by checking existing EPD_Event_Expense__c
+     *              in the database (and newly created within the same transaction).
+     * @author
+     * @last modified on  : 12-02-2025
+     * @last modified by  : daniel.magyar@veeva.com
+     * @param interactions  Map<Id, Hippo_Interaction__c> - all the new or updated Hippo_Interaction__c
+     * @param attendees     List<Event_Attendee_vod__c>   - any newly created or updated Event_Attendee_vod__c
+     *                                                           that references these interactions
      **/
     private static void createEPDEventExpensesFromInteraction(Map<Id, Hippo_Interaction__c> interactions, List<Event_Attendee_vod__c> attendees) {
         System.debug('>>> Entering createEPDEventExpensesFromInteraction');
         System.debug('>>> Number of Hippo_Interaction__c records passed in: ' + interactions.size());
         System.debug('>>> Number of Event_Attendee_vod__c records passed in: ' + attendees.size());
 
-        // Build maps from ALL provided interactions—not just those with attendees—to ensure expense creation is decoupled.
-        // 1. Build a map from Interaction Id -> Attendee Id (if any)
+        // + 1. Filter for approved interactions only.
+        Map<Id, Hippo_Interaction__c> approvedInteractions = new Map<Id, Hippo_Interaction__c>();
+        for (Hippo_Interaction__c inter : interactions.values()) {
+            if (inter.Status__c == 'Approved') {
+                approvedInteractions.put(inter.Id, inter);
+            } else {
+                System.debug('Skipping interaction ' + inter.Id + ' because status is not Approved: ' + inter.Status__c);
+            }
+        }
+        System.debug('>>> Number of approved interactions: ' + approvedInteractions.size());
+        if (approvedInteractions.isEmpty()) {
+            System.debug('>>> No approved interactions, exiting method.');
+            return;
+        }
+
+        // + 2. Build a map from Interaction Id -> Attendee Id for approved interactions.
         Map<Id, Id> interactionIdToAttendeeIdMap = new Map<Id, Id>();
         for (Event_Attendee_vod__c attendee : attendees) {
-            interactionIdToAttendeeIdMap.put(attendee.VIA_Hippo_Interaction__c, attendee.Id);
+            if (attendee.VIA_Hippo_Interaction__c != null && approvedInteractions.containsKey(attendee.VIA_Hippo_Interaction__c)) {
+                interactionIdToAttendeeIdMap.put(attendee.VIA_Hippo_Interaction__c, attendee.Id);
+            }
         }
+        System.debug('>>> interactionIdToAttendeeIdMap size: ' + interactionIdToAttendeeIdMap.size());
 
-        System.debug('>>> interactionIdToAttendeeIdMap created with size: ' + interactionIdToAttendeeIdMap.size());
-
-        // 2. Use the entire interactions map
-        Map<Id, Hippo_Interaction__c> interactionsToProcess = interactions;
-        System.debug('>>> interactionsToProcess keys: ' + interactionsToProcess.keySet());
-
-        // 3. If an attendee exists, we also know the Medical_Event_vod__c for that Interaction
+        // + 3. Build a map from Interaction Id -> Medical_Event_vod__c from attendee data.
         Map<Id, Id> interactionIdToMedEventIdMap = new Map<Id, Id>();
         for (Event_Attendee_vod__c attendee : attendees) {
-            interactionIdToMedEventIdMap.put(attendee.VIA_Hippo_Interaction__c, attendee.Medical_Event_vod__c);
+            if (attendee.VIA_Hippo_Interaction__c != null && approvedInteractions.containsKey(attendee.VIA_Hippo_Interaction__c)) {
+                interactionIdToMedEventIdMap.put(attendee.VIA_Hippo_Interaction__c, attendee.Medical_Event_vod__c);
+            }
         }
-        System.debug('>>> interactionIdToMedEventIdMap initial size (from Attendees): ' + interactionIdToMedEventIdMap.size());
+        System.debug('>>> interactionIdToMedEventIdMap size (from Attendees): ' + interactionIdToMedEventIdMap.size());
 
-        // 4. Collect Hippo_Event__c IDs so we can look up the country names
-        Map<Id, String> interactionIdToCountryNameMap = new Map<Id, String>();
+        // + 4. Collect Hippo_Event__c IDs from approved interactions.
         Set<Id> hippoEventIds = new Set<Id>();
-        for (Hippo_Interaction__c inter : interactionsToProcess.values()) {
+        for (Hippo_Interaction__c inter : approvedInteractions.values()) {
             if (inter.Hippo_Event__c != null) {
                 hippoEventIds.add(inter.Hippo_Event__c);
             }
         }
         System.debug('>>> Found Hippo_Event__c IDs: ' + hippoEventIds);
 
-        // 5. Query those Hippo_Event__c records to get the Country_name__c
+        // + 5. Query Hippo_Event__c records to get their Country_name__c.
         Map<Id, String> hippoEventIdToCountryNameMap = new Map<Id, String>();
         if (!hippoEventIds.isEmpty()) {
             for (Hippo_Event__c he : [SELECT Id, Country_name__c FROM Hippo_Event__c WHERE Id IN :hippoEventIds]) {
@@ -1134,31 +1175,36 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
         }
         System.debug('>>> hippoEventIdToCountryNameMap: ' + hippoEventIdToCountryNameMap);
 
-        // 6. Populate interactionIdToCountryNameMap
-        for (Hippo_Interaction__c inter : interactionsToProcess.values()) {
+        // + 6. Build a map of Interaction Id -> CountryName.
+        Map<Id, String> interactionIdToCountryNameMap = new Map<Id, String>();
+        for (Hippo_Interaction__c inter : approvedInteractions.values()) {
             if (inter.Hippo_Event__c != null) {
-                String countryName = hippoEventIdToCountryNameMap.get(inter.Hippo_Event__c);
-                interactionIdToCountryNameMap.put(inter.Id, countryName);
+                String country = hippoEventIdToCountryNameMap.get(inter.Hippo_Event__c);
+                interactionIdToCountryNameMap.put(inter.Id, country);
             }
         }
         System.debug('>>> interactionIdToCountryNameMap: ' + interactionIdToCountryNameMap);
 
-        // 7. Filter down to UK interactions
-        List<EPD_Event_Expense__c> expensesToInsert = new List<EPD_Event_Expense__c>();
+        // + 7. Filter to only approved interactions that are in the UK.
         Set<Id> interactionIdsToProcess = new Set<Id>();
         for (Id interId : interactionIdToCountryNameMap.keySet()) {
             if (UK_ONLY.equals(interactionIdToCountryNameMap.get(interId))) {
                 interactionIdsToProcess.add(interId);
             }
         }
-        System.debug('>>> UK interactionIdsToProcess: ' + interactionIdsToProcess);
+        System.debug('>>> Approved UK interactionIdsToProcess: ' + interactionIdsToProcess);
+        if (interactionIdsToProcess.isEmpty()) {
+            System.debug('>>> No approved UK interactions to process for expenses. Exiting method.');
+            return;
+        }
 
-        // 8. For each UK interaction that does not have a Medical_Event_vod__c from attendee data, attempt to fill it
+        // + 8. For each approved UK interaction that lacks a Medical_Event mapping from attendee data,
+        // attempt to fill it using existing Medical Events from the related Hippo_Event__c.
         for (Id interactionId : interactionIdsToProcess) {
             if (!interactionIdToMedEventIdMap.containsKey(interactionId)) {
-                Hippo_Interaction__c interTemp = interactions.get(interactionId);
+                Hippo_Interaction__c interTemp = approvedInteractions.get(interactionId);
                 if (interTemp != null && interTemp.Hippo_Event__c != null) {
-                    Map<Id, Id> missingMedEventMap = getHippoEventMedEventMapFromInteraction(interactions);
+                    Map<Id, Id> missingMedEventMap = getHippoEventMedEventMapFromInteraction(approvedInteractions); // Pass approved interactions if possible.
                     if (missingMedEventMap.containsKey(interTemp.Hippo_Event__c)) {
                         interactionIdToMedEventIdMap.put(interactionId, missingMedEventMap.get(interTemp.Hippo_Event__c));
                     }
@@ -1167,83 +1213,120 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
         }
         System.debug('>>> Final interactionIdToMedEventIdMap: ' + interactionIdToMedEventIdMap);
 
-        // 9. Query Hippo_Interaction_Amount__c for these UK interactions
+        // + 9. Build a deduplication map keyed by (InteractionId + '_' + ExpenseType).
+        Map<String, EPD_Event_Expense__c> existingExpenseMap = new Map<String, EPD_Event_Expense__c>();
         if (!interactionIdsToProcess.isEmpty()) {
-            // Get related Hippo_Interaction_Amount__c records
-            List<Hippo_Interaction_Amount__c> interactionAmounts = [
-                SELECT Cost__c, Currency__c, Label__c, Other_Label__c, Interaction__c
-                FROM Hippo_Interaction_Amount__c
-                WHERE Interaction__c IN :interactionIdsToProcess
+            List<EPD_Event_Expense__c> existingExpenses = [
+                SELECT Id, EPD_Medical_Event__c, EPD_Type__c, EPD_Planned_Cost__c, CurrencyIsoCode, VIA_Event_Attendee__c, VIA_Hippo_Interaction__c
+                FROM EPD_Event_Expense__c
+                WHERE VIA_Hippo_Interaction__c IN :interactionIdsToProcess
             ];
-            System.debug('>>> Number of Hippo_Interaction_Amount__c records found: ' + interactionAmounts.size());
-
-            for (Hippo_Interaction_Amount__c amount : interactionAmounts) {
-                Id interactionId = amount.Interaction__c;
-                Id medEventId = interactionIdToMedEventIdMap.get(interactionId);
-                Id attendeeId = interactionIdToAttendeeIdMap.get(interactionId);
-                Hippo_Interaction__c interaction = interactions.get(interactionId);
-
-                System.debug('>>> Processing amount for Interaction: ' + interactionId + '. medEventId=' + medEventId + ', attendeeId=' + attendeeId + ', interaction=' + interaction);
-
-                // If we have a medEventId and a valid interaction record, create an expense
-                if (medEventId != null && interaction != null) {
-                    EPD_Event_Expense__c expense = new EPD_Event_Expense__c();
-                    expense.EPD_Medical_Event__c = medEventId;
-                    if (attendeeId != null) {
-                        expense.VIA_Event_Attendee__c = attendeeId;
-                    }
-                    expense.EPD_Comments__c = interaction.Type__c;
-
-                    // Map fields from amount to expense
-                    for (String hippoField : EVENT_AMOUNT_TO_EXPENSE_FIELD_MAPPING.keySet()) {
-                        String epdField = EVENT_AMOUNT_TO_EXPENSE_FIELD_MAPPING.get(hippoField);
-                        Object fieldValue = amount.get(hippoField);
-
-                        if (fieldValue != null) {
-                            Schema.DescribeFieldResult fieldDescribe = Schema.SObjectType.EPD_Event_Expense__c.fields.getMap().get(epdField).getDescribe();
-
-                            if ('EPD_Type__c'.equals(epdField)) {
-                                String originalLabel = String.valueOf(fieldValue);
-                                String labelValue;
-
-                                if (LABEL_TO_EPD_TYPE_MAPPING.containsKey(originalLabel)) {
-                                    labelValue = LABEL_TO_EPD_TYPE_MAPPING.get(originalLabel);
-                                } else if ('Other'.equals(originalLabel) && amount.Other_Label__c != null) {
-                                    labelValue = String.valueOf(amount.Other_Label__c);
-                                } else {
-                                    labelValue = originalLabel;
-                                }
-
-                                expense.put(epdField, labelValue);
-                            } else if (fieldDescribe.getType() == Schema.DisplayType.CURRENCY || fieldDescribe.getType() == Schema.DisplayType.DOUBLE || fieldDescribe.getType() == Schema.DisplayType.INTEGER) {
-                                Decimal decimalValue = Decimal.valueOf(String.valueOf(fieldValue));
-                                expense.put(epdField, decimalValue);
-                            } else if (fieldDescribe.getType() == Schema.DisplayType.STRING) {
-                                expense.put(epdField, String.valueOf(fieldValue));
-                            } else {
-                                expense.put(epdField, fieldValue);
-                            }
-                        }
-                    }
-                    expensesToInsert.add(expense);
-                } else {
-                    System.debug('>>> Skipping expense creation because medEventId or interaction is null.');
-                }
+            for (EPD_Event_Expense__c exp : existingExpenses) {
+                String key = exp.VIA_Hippo_Interaction__c + '_' + exp.EPD_Type__c;
+                existingExpenseMap.put(key, exp);
             }
+        }
+        System.debug('>>> existingExpenseMap keys: ' + existingExpenseMap.keySet());
 
-            if (!expensesToInsert.isEmpty()) {
-                System.debug('>>> Inserting ' + expensesToInsert.size() + ' EPD_Event_Expense__c records.');
-                try {
-                    insert expensesToInsert;
-                } catch (DmlException e) {
-                    System.debug('Error inserting expenses: ' + e.getMessage());
+        // + 10. Query Hippo_Interaction_Amount__c records for these approved UK interactions.
+        List<Hippo_Interaction_Amount__c> interactionAmounts = [
+            SELECT Cost__c, Currency__c, Label__c, Other_Label__c, Interaction__c
+            FROM Hippo_Interaction_Amount__c
+            WHERE Interaction__c IN :interactionIdsToProcess
+        ];
+        System.debug('>>> Found ' + interactionAmounts.size() + ' Hippo_Interaction_Amount__c records for approved UK interactions');
+
+        List<EPD_Event_Expense__c> expensesToUpsert = new List<EPD_Event_Expense__c>();
+
+        // + 11. Iterate over each Interaction Amount record.
+        for (Hippo_Interaction_Amount__c amount : interactionAmounts) {
+            Id interactionId = amount.Interaction__c;
+            Id medEventId = interactionIdToMedEventIdMap.get(interactionId);
+            Id attendeeId = interactionIdToAttendeeIdMap.get(interactionId);
+            Hippo_Interaction__c inter = approvedInteractions.get(interactionId);
+            System.debug('>>> Processing amount for Interaction=' + interactionId + ', medEventId=' + medEventId + ', attendeeId=' + attendeeId + ', interaction=' + inter);
+            if (medEventId != null && inter != null) {
+                // Only process if the interaction is Approved (already filtered).
+                // Determine the final expense type using Label__c or Other_Label__c.
+                String originalLabel = String.valueOf(amount.Label__c);
+                String finalLabel;
+                if (LABEL_TO_EPD_TYPE_MAPPING.containsKey(originalLabel)) {
+                    finalLabel = LABEL_TO_EPD_TYPE_MAPPING.get(originalLabel);
+                } else if ('Other'.equals(originalLabel) && amount.Other_Label__c != null) {
+                    finalLabel = String.valueOf(amount.Other_Label__c);
+                } else {
+                    finalLabel = originalLabel;
+                }
+                // Build a deduplication key: InteractionId + '_' + finalLabel.
+                String expenseKey = interactionId + '_' + finalLabel;
+                System.debug('>>> Built expense key: ' + expenseKey);
+                // Check if an expense already exists for this key.
+                if (existingExpenseMap.containsKey(expenseKey)) {
+                    System.debug('>>> Found existing expense for key: ' + expenseKey + '. Updating it.');
+                    EPD_Event_Expense__c existingExpense = existingExpenseMap.get(expenseKey);
+                    existingExpense.EPD_Planned_Cost__c = (amount.Cost__c == null) ? 0 : amount.Cost__c;
+                    existingExpense.CurrencyIsoCode = (amount.Currency__c == null) ? '' : amount.Currency__c;
+                    existingExpense.EPD_Comments__c = inter.Type__c;
+                    expensesToUpsert.add(existingExpense);
+                } else {
+                    System.debug('>>> No existing expense for key: ' + expenseKey + '. Creating new expense.');
+                    EPD_Event_Expense__c newExpense = new EPD_Event_Expense__c();
+                    newExpense.VIA_Hippo_Interaction__c = interactionId; // Tie directly to the Interaction.
+                    newExpense.EPD_Medical_Event__c = medEventId;
+                    newExpense.EPD_Type__c = finalLabel;
+                    newExpense.EPD_Planned_Cost__c = (amount.Cost__c == null) ? 0 : amount.Cost__c;
+                    newExpense.CurrencyIsoCode = (amount.Currency__c == null) ? '' : amount.Currency__c;
+                    newExpense.EPD_Comments__c = inter.Type__c;
+                    if (attendeeId != null) {
+                        newExpense.VIA_Event_Attendee__c = attendeeId;
+                    }
+                    expensesToUpsert.add(newExpense);
+                    // Record this new expense in the map.
+                    existingExpenseMap.put(expenseKey, newExpense);
                 }
             } else {
-                System.debug('>>> No EPD_Event_Expense__c records to insert (expensesToInsert is empty).');
+                System.debug('>>> Skipping expense creation because medEventId or interaction is null for Interaction: ' + interactionId);
+            }
+        }
+
+        // + 12. Upsert the expense records.
+        if (!expensesToUpsert.isEmpty()) {
+            System.debug('>>> Upserting ' + expensesToUpsert.size() + ' EPD_Event_Expense__c records.');
+            try {
+                upsert expensesToUpsert;
+            } catch (DmlException e) {
+                System.debug('Error upserting expenses: ' + e.getMessage());
             }
         } else {
-            System.debug('>>> No UK interactions to process for expenses (interactionIdsToProcess is empty).');
+            System.debug('>>> No EPD_Event_Expense__c records to upsert (expensesToUpsert is empty).');
         }
+    }
+
+    /**
+     * @description Returns a unique key that identifies an EPD_Event_Expense__c
+     *              based on critical fields:
+     *              - Medical Event
+     *              - Expense Type
+     *              - Planned Cost
+     *              - Currency Iso
+     *              - Event Attendee (if applicable)
+     * @author daniel.magyar@veeva.com
+     * @param medEventId  Id - the associated Medical_Event_vod__c
+     * @param expenseType String - the EPD_Type__c
+     * @param cost        Decimal - the EPD_Planned_Cost__c
+     * @param currencyIso String - the CurrencyIsoCode
+     * @param attendeeId  Id - the VIA_Event_Attendee__c, if any
+     * @return A concatenated string key to detect duplicates
+     **/
+    private static String buildExpenseKey(Id medEventId, String expenseType, Decimal cost, String currencyIso, Id attendeeId) {
+        // Convert null to blank
+        String safeMedEventId = (medEventId == null) ? '' : String.valueOf(medEventId);
+        String safeType = (expenseType == null) ? '' : expenseType;
+        String safeCost = (cost == null) ? '' : String.valueOf(cost);
+        String safeCurrency = (currencyIso == null) ? '' : currencyIso;
+        String safeAttendeeId = (attendeeId == null) ? '' : String.valueOf(attendeeId);
+
+        return safeMedEventId + '|' + safeType + '|' + safeCost + '|' + safeCurrency + '|' + safeAttendeeId;
     }
 
     /**

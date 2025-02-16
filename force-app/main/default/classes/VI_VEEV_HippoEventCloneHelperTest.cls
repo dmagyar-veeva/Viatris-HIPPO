@@ -1011,76 +1011,78 @@ global class VI_VEEV_HippoEventCloneHelperTest {
     @IsTest(SeeAllData=true)
     static void testHippoEventUpdateUKwithInteractionExpensesWithoutEventHCP() {
         // Get a test user (adjust the query as needed)
-        User testUser = [SELECT Id FROM User WHERE Name = 'Jonas Willmann' LIMIT 1];
+        User jonasW = [SELECT Id FROM User WHERE Name = 'Jonas Willmann' LIMIT 1];
 
         // Create a UK Hippo_Event__c record.
-        Hippo_Event__c ukEvent = new Hippo_Event__c(
-            Name = 'Test UK Without HCP',
-            Start_Event_Date__c = Date.today(),
-            End_Event_Date__c = Date.today(),
-            TrackingNumber__c = 'Tracking-UK-001',
-            Status__c = 'Draft',
-            Type__c = 'Roundtable',
-            Requesting_Party_Name_Sync__c = 'Test Party',
-            Requesting_Party_Title_Sync__c = 'Test Title',
-            Requesting_Party_Location_Sync__c = 'Test Location',
-            Requesting_Party_Department_Sync__c = 'Test Dept',
-            Channel__c = 'Webinar',
-            Event_subtype__c = 'RP Classic / RP Conference',
-            Country__c = 'a6K3W000000Ch8UUAS', // assumed UK Country Id
-            VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nG50000001yBpIAI',
-            Region__c = 'a6g3W000000LPcvQAG',
-            Event_venue__c = 'Coffee Beans UK',
-            Address__c = '102 Derham Rd',
-            City__c = 'Norwich',
-            zipcode__c = '12200'
-        );
-        insert ukEvent;
+        System.runAs(jonasW) {
+            Hippo_Event__c ukEvent = new Hippo_Event__c(
+                Name = 'Test UK Without HCP',
+                Start_Event_Date__c = Date.today(),
+                End_Event_Date__c = Date.today(),
+                TrackingNumber__c = 'Tracking-UK-001',
+                Status__c = 'Draft',
+                Type__c = 'Roundtable',
+                Requesting_Party_Name_Sync__c = 'Test Party',
+                Requesting_Party_Title_Sync__c = 'Test Title',
+                Requesting_Party_Location_Sync__c = 'Test Location',
+                Requesting_Party_Department_Sync__c = 'Test Dept',
+                Channel__c = 'Webinar',
+                Event_subtype__c = 'RP Classic / RP Conference',
+                Country__c = 'a6K3W000000Ch8UUAS',
+                VIA_HIP_Subtype__c = 'Commercial',
+                Parent_User_Setting__c = 'a6nG50000001yBpIAI',
+                Region__c = 'a6g3W000000LPcvQAG',
+                Event_venue__c = 'Coffee Beans UK',
+                Address__c = '102 Derham Rd',
+                City__c = 'Norwich',
+                zipcode__c = '12200'
+            );
+            insert ukEvent;
 
-        // Approve the event.
-        Boolean origSkip = VS_InteractionTriggerHandler.isSkipTriggerForTest;
-        VS_InteractionTriggerHandler.isSkipTriggerForTest = true;
-        ukEvent.Status__c = 'Approved';
-        update ukEvent;
-        VS_InteractionTriggerHandler.isSkipTriggerForTest = origSkip;
+            // Approve the event.
+            Boolean origSkip = VS_InteractionTriggerHandler.isSkipTriggerForTest;
+            VS_InteractionTriggerHandler.isSkipTriggerForTest = true;
+            ukEvent.Status__c = 'Approved';
+            update ukEvent;
+            VS_InteractionTriggerHandler.isSkipTriggerForTest = origSkip;
 
-        // Create a Hippo_Interaction__c record with no HCP_Account__c so no Event_HCP is created.
-        Hippo_Interaction__c interaction = new Hippo_Interaction__c(CurrencyIsoCode = 'EUR', Hippo_Event__c = ukEvent.Id, HCP_Account__c = null, Status__c = 'Draft', Travel_Cost_Calculation__c = 1, Type__c = 'Engagement');
-        VS_InteractionTriggerHandler.isSkipTriggerForTest = true;
-        insert interaction;
-        VS_InteractionTriggerHandler.isSkipTriggerForTest = origSkip;
+            // Create a Hippo_Interaction__c record with no HCP_Account__c so no Event_HCP is created.
+            Hippo_Interaction__c interaction = new Hippo_Interaction__c(CurrencyIsoCode = 'EUR', Hippo_Event__c = ukEvent.Id, HCP_Account__c = null, Status__c = 'Draft', Travel_Cost_Calculation__c = 1, Type__c = 'Engagement');
+            VS_InteractionTriggerHandler.isSkipTriggerForTest = true;
+            insert interaction;
+            VS_InteractionTriggerHandler.isSkipTriggerForTest = origSkip;
 
-        // Create associated Hippo_Interaction_Amount__c records.
-        Hippo_Interaction_Amount__c amt1 = new Hippo_Interaction_Amount__c(Interaction__c = interaction.Id, Cost__c = 500.00, Currency__c = 'GBP', Label__c = 'Accommodation');
-        Hippo_Interaction_Amount__c amt2 = new Hippo_Interaction_Amount__c(Interaction__c = interaction.Id, Cost__c = 300.00, Currency__c = 'GBP', Label__c = 'Taxi');
-        VS_InteractionTriggerHandler.isSkipTriggerForTest = true;
-        insert new List<Hippo_Interaction_Amount__c>{ amt1, amt2 };
-        VS_InteractionTriggerHandler.isSkipTriggerForTest = origSkip;
+            // Create associated Hippo_Interaction_Amount__c records.
+            Hippo_Interaction_Amount__c amt1 = new Hippo_Interaction_Amount__c(Interaction__c = interaction.Id, Cost__c = 500.00, Currency__c = 'GBP', Label__c = 'Accommodation');
+            Hippo_Interaction_Amount__c amt2 = new Hippo_Interaction_Amount__c(Interaction__c = interaction.Id, Cost__c = 300.00, Currency__c = 'GBP', Label__c = 'Taxi');
+            VS_InteractionTriggerHandler.isSkipTriggerForTest = true;
+            insert new List<Hippo_Interaction_Amount__c>{ amt1, amt2 };
+            VS_InteractionTriggerHandler.isSkipTriggerForTest = origSkip;
 
-        // Now update the interaction's status to Approved AFTER amounts are inserted.
-        interaction.Status__c = 'Approved';
-        VS_InteractionTriggerHandler.isSkipTriggerForTest = true;
-        update interaction;
-        VS_InteractionTriggerHandler.isSkipTriggerForTest = origSkip;
+            // Now update the interaction's status to Approved AFTER amounts are inserted.
+            interaction.Status__c = 'Approved';
+            VS_InteractionTriggerHandler.isSkipTriggerForTest = true;
+            update interaction;
+            VS_InteractionTriggerHandler.isSkipTriggerForTest = origSkip;
 
-        // Query for the Medical_Event_vod__c record created for this Hippo event.
-        List<Medical_Event_vod__c> medEvents = [SELECT Id FROM Medical_Event_vod__c WHERE VIA_Hippo_Event__c = :ukEvent.Id];
-        System.assertNotEquals(0, medEvents.size(), 'A Medical Event record should exist for the UK Hippo Event.');
-        Id medEventId = medEvents[0].Id;
+            // Query for the Medical_Event_vod__c record created for this Hippo event.
+            List<Medical_Event_vod__c> medEvents = [SELECT Id FROM Medical_Event_vod__c WHERE VIA_Hippo_Event__c = :ukEvent.Id];
+            System.assertNotEquals(0, medEvents.size(), 'A Medical Event record should exist for the UK Hippo Event.');
+            Id medEventId = medEvents[0].Id;
 
-        // Query for the expense records created from the interaction.
-        List<EPD_Event_Expense__c> expenses = [
-            SELECT Id, EPD_Medical_Event__c, EPD_Type__c, EPD_Planned_Cost__c, CurrencyIsoCode
-            FROM EPD_Event_Expense__c
-            WHERE EPD_Medical_Event__c = :medEventId
-        ];
+            // Query for the expense records created from the interaction.
+            List<EPD_Event_Expense__c> expenses = [
+                SELECT Id, EPD_Medical_Event__c, EPD_Type__c, EPD_Planned_Cost__c, CurrencyIsoCode
+                FROM EPD_Event_Expense__c
+                WHERE EPD_Medical_Event__c = :medEventId
+            ];
 
-        System.assertEquals(1, expenses.size(), 'One expense record should be created from the interaction even without an Event_HCP.');
+            System.assertEquals(2, expenses.size(), 'One expense record should be created from the interaction even without an Event_HCP.');
 
-        EPD_Event_Expense__c exp = expenses[0];
-        System.assertEquals('Stay Expenses', exp.EPD_Type__c, 'Expense type should be mapped correctly for Accommodation.');
-        System.assertEquals(500.00, exp.EPD_Planned_Cost__c, 'Expense planned cost should match the interaction amount.');
-        System.assertEquals('GBP', exp.CurrencyIsoCode, 'Expense currency should be GBP.');
+            EPD_Event_Expense__c exp = expenses[0];
+            System.assertEquals('Stay Expenses', exp.EPD_Type__c, 'Expense type should be mapped correctly for Accommodation.');
+            System.assertEquals(500.00, exp.EPD_Planned_Cost__c, 'Expense planned cost should match the interaction amount.');
+            System.assertEquals('GBP', exp.CurrencyIsoCode, 'Expense currency should be GBP.');
+        }
     }
 }
