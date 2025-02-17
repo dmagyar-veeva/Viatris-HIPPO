@@ -2,7 +2,7 @@
  * @description       : Application logic for creating edical Events and Atendies out from  Hippo events and Attendees.
  * @author            : zoltan.nagy@veeva.com
  * @group             :
- * @last modified on  : 12-02-2025
+ * @last modified on  : 16-02-2025
  * @last modified by  : daniel.magyar@veeva.com
  **/
 public without sharing class VI_VEEV_HippoEventCloneHelper {
@@ -748,7 +748,7 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
      * @author zoltan.nagy@veeva.com | 11-01-2022
      * @param hippoEvent
      * @param medEvent
-     * @last modified on  : 01-04-2024
+     * @last modified on  : 16-02-2025
      * @last modified by  : zoltan.nagy@veeva.com
      **/
     private static void populateMedEventInstance(Hippo_Event__c hippoEvent, Medical_Event_vod__c medEvent, String countryName) {
@@ -797,12 +797,22 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
                     medEvent.put('VIA_Status__c', 'Approved');
                 }
 
-                String location = hippoEvent.Event_venue__c + ', ' + hippoEvent.Address__c + ', ' + hippoEvent.City__c + ', ' + hippoEvent.zipcode__c + ', ' + hippoEvent.Country_name__c;
-                if (location.length() > 255) {
-                    location = location.substring(0, 255);
+                String location;
+                if ('Webinar'.equals(hippoEvent.Channel__c)) {
+                    location = 'Online, ' + hippoEvent.Country_name__c;
+                    if (location.length() > 255) {
+                        location = location.substring(0, 255);
+                    }
+                    medEvent.Location__c = location;
+                    System.debug('Set Location__c for UK (Webinar): ' + location);
+                } else {
+                    location = hippoEvent.Event_venue__c + ', ' + hippoEvent.Address__c + ', ' + hippoEvent.City__c + ', ' + hippoEvent.zipcode__c + ', ' + hippoEvent.Country_name__c;
+                    if (location.length() > 255) {
+                        location = location.substring(0, 255);
+                    }
+                    medEvent.Location__c = location;
+                    System.debug('Set Location__c for UK: ' + location);
                 }
-                medEvent.Location__c = location;
-                System.debug('Set Location__c for UK: ' + location);
             }
         }
         try {
