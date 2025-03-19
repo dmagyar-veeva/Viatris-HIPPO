@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MYL_Check_Attendee_Count_with_RPPS_ID</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(Medical_Event_vod__r.MYL_Total_Event_Attendee_with_RPPS_ID__c &gt; 4,Medical_Event_vod__r.RecordType.DeveloperName = &apos;MYL_FR_Pharma_Medical_Event&apos;, ISPICKVAL(Medical_Event_vod__r.Event_Type__c,&apos;Opportunity&apos;), NOT(ISBLANK(Account_vod__r.External_ID_vod__c)) )</errorConditionFormula>
+    <errorMessage>Maximum 4 authorized health professionals</errorMessage>
+</ValidationRule>

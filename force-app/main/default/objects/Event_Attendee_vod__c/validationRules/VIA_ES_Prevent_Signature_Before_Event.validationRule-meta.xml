@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VIA_ES_Prevent_Signature_Before_Event</fullName>
+    <active>true</active>
+    <description>Prevent from getting a signature before the event has started.</description>
+    <errorConditionFormula>AND(
+Medical_Event_vod__r.RecordType.DeveloperName = &apos;ES_Hippo_Event&apos;,
+NOT(ISBLANK(Signature_Datetime_vod__c)),
+Medical_Event_vod__r.Start_Date_vod__c &gt; TODAY()
+)</errorConditionFormula>
+    <errorMessage>You cannot add a signature before the event has started.</errorMessage>
+</ValidationRule>

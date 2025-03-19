@@ -31,6 +31,157 @@
         </sections>
     </layouts>
     <layouts>
+        <layout>VIA_ES_Completed_Hippo_Medical_Event</layout>
+        <sections>
+            <label><!-- Additional information --></label>
+            <section>Additional information</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>VIA_ES_Completed_Hippo_Medical_Event_End_User</layout>
+        <sections>
+            <label><!-- Additional information --></label>
+            <section>Additional information</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>VIA_ES_Compliance</layout>
+        <sections>
+            <label><!-- Avisos --></label>
+            <section>Avisos</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Información --></label>
+            <section>Información</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>VIA_ES_Hippo_Medical_Event</layout>
+        <sections>
+            <label><!-- Additional information --></label>
+            <section>Additional information</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>VIA_ES_Hippo_Medical_Event_End_User</layout>
+        <sections>
+            <label><!-- Additional information --></label>
+            <section>Additional information</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>VIA_FR_Completed_Hippo_Medical_Event</layout>
+        <sections>
+            <label><!-- Additional information --></label>
+            <section>Additional information</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>VIA_FR_Completed_Hippo_Medical_Event_End_User</layout>
+        <sections>
+            <label><!-- Additional information --></label>
+            <section>Additional information</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>VIA_FR_Hippo_Medical_Event</layout>
+        <sections>
+            <label><!-- Additional information --></label>
+            <section>Additional information</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>VIA_FR_Hippo_Medical_Event_End_User</layout>
+        <sections>
+            <label><!-- Additional information --></label>
+            <section>Additional information</section>
+        </sections>
+        <sections>
+            <label><!-- Before creating new Account, please verify the database --></label>
+            <section>Before creating new Account, please verify the database</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Expense Summary --></label>
+            <section>Expense Summary</section>
+        </sections>
+        <sections>
+            <label><!-- Extra Time --></label>
+            <section>Extra Time</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+        <sections>
+            <label><!-- Participants without Name --></label>
+            <section>Participants without Name</section>
+        </sections>
+    </layouts>
+    <layouts>
         <layout>VIA_UK_Hippo_Medical_Event_End_User</layout>
         <sections>
             <label><!-- Expenses Summary --></label>
@@ -43,6 +194,17 @@
     </layouts>
     <layouts>
         <layout>VIA_UK_Hippo_Medical_Event_End_User_Read_Only</layout>
+        <sections>
+            <label><!-- Expenses Summary --></label>
+            <section>Expenses Summary</section>
+        </sections>
+        <sections>
+            <label><!-- Unnamed Attendees Summary (no Account page) --></label>
+            <section>Unnamed Attendees Summary (no Account page)</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>VIA_UK_Medical_Event_End_User</layout>
         <sections>
             <label><!-- Expenses Summary --></label>
             <section>Expenses Summary</section>
@@ -151,6 +313,10 @@
         <name>Speaker_Program_vod</name>
     </recordTypes>
     <recordTypes>
+        <label><!-- UK Hippo Event --></label>
+        <name>UK_Hippo_Event</name>
+    </recordTypes>
+    <recordTypes>
         <label><!-- Educational materials, medically useful items and gifts of negligible value --></label>
         <name>VIA_Educational_materials_medically_useful_items_and_gifts_of_negligible_value</name>
     </recordTypes>
@@ -170,4 +336,8 @@
         <name>Workshop_vod</name>
     </recordTypes>
     <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- You can not changed the Planned cost after the first Approval round. --></errorMessage>
+        <name>VIA_Lock_Planned_Cost_Hippo_UK</name>
+    </validationRules>
 </CustomObjectTranslation>

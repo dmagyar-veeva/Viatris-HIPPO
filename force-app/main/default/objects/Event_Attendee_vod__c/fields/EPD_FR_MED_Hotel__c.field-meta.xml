@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EPD_FR_MED_Hotel__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>19-March-2014-CV: Medical France, created for requirement R-0922.</description>
+    <label>Hotel?</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

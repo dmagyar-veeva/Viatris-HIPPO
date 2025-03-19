@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MassUpdateAttendee2</fullName>
+    <availability>online</availability>
+    <displayType>massActionButton</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>MassUpdateAttendee2</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <requireRowSelection>true</requireRowSelection>
+    <url>{!requireScript(&quot;/soap/ajax/25.0/connection.js&quot;)}
+
+var result;
+var records;
+
+var idsToUpdate = {!GETRECORDIDS( $ObjectType.Event_Attendee_vod__c )};
+
+
+if(idsToUpdate .length == 0) 
+{ 
+alert(&quot;Select at least 1 attendee!&quot;); 
+return;
+}
+
+var IDSQL = &quot;&quot;;
+var sizu = idsToUpdate.length;
+for(i = 0;i &lt; sizu; i++)
+{
+
+if(i == 0)
+   IDSQL = &quot;&apos;&quot; + idsToUpdate[i] + &quot;&apos;&quot;;
+else
+   IDSQL = IDSQL + &quot;,&apos;&quot; + idsToUpdate[i] + &quot;&apos;&quot;;
+} 
+
+
+//alert(IDSQL);
+
+
+var SQLu = &quot;Select Id,Status_vod__c from Event_Attendee_vod__c where id in (&quot; + IDSQL+ &quot;)&quot;; 
+
+alert(SQLu);
+
+result = sforce.connection.query(SQLu); 
+
+//alert(result);
+
+records = result.getArray(&quot;records&quot;);
+
+var queryResponse = sforce.connection.query(&quot;select id from emailtemplate&quot;);
+var templatedId = queryResponse.getArray(&quot;records&quot;)[0].Id;
+
+
+
+for(i=0; i &lt; result.getArray(&quot;records&quot;).length; i++) 
+{ 
+//alert(result.getArray(&quot;records&quot;)[i].Status_vod__c);
+result.getArray(&quot;records&quot;)[i].Status_vod__c = &quot;Attended&quot;; 
+//alert(result.getArray(&quot;records&quot;)[i].Status_vod__c);
+
+sforce.connection.update([result.getArray(&quot;records&quot;)[i]]);
+}</url>
+</WebLink>

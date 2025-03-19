@@ -12,6 +12,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>EPD_Event_Expense__c.VIA_Hippo_Interaction__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Event_Attendee_vod__c.Account_vod__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -380,5 +385,9 @@
     <tabSettings>
         <tab>Medical_Event_vod__c</tab>
         <visibility>Available</visibility>
+    </tabSettings>
+    <tabSettings>
+        <tab>standard-SemanticModel</tab>
+        <visibility>Visible</visibility>
     </tabSettings>
 </PermissionSet>

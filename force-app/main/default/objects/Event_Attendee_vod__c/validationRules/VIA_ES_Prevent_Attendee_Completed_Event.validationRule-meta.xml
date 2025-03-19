@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VIA_ES_Prevent_Attendee_Completed_Event</fullName>
+    <active>true</active>
+    <description>Prevent to add attendees to completed hippo events</description>
+    <errorConditionFormula>AND(
+Medical_Event_vod__r.RecordType.DeveloperName = &apos;ES_Completed_Hippo_Event&apos;, 
+ISBLANK(PRIORVALUE(CreatedDate))
+)</errorConditionFormula>
+    <errorMessage>You cannot add an attendee to a Completed Event.</errorMessage>
+</ValidationRule>

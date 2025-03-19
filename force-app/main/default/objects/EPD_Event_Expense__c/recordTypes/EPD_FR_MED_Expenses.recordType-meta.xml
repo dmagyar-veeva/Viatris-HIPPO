@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EPD_FR_MED_Expenses</fullName>
+    <active>true</active>
+    <description>20-March-14-CV: Medical FR, created for requirement R-0923</description>
+    <label>FR MED Expenses</label>
+</RecordType>

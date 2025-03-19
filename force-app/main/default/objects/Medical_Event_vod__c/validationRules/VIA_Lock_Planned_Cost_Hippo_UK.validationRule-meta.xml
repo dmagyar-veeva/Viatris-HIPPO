@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VIA_Lock_Planned_Cost_Hippo_UK</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ 
+ISPICKVAL(VIA_Type__c,&quot;Lunch &amp; Learn&quot;),
+ISCHANGED(EPD_Planned_Cost_w_Speaker__c),
+ISPICKVAL(VIA_Approval_Status__c,&quot;In Progress - 2nd Line Approval&quot;)
+
+)</errorConditionFormula>
+    <errorMessage>You can not changed the Planned cost after the first Approval round.</errorMessage>
+</ValidationRule>

@@ -600,15 +600,17 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
     }
 
     /**
-     * @description Delete Event attendees following Even HCP deletion
+     * @description Delete Event attendees folloowing Even HCP deletion
      * @author zoltan.nagy@veeva.com | 11-01-2022
      * @param oldItemsMap
-     * @last modified on  : 26-02-2025
-     * @last modified by  : daniel.magyar@veeva.com
+     * @last modified on  : 01-04-2024
+     * @last modified by  : zoltan.nagy@veeva.com
      **/
     public static void deleteMedicalEventAttendees(List<SObject> oldItems) {
         List<Event_Attendee_vod__c> eventAttendeesToDelete = new List<Event_Attendee_vod__c>();
+        //daniel.magyar@veeva.com - new list to update Event_Attendee_vod__c in case of Event_HCP__c is deleted for France
         List<Event_Attendee_vod__c> eventAttendeesToUpdate = new List<Event_Attendee_vod__c>();
+        //remains
         List<Id> eventHCPIDs = new List<Id>();
 
         for (SObject oldItem : oldItems) {
@@ -621,6 +623,7 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
             getHippoEventIdCountryNameMap.put(eventHCP.Id, eventHCP.Event__r.Country_name__c);
         }
 
+        //daniel.magyar@veeva.com - now there is an update for France, else Delete
         for (Event_Attendee_vod__c eventAttendee : [SELECT Id, VIA_Event_HCP__c FROM Event_Attendee_vod__c WHERE VIA_Event_HCP__c IN :eventHCPIDs]) {
             String countryName = getHippoEventIdCountryNameMap.get(eventAttendee.VIA_Event_HCP__c);
             if (countryName.equals(FRANCE_ONLY)) {

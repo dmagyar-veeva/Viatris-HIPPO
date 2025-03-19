@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EPD_FR_MED_Validated_by_HQ__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>29-March-14-CV: Created to enable the HQ to validate the invitees.</description>
+    <label>Validated by HQ</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

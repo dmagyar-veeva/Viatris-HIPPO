@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Expense_Attendee_Type_vod__c</fullName>
+    <description>Indicates the type of attendee. The values of this picklist should match the values available in the third-party expense system, such as Concur.</description>
+    <label>Expense Attendee Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>BUSGUEST</fullName>
+                <default>false</default>
+                <label>BUSGUEST</label>
+            </value>
+            <value>
+                <fullName>HCPROW</fullName>
+                <default>true</default>
+                <label>HCPROW</label>
+            </value>
+            <value>
+                <fullName>SYSEMP</fullName>
+                <default>false</default>
+                <label>SYSEMP</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

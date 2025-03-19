@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Walk_In_Status_vod__c</fullName>
+    <description>Used to track the status of walk-in attendees at an event.</description>
+    <label>Walk-In Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Needs_Reconciliation_vod</fullName>
+                <default>false</default>
+                <label>Needs_Reconciliation_vod</label>
+            </value>
+            <value>
+                <fullName>Reconciled_To_Existing_Account_vod</fullName>
+                <default>false</default>
+                <label>Reconciled_To_Existing_Account_vod</label>
+            </value>
+            <value>
+                <fullName>Reconciled_To_Existing_User_vod</fullName>
+                <default>false</default>
+                <label>Reconciled_To_Existing_User_vod</label>
+            </value>
+            <value>
+                <fullName>Reconciled_To_New_Account_vod</fullName>
+                <default>false</default>
+                <label>Reconciled_To_New_Account_vod</label>
+            </value>
+            <value>
+                <fullName>Dismissed_vod</fullName>
+                <default>false</default>
+                <label>Dismissed_vod</label>
+            </value>
+            <value>
+                <fullName>Reconciled_To_Customer_Master_vod</fullName>
+                <default>false</default>
+                <label>Reconciled_To_Customer_Master_vod</label>
+            </value>
+            <value>
+                <fullName>Pending_Verification_vod</fullName>
+                <default>false</default>
+                <label>Pending_Verification_vod</label>
+            </value>
+            <value>
+                <fullName>Reconciliation_Rejected_vod</fullName>
+                <default>false</default>
+                <label>Reconciliation_Rejected_vod</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

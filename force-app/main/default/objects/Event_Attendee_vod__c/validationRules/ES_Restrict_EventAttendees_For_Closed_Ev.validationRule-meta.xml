@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ES_Restrict_EventAttendees_For_Closed_Ev</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISPICKVAL(Medical_Event_vod__r.EPD_FR_MED_Event_Status__c, &apos;Closed&apos;)   &amp;&amp;  Medical_Event_vod__r.MYL_Country_Code__c = &apos;ES&apos; &amp;&amp;  RecordType.DeveloperName == &apos;Medical_Event_vod&apos;</errorConditionFormula>
+    <errorMessage>Attendees cannot be added to Closed Events</errorMessage>
+</ValidationRule>

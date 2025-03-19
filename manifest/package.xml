@@ -26,6 +26,12 @@
 		<name>ApexTrigger</name>
 	</types>
 	<types>
+		<members>Medical_Event_vod__c.VIA_UK_HIPPO_EVENT_SINGLE</members>
+		<members>Medical_Event_vod__c.VIA_UK_MEDICAL_EVENT_STEP_1</members>
+		<members>Medical_Event_vod__c.VIA_UK_MEDICAL_EVENT_STEP_2</members>
+		<name>ApprovalProcess</name>
+	</types>
+	<types>
 		<members>Event_Attendee_vod__c.VIA_Hippo_Interaction__c</members>
 		<members>Event_Attendee_vod__c.VIA_Hippo_Source__c</members>
 		<members>Medical_Event_vod__c.EPD_FR_MED_Organization_Name__c</members>
@@ -47,7 +53,9 @@
 		<name>CustomLabel</name>
 	</types>
 	<types>
-		<members>ProcessInstanceWorkitem</members>
+		<members>EPD_Event_Expense__c</members>
+		<members>Event_Attendee_vod__c</members>
+		<members>Medical_Event_vod__c</members>
 		<name>CustomObject</name>
 	</types>
 	<types>
@@ -55,11 +63,33 @@
 		<name>CustomObjectTranslation</name>
 	</types>
 	<types>
+		<members>HomePageVod_DS</members>
+		<members>Medical_Event_UK</members>
+		<name>FlexiPage</name>
+	</types>
+	<types>
+		<members>EPD_Event_Expense__c-Event Expense Layout</members>
+		<members>Event_Attendee_vod__c-VIA_ES_Hippo_Event_Attendee</members>
+		<members>Event_Attendee_vod__c-VIA_FR_Hippo_Event_Attendee</members>
+		<members>Event_Attendee_vod__c-VIA_FR_Hippo_Event_Attendee_v2</members>
+		<members>Event_Attendee_vod__c-VIA_UK_Hippo_Event_Attendee</members>
 		<members>Medical_Event_vod__c-EPD EU Medical Event Layout</members>
 		<members>Medical_Event_vod__c-EPD IBE Medical Event Layout</members>
+		<members>Medical_Event_vod__c-VIA_ES_Completed_Hippo_Medical_Event</members>
+		<members
+    >Medical_Event_vod__c-VIA_ES_Completed_Hippo_Medical_Event_End_User</members>
+		<members>Medical_Event_vod__c-VIA_ES_Compliance</members>
+		<members>Medical_Event_vod__c-VIA_ES_Hippo_Medical_Event</members>
+		<members>Medical_Event_vod__c-VIA_ES_Hippo_Medical_Event_End_User</members>
+		<members>Medical_Event_vod__c-VIA_FR_Completed_Hippo_Medical_Event</members>
+		<members
+    >Medical_Event_vod__c-VIA_FR_Completed_Hippo_Medical_Event_End_User</members>
+		<members>Medical_Event_vod__c-VIA_FR_Hippo_Medical_Event</members>
+		<members>Medical_Event_vod__c-VIA_FR_Hippo_Medical_Event_End_User</members>
 		<members>Medical_Event_vod__c-VIA_UK_Hippo_Medical_Event_End_User</members>
 		<members
     >Medical_Event_vod__c-VIA_UK_Hippo_Medical_Event_End_User_Read_Only</members>
+		<members>Medical_Event_vod__c-VIA_UK_Medical_Event_End_User</members>
 		<name>Layout</name>
 	</types>
 	<types>
@@ -81,12 +111,15 @@
 		<name>Profile</name>
 	</types>
 	<types>
+		<members>EPD_Event_Expense__c.EPD_FR_MED_Expenses</members>
+		<members>Event_Attendee_vod__c.Event_Attendee_vod</members>
+		<members>Event_Attendee_vod__c.Hippo_Event_Attendee</members>
+		<members>Event_Attendee_vod__c.UK_Attendee</members>
 		<members>Medical_Event_vod__c.Award_vod</members>
 		<members>Medical_Event_vod__c.BE_Medical_Event</members>
 		<members>Medical_Event_vod__c.Congress</members>
 		<members>Medical_Event_vod__c.Congress_vod</members>
 		<members>Medical_Event_vod__c.EPD_FR_MED_Global_Event</members>
-		<members>Medical_Event_vod__c.EPD_UK_Medical_Event</members>
 		<members>Medical_Event_vod__c.EPD_UK_Medical_Event</members>
 		<members>Medical_Event_vod__c.ES_Completed_Hippo_Event</members>
 		<members>Medical_Event_vod__c.ES_Hippo_Event</members>
@@ -102,6 +135,7 @@
 		<members>Medical_Event_vod__c.Round_Table_vod</members>
 		<members>Medical_Event_vod__c.Satellite_Symposium_vod</members>
 		<members>Medical_Event_vod__c.Speaker_Program_vod</members>
+		<members>Medical_Event_vod__c.UK_Hippo_Event</members>
 		<members
     >Medical_Event_vod__c.VIA_Educational_materials_medically_useful_items_and_gifts_of_negligible_value</members>
 		<members>Medical_Event_vod__c.VIA_GR_Medical_Event</members>
@@ -109,9 +143,14 @@
 		<members>Medical_Event_vod__c.Workshop_vod</members>
 		<name>RecordType</name>
 	</types>
+		<types>
+		<members>unfiled$public/UK_HIPPO_Upcoming_Events_v2_FaA</members>
+		<name>Report</name>
+	</types>
 	<types>
 		<members>EPD_Event_Expense__c.EPD_UK_Planned_Cost_Lock_Hippo_Event</members>
 		<members>EPD_Event_Expense__c.EPD_UK_Planned_Cost_Lock_Lunch_Learn</members>
+		<members>Medical_Event_vod__c.VIA_Lock_Planned_Cost_Hippo_UK</members>
 		<name>ValidationRule</name>
 	</types>
 	<version>63.0</version>

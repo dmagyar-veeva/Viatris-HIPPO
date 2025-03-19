@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Attendee_Selection_vod</fullName>
+    <active>true</active>
+    <description>This rule validates that either an Account, Contact, or User was selected as an Attendee.</description>
+    <errorConditionFormula>AND(LEN( Account_vod__c ) &lt; 1,LEN( Contact_vod__c ) &lt; 1,LEN( User_vod__c ) &lt; 1,LEN(EM_Attendee_vod__c) &lt; 1,LEN(EM_Event_Speaker_vod__c) &lt; 1, LEN(EM_Event_Team_Member_vod__c) &lt; 1, ISBLANK(TEXT(Walk_In_Status_vod__c)), ISBLANK(TEXT(EM_Attendee_vod__r.Online_Registration_Status_vod__c)))</errorConditionFormula>
+    <errorMessage>An Account, Contact, or User must be selected to save a record.</errorMessage>
+</ValidationRule>

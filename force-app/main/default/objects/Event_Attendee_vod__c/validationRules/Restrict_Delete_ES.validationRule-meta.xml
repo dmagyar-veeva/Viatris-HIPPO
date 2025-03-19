@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Delete_ES</fullName>
+    <active>true</active>
+    <errorConditionFormula>Medical_Event_vod__r.MYL_Country_Code__c = &apos;ES&apos; &amp;&amp;  ES_Is_Owner__c = true</errorConditionFormula>
+    <errorMessage>Only owner can delete the record</errorMessage>
+</ValidationRule>
