@@ -8,8 +8,6 @@
 		<members>VI_VEEV_HippoInteractionTriggerHandler</members>
 		<members>VI_VEEV_IFACE_TriggerHandler</members>
 		<members>VI_VEEV_TriggerDispatcher</members>
-		<members>VS_InteractionTriggerHandler</members>
-		<members>VS_InteractionTriggerHandlerTest</members>
 		<members>VproApprovalProcessOverrideController</members>
 		<name>ApexClass</name>
 	</types>
@@ -22,7 +20,6 @@
 		<members>VI_VEEV_HippoEventTrigger</members>
 		<members>VI_VEEV_HippoHCPTrigger</members>
 		<members>VI_VEEV_HippoInteractionTrigger</members>
-		<members>VS_InteractionTrigger</members>
 		<name>ApexTrigger</name>
 	</types>
 	<types>
