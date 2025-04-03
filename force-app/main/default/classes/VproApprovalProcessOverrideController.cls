@@ -19,7 +19,23 @@ public with sharing class VproApprovalProcessOverrideController {
         stdController.addFields(approvalRequestFields);
         this.theApprovalRequest = (ProcessInstanceWorkitem) stdController.getRecord();
         System.debug(this.theApprovalRequest);
-        isMedicalEventRecord = Schema.Medical_Event_vod__c.SObjecttype == this.theApprovalRequest.ProcessInstance.TargetObjectId.getSobjectType();
+        Id targetId = this.theApprovalRequest.ProcessInstance.TargetObjectId;
+        isMedicalEventRecord = false;
+        // Check if the target object is a Medical Event record and if Country is France, UK or Spain.
+        Set<String> allowedCountries = new Set<String>{ 'FR', 'UK', 'ES' };
+
+        if (targetId.getSObjectType() == Schema.Medical_Event_vod__c.SObjectType) {
+            Medical_Event_vod__c me = [
+                SELECT Id, MYL_Country_Code__c, VIA_Country_Code__c
+                FROM Medical_Event_vod__c
+                WHERE Id = :targetId
+                LIMIT 1
+            ];
+
+            if (allowedCountries.contains(me.MYL_Country_Code__c) || allowedCountries.contains(me.VIA_Country_Code__c)) {
+                isMedicalEventRecord = true;
+            }
+        }
         sObjectTypeLabel = this.theApprovalRequest.ProcessInstance.TargetObjectId.getSobjectType().getDescribe().getLabel();
         APPROVAL_REQUEST_DETAIL_PAGE = new Pagereference('/' + this.theApprovalRequest.Id);
         System.debug('Constructor:START_PAGE=' + APPROVAL_REQUEST_DETAIL_PAGE);

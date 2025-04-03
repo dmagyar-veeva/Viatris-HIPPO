@@ -56,13 +56,33 @@
 		<name>CustomObject</name>
 	</types>
 	<types>
+		<members>EPD_Event_Expense__c-fr</members>
+		<members>Event_Attendee_vod__c-en_GB</members>
+		<members>Event_Attendee_vod__c-fr</members>
 		<members>Medical_Event_vod__c-en_GB</members>
+		<members>Medical_Event_vod__c-fr</members>
 		<name>CustomObjectTranslation</name>
+	</types>
+	<types>
+		<members>public/KQpfbXeUigozYJJfRIFRtfgThlYzyH</members>
+		<name>Dashboard</name>
 	</types>
 	<types>
 		<members>HomePageVod_DS</members>
 		<members>Medical_Event_UK</members>
 		<name>FlexiPage</name>
+	</types>
+	<types>
+		<members>Event_Interaction_Status</members>
+		<members>Event_Organizer</members>
+		<members>Event_type</members>
+		<name>GlobalValueSet</name>
+	</types>
+	<types>
+		<members>Event_Interaction_Status-fr</members>
+		<members>Event_Organizer-fr</members>
+		<members>Event_type-fr</members>
+		<name>GlobalValueSetTranslation</name>
 	</types>
 	<types>
 		<members>EPD_Event_Expense__c-Event Expense Layout</members>
@@ -95,7 +115,81 @@
 	</types>
 	<types>
 		<members>Admin</members>
-		<members>Dataload Automation</members>
+		<members>MYL CLM Only Profile</members>
+		<members>MYL_BE_Data_Steward1</members>
+		<members>MYL_BE_Medical_Sales_Group</members>
+		<members>MYL_BE_Medical_Sales_Management_Group</members>
+		<members>MYL_DE_Customer_Service</members>
+		<members>MYL_DE_Data_Steward1</members>
+		<members>MYL_DE_Marketing_Team</members>
+		<members>MYL_DE_Medical_Advisors</members>
+		<members>MYL_DE_Medical_Event_Group</members>
+		<members>MYL_DE_Medical_Sales_Group</members>
+		<members>MYL_DE_Medical_Sales_Management_Group</members>
+		<members>MYL_DE_Pharmacy_Sales_Group</members>
+		<members>MYL_DE_Pharmacy_Sales_Management_Group</members>
+		<members>MYL_DE_Sales_Logistics</members>
+		<members>MYL_ES_Compliance</members>
+		<members>MYL_ES_Customer Service</members>
+		<members>MYL_ES_Data_Steward1</members>
+		<members>MYL_ES_Marketing_Group</members>
+		<members>MYL_ES_Medical_Sales_Group</members>
+		<members>MYL_ES_Medical_Sales_Management_Group</members>
+		<members>MYL_ES_Pharmacy_Sales_Group</members>
+		<members>MYL_ES_Pharmacy_Sales_Management_Group</members>
+		<members>MYL_ES_Pharmacy_Sales_Management_Group_Salesforce</members>
+		<members>MYL_ES_Sólo Lectura</members>
+		<members>MYL_EU_Call_Booking_Agent</members>
+		<members>MYL_EU_Data_Steward1</members>
+		<members>MYL_EU_Medical Information</members>
+		<members>MYL_EU_Medical_Sales_Group</members>
+		<members>MYL_EU_Medical_Sales_Management_Group</members>
+		<members>MYL_External Partner</members>
+		<members>MYL_FR_BDL_Management_Platform</members>
+		<members>MYL_FR_CLM_HQ</members>
+		<members>MYL_FR_CLM_SFA</members>
+		<members>MYL_FR_Customer Service</members>
+		<members>MYL_FR_Data_Steward1</members>
+		<members>MYL_FR_MED Direction Pharma and Med</members>
+		<members>MYL_FR_MED_Commercial Team</members>
+		<members>MYL_FR_MED_Data_Steward</members>
+		<members>MYL_FR_MED_Medical_Sales_Management_Group</members>
+		<members>MYL_FR_MED_Sales_Group</members>
+		<members>MYL_FR_Pharmacy_Sales_Group</members>
+		<members>MYL_FR_Pharmacy_Sales_Management_Group</members>
+		<members>MYL_IBE_Data_Steward1</members>
+		<members>MYL_IBE_Marketing_Group</members>
+		<members>MYL_IBE_Medical_Sales_Group</members>
+		<members>MYL_IBE_Medical_Sales_Management_Group</members>
+		<members>MYL_IE_Data_Steward1</members>
+		<members>MYL_IE_Medical_Sales_Group</members>
+		<members>MYL_IE_Medical_Sales_Group_2</members>
+		<members>MYL_IE_Medical_Sales_Management_Group</members>
+		<members>MYL_IT_Customer Service</members>
+		<members>MYL_IT_Data_Steward1</members>
+		<members>MYL_IT_Marketing_Group</members>
+		<members>MYL_IT_Medical_Advisors</members>
+		<members>MYL_IT_Medical_Sales_Group</members>
+		<members>MYL_IT_Medical_Sales_Management_Group</members>
+		<members>MYL_IT_Pharmacy_Sales_Group</members>
+		<members>MYL_IT_Pharmacy_Sales_Management_Group</members>
+		<members>MYL_IT_Pharmacy_advisor_group</members>
+		<members>MYL_NL_Data_Steward1</members>
+		<members>MYL_NL_Medical Information</members>
+		<members>MYL_NL_Medical_Sales_Group</members>
+		<members>MYL_NL_Medical_Sales_Management_Group</members>
+		<members>MYL_Nordic_Call_Booking_Agent</members>
+		<members>MYL_Nordic_Data_Steward1</members>
+		<members>MYL_Nordic_Marketing_Group</members>
+		<members>MYL_Nordic_Medical_Sales_Group</members>
+		<members>MYL_Nordic_Medical_Sales_Management_Group</members>
+		<members>MYL_PL_ASM</members>
+		<members>MYL_PL_Data_Steward1</members>
+		<members>MYL_PL_HO_Analytics_Specialist</members>
+		<members>MYL_PL_KAM</members>
+		<members>MYL_PL_Med_Advisor</members>
+		<members>MYL_PL_Med_Rep</members>
+		<members>MYL_PL_NSM</members>
 		<members>MYL_UK_Data_Steward1</members>
 		<members>MYL_UK_Healthcare_Partnership_Manager</members>
 		<members>MYL_UK_Marketing_Group</members>
@@ -104,7 +198,20 @@
 		<members>MYL_UK_Medical_Sales_Management_Group</members>
 		<members>MYL_UK_Pharmacy_Sales_Group</members>
 		<members>MYL_UK_Wholesale_Group</members>
+		<members>Mylan MDM</members>
+		<members>Mylan MDM PL</members>
+		<members>Mylan MDM RO</members>
+		<members>MylanEMEA Profile</members>
 		<members>System Administrator DevOps</members>
+		<members>VIA_ES_Farmatic_Integration</members>
+		<members>VIA_GR_Customer_Service</members>
+		<members>VIA_GR_Data_Steward</members>
+		<members>VIA_GR_Marketing_Group</members>
+		<members>VIA_GR_Medical_Sales_Group</members>
+		<members>VIA_GR_Medical_Sales_Management_Group</members>
+		<members>VIA_GR_Pharmacy_Sales_Group</members>
+		<members>VIA_GR_Pharmacy_Sales_Management_Group</members>
+		<members>VIA_Marketing_Team</members>
 		<name>Profile</name>
 	</types>
 	<types>
@@ -139,10 +246,6 @@
 		<members>Medical_Event_vod__c.VIA_UK_Completed_Medical_Event</members>
 		<members>Medical_Event_vod__c.Workshop_vod</members>
 		<name>RecordType</name>
-	</types>
-		<types>
-		<members>unfiled$public/UK_HIPPO_Upcoming_Events_v2_FaA</members>
-		<name>Report</name>
 	</types>
 	<types>
 		<members>EPD_Event_Expense__c.EPD_UK_Planned_Cost_Lock_Hippo_Event</members>

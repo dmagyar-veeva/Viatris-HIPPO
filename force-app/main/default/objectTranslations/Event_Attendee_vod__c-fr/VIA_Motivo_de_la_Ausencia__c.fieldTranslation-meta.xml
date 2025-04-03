@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Motivo de la Ausencia --></label>
+    <name>VIA_Motivo_de_la_Ausencia__c</name>
+    <picklistValues>
+        <masterLabel>Enfermedad/Indisposición</masterLabel>
+        <translation><!-- Enfermedad/Indisposición --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Incompatibilidad con horario laboral</masterLabel>
+        <translation><!-- Incompatibilidad con horario laboral --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>No Interesado/a</masterLabel>
+        <translation><!-- No Interesado/a --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>3rd Party Event Registration</masterLabel>
+        <translation>Inscription à un événement tiers</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Company Organized</masterLabel>
+        <translation>Organisé par la société</translation>
+    </valueTranslation>
+</GlobalValueSetTranslation>

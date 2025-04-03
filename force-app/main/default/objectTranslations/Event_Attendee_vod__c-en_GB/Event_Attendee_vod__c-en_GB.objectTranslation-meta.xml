@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Event Attendee --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Event Attendee --></value>
+    </caseValues>
+    <layouts>
+        <layout>VIA_ES_Hippo_Event_Attendee</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>VIA_FR_Hippo_Event_Attendee</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>VIA_FR_Hippo_Event_Attendee_v2</layout>
+        <sections>
+            <label><!-- Attendance Information --></label>
+            <section>Attendance Information</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>VIA_UK_Hippo_Event_Attendee</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Attendee Id --></nameFieldLabel>
+    <recordTypes>
+        <description><!-- 19-March-2014-CV: Medical France, created for requirement R-0901 --></description>
+        <label><!-- FR MED Attendee --></label>
+        <name>EPD_FR_MED_Attendee</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Standard record type for Event Attendees --></description>
+        <label><!-- Event_Attendee_vod --></label>
+        <name>Event_Attendee_vod</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Attendees added to events created from Hippo. --></description>
+        <label><!-- Hippo Event Attendee --></label>
+        <name>Hippo_Event_Attendee</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- 20131117 CV - UK Record Type for Event Attendees --></description>
+        <label><!-- UK Attendee --></label>
+        <name>UK_Attendee</name>
+    </recordTypes>
+    <startsWith><!-- Consonant --></startsWith>
+    <validationRules>
+        <errorMessage><!-- An Account, Contact, or User must be selected to save a record. --></errorMessage>
+        <name>Attendee_Selection_vod</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Attendees cannot be added to Closed Events --></errorMessage>
+        <name>ES_Restrict_EventAttendees_For_Closed_Ev</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You can only add Active Professionals --></errorMessage>
+        <name>MYL_Add_Only_Active_Attendee</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Maximum 4 authorized health professionals --></errorMessage>
+        <name>MYL_Check_Attendee_Count_with_RPPS_ID</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please select only one Account, Contact, or User. --></errorMessage>
+        <name>Multiple_Attendees_vod</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Only owner can delete the record --></errorMessage>
+        <name>Restrict_Delete_ES</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You cannot add an attendee to a Completed Event. --></errorMessage>
+        <name>VIA_ES_Prevent_Attendee_Completed_Event</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You cannot add a signature before the event has started. --></errorMessage>
+        <name>VIA_ES_Prevent_Signature_Before_Event</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- EPD_Update_Status --></label>
+        <name>EPD_Update_Status</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- MassUpdateAttendee2 --></label>
+        <name>MassUpdateAttendee2</name>
+    </webLinks>
+</CustomObjectTranslation>

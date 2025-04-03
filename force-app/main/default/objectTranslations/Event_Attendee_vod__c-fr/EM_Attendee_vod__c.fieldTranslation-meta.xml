@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Participant</label>
+    <name>EM_Attendee_vod__c</name>
+    <relationshipLabel>Participants à l&apos;événement</relationshipLabel>
+</CustomFieldTranslation>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Commercial Advisory Board</fullName>
+        <default>false</default>
+        <label>Commercial Advisory Board</label>
+    </customValue>
+    <customValue>
+        <fullName>Master Class</fullName>
+        <default>false</default>
+        <label>Master Class</label>
+    </customValue>
+    <customValue>
+        <fullName>Roundtable</fullName>
+        <default>false</default>
+        <label>Roundtable</label>
+    </customValue>
+    <customValue>
+        <fullName>Symposium</fullName>
+        <default>false</default>
+        <label>Symposium</label>
+    </customValue>
+    <customValue>
+        <fullName>Site Visit</fullName>
+        <default>false</default>
+        <label>Site Visit</label>
+    </customValue>
+    <customValue>
+        <fullName>Conference</fullName>
+        <default>false</default>
+        <label>Conference</label>
+    </customValue>
+    <customValue>
+        <fullName>Congress</fullName>
+        <default>false</default>
+        <label>Congress</label>
+    </customValue>
+    <customValue>
+        <fullName>Meeting</fullName>
+        <default>false</default>
+        <label>Meeting</label>
+    </customValue>
+    <customValue>
+        <fullName>CME (Continuing Medical Education)</fullName>
+        <default>false</default>
+        <label>CME (Continuing Medical Education)</label>
+    </customValue>
+    <customValue>
+        <fullName>Local Speaker Programs</fullName>
+        <default>false</default>
+        <label>Local Speaker Programs</label>
+    </customValue>
+    <customValue>
+        <fullName>Medical-2-Medical Educational Event</fullName>
+        <default>false</default>
+        <label>Medical-2-Medical Educational Event</label>
+    </customValue>
+    <customValue>
+        <fullName>Medical Advisory Board</fullName>
+        <default>false</default>
+        <label>Medical Advisory Board</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </customValue>
+    <customValue>
+        <fullName>3rd Party Event Registration</fullName>
+        <default>false</default>
+        <label>3rd Party Event Registration</label>
+    </customValue>
+    <customValue>
+        <fullName>Event</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Event</label>
+    </customValue>
+    <masterLabel>Event_type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

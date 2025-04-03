@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Walk-In Status --></label>
+    <name>Walk_In_Status_vod__c</name>
+    <picklistValues>
+        <masterLabel>Dismissed_vod</masterLabel>
+        <translation><!-- Dismissed_vod --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Needs_Reconciliation_vod</masterLabel>
+        <translation><!-- Needs_Reconciliation_vod --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Pending_Verification_vod</masterLabel>
+        <translation><!-- Pending_Verification_vod --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Reconciled_To_Customer_Master_vod</masterLabel>
+        <translation><!-- Reconciled_To_Customer_Master_vod --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Reconciled_To_Existing_Account_vod</masterLabel>
+        <translation><!-- Reconciled_To_Existing_Account_vod --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Reconciled_To_Existing_User_vod</masterLabel>
+        <translation><!-- Reconciled_To_Existing_User_vod --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Reconciled_To_New_Account_vod</masterLabel>
+        <translation><!-- Reconciled_To_New_Account_vod --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Reconciliation_Rejected_vod</masterLabel>
+        <translation><!-- Reconciliation_Rejected_vod --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

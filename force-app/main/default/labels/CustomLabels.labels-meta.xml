@@ -46,7 +46,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Override Action - Message for Event Approvals</shortDescription>
-        <value>Event records may only be approved or rejected from their Detail Pages. Click &apos;View Event&apos; to be directed to the Event Detail page.</value>
+        <value>Event records may only be approved or rejected from their Detail Pages. Click &apos;View Event Details&apos; to be directed to the Event Detail page.</value>
     </labels>
     <labels>
         <fullName>Override_Action_Reject</fullName>

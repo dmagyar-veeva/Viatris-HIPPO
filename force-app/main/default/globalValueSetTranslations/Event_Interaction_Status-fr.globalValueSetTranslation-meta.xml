@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>Approved</masterLabel>
+        <translation>Approuvé</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Cancelled</masterLabel>
+        <translation>Annulé</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Completed</masterLabel>
+        <translation>Terminé</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Draft</masterLabel>
+        <translation>Brouillon</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Hippo Approved</masterLabel>
+        <translation>Approuvé Hippo</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Pending Event Approval</masterLabel>
+        <translation><!-- Pending Event Approval --></translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Registered</masterLabel>
+        <translation><!-- Registered --></translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Rejected</masterLabel>
+        <translation>Rejeté</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Sent to Approval</masterLabel>
+        <translation>Envoyé pour approbation</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Terminated</masterLabel>
+        <translation>Terminé</translation>
+    </valueTranslation>
+</GlobalValueSetTranslation>

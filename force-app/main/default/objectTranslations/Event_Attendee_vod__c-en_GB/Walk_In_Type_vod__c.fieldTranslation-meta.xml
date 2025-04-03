@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Walk-In Type --></label>
+    <name>Walk_In_Type_vod__c</name>
+    <picklistValues>
+        <masterLabel>Non-Prescriber</masterLabel>
+        <translation><!-- Non-Prescriber --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Other</masterLabel>
+        <translation><!-- Other --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Prescriber</masterLabel>
+        <translation><!-- Prescriber --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

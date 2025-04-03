@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Statut</label>
+    <name>Status_vod__c</name>
+    <picklistValues>
+        <masterLabel>Accepted</masterLabel>
+        <translation>Présent sans hospitalité</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Attended</masterLabel>
+        <translation>Présent avec hospitalité</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Cancelled</masterLabel>
+        <translation>Annulé</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Cleared_Signature_vod</masterLabel>
+        <translation>Absent facturé</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Invited</masterLabel>
+        <translation>Invité</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Rejected</masterLabel>
+        <translation>Absent</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Signed_vod</masterLabel>
+        <translation>Présent avec hospitalité</translation>
+    </picklistValues>
+</CustomFieldTranslation>

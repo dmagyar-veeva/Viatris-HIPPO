@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Frais RP</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Frais RP</value>
+    </caseValues>
+    <gender>Masculine</gender>
+    <layouts>
+        <layout>Event Expense Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel>Name</nameFieldLabel>
+    <recordTypes>
+        <description><!-- 20-March-14-CV: Medical FR, created for requirement R-0923 --></description>
+        <label><!-- FR MED Expenses --></label>
+        <name>EPD_FR_MED_Expenses</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- You cannot modify the Planned Cost of a Hippo-related Event, except if the Type is &apos;Lunch &amp; Learn&apos;. --></errorMessage>
+        <name>EPD_UK_Planned_Cost_Lock_Hippo_Event</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You cannot modify the Planned Cost of an Approved &apos;Lunch &amp; Learn&apos; event. --></errorMessage>
+        <name>EPD_UK_Planned_Cost_Lock_Lunch_Learn</name>
+    </validationRules>
+</CustomObjectTranslation>

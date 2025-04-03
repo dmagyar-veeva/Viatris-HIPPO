@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Statut de l&apos;entrée</label>
+    <name>Walk_In_Status_vod__c</name>
+    <picklistValues>
+        <masterLabel>Dismissed_vod</masterLabel>
+        <translation>Rejeté</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Needs_Reconciliation_vod</masterLabel>
+        <translation>Rapprochement requis</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Pending_Verification_vod</masterLabel>
+        <translation>Vérification en Attente</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Reconciled_To_Customer_Master_vod</masterLabel>
+        <translation>Rapproché avec l&apos;instance principale</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Reconciled_To_Existing_Account_vod</masterLabel>
+        <translation>Rapproché avec le compte existant</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Reconciled_To_Existing_User_vod</masterLabel>
+        <translation>Rapproché avec l&apos;utilisateur existant</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Reconciled_To_New_Account_vod</masterLabel>
+        <translation>Rapproché avec le nouveau compte</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Reconciliation_Rejected_vod</masterLabel>
+        <translation>Rapprochement rejeté</translation>
+    </picklistValues>
+</CustomFieldTranslation>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Event Team Member --></label>
+    <name>EM_Event_Team_Member_vod__c</name>
+    <relationshipLabel><!-- Event Attendees(Event Team Member) --></relationshipLabel>
+</CustomFieldTranslation>

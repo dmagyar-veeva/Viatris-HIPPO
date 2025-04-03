@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Position --></label>
+    <name>Position_vod__c</name>
+    <picklistValues>
+        <masterLabel>Award_Winner_vod</masterLabel>
+        <translation><!-- Award_Winner_vod --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Chair_Person_vod</masterLabel>
+        <translation><!-- Chair_Person_vod --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Organizer_vod</masterLabel>
+        <translation><!-- Organizer_vod --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Participant_vod</masterLabel>
+        <translation><!-- Participant_vod --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Speaker_vod</masterLabel>
+        <translation><!-- Speaker_vod --></translation>
+    </picklistValues>
+</CustomFieldTranslation>
