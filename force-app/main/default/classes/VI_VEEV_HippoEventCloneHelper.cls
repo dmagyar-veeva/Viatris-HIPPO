@@ -140,15 +140,16 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
                     System.debug('Hippo Event ' + newItem.Id + ' has been TERMINATED in the UK.');
 
                     // Fetch the related Medical_Event_vod__c record
-                    Medical_Event_vod__c relatedMedicalEvent = [
+                    List<Medical_Event_vod__c> medEventList = [
                         SELECT Id, VIA_Status__c, VIA_Hippo_Event__c, EPD_FR_MED_Event_Status__c, RecordTypeId
                         FROM Medical_Event_vod__c
                         WHERE VIA_Hippo_Event__c = :newItem.Id
                         LIMIT 1
                     ];
 
-                    if (relatedMedicalEvent != null) {
+                    if (!medEventList.isEmpty()) {
                         // Copy the Status__c from Hippo_Event__c to VIA_Status__c in Medical_Event_vod__c
+                        Medical_Event_vod__c relatedMedicalEvent = medEventList[0];
                         relatedMedicalEvent.VIA_Status__c = newItem.Status__c;
                         relatedMedicalEvent.EPD_FR_MED_Event_Status__c = newItem.Status_Formula__c;
                         relatedMedicalEvent.RecordTypeId = getCompletedHipoEventRTId(countryName);
@@ -239,7 +240,7 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
      * @description Event_HCP after insert. Creates Event Attendes form each newly created hippo Event HCP record
      * @author zoltan.nagy@veeva.com | 11-01-2022
      * @param newItemsMap
-     * @last modified on  : 05-08-2024
+     * @last modified on  : 04-03-2025
      * @last modified by  : daniel.magyar@veeva.com
      **/
     public static void createMedicalEventAttendees(Map<Id, SObject> newItemsMap) {
@@ -261,6 +262,24 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
             hippoEventIdCountryNameMap = getHippoEventIdCountryNameMap(hippoEventIds);
         }
 
+        // Gather sets of MedEventIds / AccountIds for dedup check
+        Set<Id> medEventIds = new Set<Id>();
+        Set<Id> accountIds = new Set<Id>();
+
+        for (Event_HCP__c eventHCP : (List<Event_HCP__c>) newItemsMap.values()) {
+            if (eventMap.containsKey(eventHCP.Event__c) && accountMap.containsKey(eventHCP.HCP_Account__c)) {
+                Id meId = eventMap.get(eventHCP.Event__c);
+                Id acctId = accountMap.get(eventHCP.HCP_Account__c).Account__c;
+                if (meId != null && acctId != null) {
+                    medEventIds.add(meId);
+                    accountIds.add(acctId);
+                }
+            }
+        }
+
+        // Query existing Attendees so we skip duplicates
+        Map<String, Event_Attendee_vod__c> existingMap = getAttendeesByMedEventAndAccount(medEventIds, accountIds);
+
         for (Event_HCP__c eventHCP : (List<Event_HCP__c>) newItemsMap.values()) {
             if (!hippoEventIdCountryNameMap.containsKey(eventHCP.Event__c)) {
                 continue;
@@ -280,29 +299,45 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
                 continue;
             }
 
-            Event_Attendee_vod__c eventAttendee = new Event_Attendee_vod__c(
-                Account_vod__c = (accountMap.get(eventHCP.HCP_Account__c)).Account__c,
-                Medical_Event_vod__c = eventMap.get(eventHCP.Event__c),
-                RecordTypeId = rtId,
-                VIA_Event_HCP__c = eventHCP.Id,
-                VIA_Speaker__c = String.isNotBlank((accountMap.get(eventHCP.HCP_Account__c)).Current_FMV_Assessment__c),
-                VIA_HIPPO_Event_Attendee__c = true,
-                Expense_Attendee_Type_vod__c = 'HCP',
-                Status_vod__c = 'Invited'
-            );
+            Id meId = eventMap.get(eventHCP.Event__c);
+            Id acctId = accountMap.get(eventHCP.HCP_Account__c).Account__c;
+            if (meId == null || acctId == null) {
+                continue;
+            }
 
-            attendeesToInsert.add(eventAttendee);
+            String compositeKey = meId + '|' + acctId;
+            Event_Attendee_vod__c existingAtt = existingMap.get(compositeKey);
+
+            if (existingAtt == null) {
+                Event_Attendee_vod__c eventAttendee = new Event_Attendee_vod__c(
+                    Account_vod__c = acctId,
+                    Medical_Event_vod__c = meId,
+                    RecordTypeId = rtId,
+                    VIA_Event_HCP__c = eventHCP.Id,
+                    VIA_Speaker__c = String.isNotBlank((accountMap.get(eventHCP.HCP_Account__c)).Current_FMV_Assessment__c),
+                    VIA_HIPPO_Event_Attendee__c = true,
+                    Expense_Attendee_Type_vod__c = 'HCP',
+                    Status_vod__c = 'Invited'
+                );
+                attendeesToInsert.add(eventAttendee);
+                existingMap.put(compositeKey, eventAttendee);
+            } else {
+                existingAtt.VIA_Event_HCP__c = eventHCP.Id;
+                existingAtt.VIA_Speaker__c = String.isNotBlank(accountMap.get(eventHCP.HCP_Account__c).Current_FMV_Assessment__c);
+                existingAtt.VIA_HIPPO_Event_Attendee__c = true;
+                attendeesToInsert.add(existingAtt);
+            }
         }
 
         if (!attendeesToInsert.isEmpty()) {
-            insert attendeesToInsert;
+            upsert attendeesToInsert;
         }
     }
 
     /**
      * @description Hippo_Interaction__c after insert. Creates Event Attendes frm each newly created Hippo Interaction record
      * @author daniel.magyar@veeva.com | 16-12-2023
-     * @last modified on  : 05-08-2024
+     * @last modified on  : 04-03-2025
      * @last modified by  : daniel.magyar@veeva.com
      * @param newItemsMap
      **/
@@ -313,6 +348,9 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
         Map<Id, HCP_Account__c> accountMap = getHippoAccMapFromInteraction((Map<Id, Hippo_Interaction__c>) newItemsMap);
         Map<Id, Id> eventMap = getHippoEventMedEventMapFromInteraction((Map<Id, Hippo_Interaction__c>) newItemsMap);
 
+        Set<Id> medEventIds = new Set<Id>();
+        Set<Id> accountIds = new Set<Id>();
+
         Set<Id> hippoEventIds = new Set<Id>();
         Map<Id, String> hippoEventIdCountryNameMap = new Map<Id, String>();
 
@@ -320,11 +358,21 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
             if (String.isNotBlank(interaction.Hippo_Event__c)) {
                 hippoEventIds.add(interaction.Hippo_Event__c);
             }
+            if (interaction.Status__c == 'Approved' && accountMap.containsKey(interaction.HCP_Account__c) && eventMap.containsKey(interaction.Hippo_Event__c)) {
+                Id meId = eventMap.get(interaction.Hippo_Event__c);
+                Id acctId = accountMap.get(interaction.HCP_Account__c).Account__c;
+                if (meId != null && acctId != null) {
+                    medEventIds.add(meId);
+                    accountIds.add(acctId);
+                }
+            }
         }
 
         if (!hippoEventIds.isEmpty()) {
             hippoEventIdCountryNameMap = getHippoEventIdCountryNameMap(hippoEventIds);
         }
+
+        Map<String, Event_Attendee_vod__c> existingMap = getAttendeesByMedEventAndAccount(medEventIds, accountIds);
 
         for (Hippo_Interaction__c interaction : (List<Hippo_Interaction__c>) newItemsMap.values()) {
             if (!hippoEventIdCountryNameMap.containsKey(interaction.Hippo_Event__c)) {
@@ -353,25 +401,47 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
             }
 
             if (interaction.Status__c == 'Approved') {
-                Event_Attendee_vod__c eventAttendee = new Event_Attendee_vod__c(
-                    Account_vod__c = (accountMap.get(interaction.HCP_Account__c)).Account__c,
-                    Medical_Event_vod__c = eventMap.get(interaction.Hippo_Event__c),
-                    RecordTypeId = rtId,
-                    Status_vod__c = 'Invited',
-                    VIA_Hippo_Interaction__c = interaction.id,
-                    VIA_Speaker__c = String.isNotBlank((accountMap.get(interaction.HCP_Account__c)).Current_FMV_Assessment__c),
-                    VIA_HIPPO_Event_Attendee__c = true,
-                    Expense_Attendee_Type_vod__c = 'HCP'
-                );
+                Id meId = eventMap.get(interaction.Hippo_Event__c);
+                Id acctId = accountMap.get(interaction.HCP_Account__c).Account__c;
+                if (meId == null || acctId == null) {
+                    continue;
+                }
 
-                eventAttendee.EPD_FR_MED_Speaker__c = isSpeakerInteraction(interaction);
-                eventAttendee.Incurred_Expense_vod__c = (interaction.Type__c == 'Educational Support' || interaction.Type__c == 'Engagement');
+                String compositeKey = meId + '|' + acctId;
+                Event_Attendee_vod__c existingAtt = existingMap.get(compositeKey);
 
-                attendeesToInsert.add(eventAttendee);
+                if (existingAtt == null) {
+                    Event_Attendee_vod__c eventAttendee = new Event_Attendee_vod__c(
+                        Account_vod__c = (accountMap.get(interaction.HCP_Account__c)).Account__c,
+                        Medical_Event_vod__c = eventMap.get(interaction.Hippo_Event__c),
+                        RecordTypeId = rtId,
+                        Status_vod__c = 'Invited',
+                        VIA_Hippo_Interaction__c = interaction.id,
+                        VIA_Speaker__c = String.isNotBlank((accountMap.get(interaction.HCP_Account__c)).Current_FMV_Assessment__c),
+                        VIA_HIPPO_Event_Attendee__c = true,
+                        Expense_Attendee_Type_vod__c = 'HCP'
+                    );
 
-                if (interaction.Travel_Cost_Calculation__c > 0) {
-                    Medical_Event_vod__c medEvent = new Medical_Event_vod__c(Id = eventAttendee.MedicaL_Event_vod__c, MYL_FR_Paid_Speaker__c = 'Yes');
-                    medEventsToUpdate.add(medEvent);
+                    eventAttendee.EPD_FR_MED_Speaker__c = isSpeakerInteraction(interaction);
+                    eventAttendee.Incurred_Expense_vod__c = (interaction.Type__c == 'Educational Support' || interaction.Type__c == 'Engagement');
+
+                    attendeesToInsert.add(eventAttendee);
+
+                    existingMap.put(compositeKey, eventAttendee);
+
+                    if (interaction.Travel_Cost_Calculation__c > 0) {
+                        Medical_Event_vod__c medEvent = new Medical_Event_vod__c(Id = eventAttendee.MedicaL_Event_vod__c, MYL_FR_Paid_Speaker__c = 'Yes');
+                        medEventsToUpdate.add(medEvent);
+                    }
+                } else {
+                    existingAtt.VIA_Hippo_Interaction__c = interaction.Id;
+                    existingAtt.VIA_Speaker__c = String.isNotBlank((accountMap.get(interaction.HCP_Account__c)).Current_FMV_Assessment__c);
+                    existingAtt.EPD_FR_MED_Speaker__c = isSpeakerInteraction(interaction);
+                    existingAtt.Incurred_Expense_vod__c = (interaction.Type__c == 'Educational Support' || interaction.Type__c == 'Engagement');
+                    attendeesToInsert.add(existingAtt);
+                    if (interaction.Travel_Cost_Calculation__c > 0) {
+                        medEventsToUpdate.add(new Medical_Event_vod__c(Id = existingAtt.Medical_Event_vod__c, MYL_FR_Paid_Speaker__c = 'Yes'));
+                    }
                 }
             }
         }
@@ -390,7 +460,7 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
     /**
      * @description Hippo_Interaction__c after update. Creates or updates Event Attendees from each created or updated Hippo Interaction record
      * @author daniel.magyar@veeva.com | 16-12-2023
-     * @last modified on  : 05-08-2024
+     * @last modified on  : 04-03-2025
      * @last modified by  : daniel.magyar@veeva.com
      * @param newItemsMap
      **/
@@ -405,6 +475,9 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
         Map<Id, Id> eventMap = getHippoEventMedEventMapFromInteraction((Map<Id, Hippo_Interaction__c>) newItemsMap);
         System.debug('Event map retrieved: ' + eventMap);
 
+        Set<Id> medEventIds = new Set<Id>();
+        Set<Id> accountIds = new Set<Id>();
+
         Set<Id> hippoEventIds = new Set<Id>();
         Map<Id, String> hippoEventIdCountryNameMap = new Map<Id, String>();
 
@@ -412,6 +485,14 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
             if (String.isNotBlank(interaction.Hippo_Event__c)) {
                 hippoEventIds.add(interaction.Hippo_Event__c);
                 System.debug('Added Hippo Event ID: ' + interaction.Hippo_Event__c);
+            }
+            if (eventMap.containsKey(interaction.Hippo_Event__c) && accountMap.containsKey(interaction.HCP_Account__c)) {
+                Id meId = eventMap.get(interaction.Hippo_Event__c);
+                Id acctId = accountMap.get(interaction.HCP_Account__c).Account__c;
+                if (meId != null && acctId != null) {
+                    medEventIds.add(meId);
+                    accountIds.add(acctId);
+                }
             }
         }
 
@@ -431,6 +512,8 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
             existingAttendeesMap.put(attendee.VIA_Hippo_Interaction__c, attendee);
             System.debug('Added attendee to map: ' + attendee.Id);
         }
+
+        Map<String, Event_Attendee_vod__c> compositeKeyMap = getAttendeesByMedEventAndAccount(medEventIds, accountIds);
 
         for (Hippo_Interaction__c interaction : (List<Hippo_Interaction__c>) newItemsMap.values()) {
             if (!hippoEventIdCountryNameMap.containsKey(interaction.Hippo_Event__c)) {
@@ -488,17 +571,30 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
                 System.debug('Full record from accountMap (HCP_Account__c): ' + accountMap.get(interaction.HCP_Account__c));
                 System.debug('>>> Attempting to set Account_vod__c from accountMap: ' + accountMap.get(interaction.HCP_Account__c).Account__c);
                 if (eventAttendee == null) {
-                    eventAttendee = new Event_Attendee_vod__c(
-                        Account_vod__c = (accountMap.get(interaction.HCP_Account__c)).Account__c,
-                        Medical_Event_vod__c = eventMap.get(interaction.Hippo_Event__c),
-                        RecordTypeId = rtId,
-                        VIA_Hippo_Interaction__c = interaction.id,
-                        VIA_Speaker__c = String.isNotBlank((accountMap.get(interaction.HCP_Account__c)).Current_FMV_Assessment__c),
-                        VIA_HIPPO_Event_Attendee__c = true,
-                        Expense_Attendee_Type_vod__c = 'HCP'
-                    );
-                    eventAttendee.EPD_FR_MED_Speaker__c = isSpeakerInteraction(interaction);
-                    eventAttendee.Incurred_Expense_vod__c = (interaction.Type__c == 'Educational Support' || interaction.Type__c == 'Engagement');
+                    Id meId = eventMap.get(interaction.Hippo_Event__c);
+                    Id acctId = accountMap.get(interaction.HCP_Account__c).Account__c;
+                    if (meId == null || acctId == null) {
+                        continue;
+                    }
+
+                    String compositeKey = meId + '|' + acctId;
+                    Event_Attendee_vod__c existingComposite = compositeKeyMap.get(compositeKey);
+
+                    if (existingComposite == null) {
+                        eventAttendee = new Event_Attendee_vod__c(
+                            Account_vod__c = acctId,
+                            Medical_Event_vod__c = meId,
+                            RecordTypeId = rtId,
+                            VIA_Hippo_Interaction__c = interaction.id,
+                            VIA_Speaker__c = String.isNotBlank((accountMap.get(interaction.HCP_Account__c)).Current_FMV_Assessment__c),
+                            VIA_HIPPO_Event_Attendee__c = true,
+                            Expense_Attendee_Type_vod__c = 'HCP'
+                        );
+                        eventAttendee.EPD_FR_MED_Speaker__c = isSpeakerInteraction(interaction);
+                        eventAttendee.Incurred_Expense_vod__c = (interaction.Type__c == 'Educational Support' || interaction.Type__c == 'Engagement');
+                    } else {
+                        eventAttendee = existingComposite;
+                    }
                 } else {
                     eventAttendee.Status_vod__c = attendeeStatus;
                 }
@@ -525,6 +621,35 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
             update medEventsToUpdate;
             System.debug('Medical events updated successfully');
         }
+    }
+
+    /**
+     * @description returns the map of existing attendees for the given medical event and account IDs
+     * @author daniel.magyar@veeva.com | 03-04-2025
+     * @param {Set<Id>} medEventIds - the set of medical event IDs
+     * @param {Set<Id>} accountIds - the set of account IDs
+     * @return {Map<String, Event_Attendee_vod__c>} a map of attendee IDs to attendees
+     */
+    private static Map<String, Event_Attendee_vod__c> getAttendeesByMedEventAndAccount(Set<Id> medEventIds, Set<Id> accountIds) {
+        Map<String, Event_Attendee_vod__c> mapKeyToAttendee = new Map<String, Event_Attendee_vod__c>();
+
+        if (medEventIds.isEmpty() || accountIds.isEmpty()) {
+            return mapKeyToAttendee;
+        }
+
+        List<Event_Attendee_vod__c> existingAttendees = [
+            SELECT Id, Medical_Event_vod__c, Account_vod__c, VIA_Event_HCP__c, VIA_Speaker__c, Status_vod__c, VIA_Hippo_Interaction__c, Expense_Attendee_Type_vod__c
+            FROM Event_Attendee_vod__c
+            WHERE Medical_Event_vod__c IN :medEventIds AND Account_vod__c IN :accountIds
+        ];
+
+        // Build  "medEventId|acctId" key
+        for (Event_Attendee_vod__c ea : existingAttendees) {
+            String compositeKey = ea.Medical_Event_vod__c + '|' + ea.Account_vod__c;
+            mapKeyToAttendee.put(compositeKey, ea);
+        }
+
+        return mapKeyToAttendee;
     }
 
     /**

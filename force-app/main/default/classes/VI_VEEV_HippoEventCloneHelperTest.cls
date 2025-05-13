@@ -24,7 +24,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Department_Sync__c = 'test department',
             Country__c = 'a6K3W000000Ch8XUAS',
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nG50000001zmDIAQ',
+            Parent_User_Setting__c = 'a6nAY0000001LSe',
             Region__c = 'a6g3W000000LPcyQAG'
         );
 
@@ -57,7 +57,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Department_Sync__c = 'test department',
             Country__c = 'a6K3W000000Ch8XUAS',
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nG50000001zmDIAQ',
+            Parent_User_Setting__c = 'a6nAY0000001LSe',
             Region__c = 'a6g3W000000LPcyQAG'
         );
 
@@ -124,7 +124,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Department_Sync__c = 'test department',
             Country__c = 'a6K3W000000Ch8dUAC',
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nG50000001zmDIAQ',
+            Parent_User_Setting__c = 'a6n0700000004BE',
             Region__c = 'a6g3W000000LPcvQAG'
         );
 
@@ -190,7 +190,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             // Business_Unit__c = 'a6F1q000000FQEy',
             Country__c = 'a6K3W000000Ch8dUAC',
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nG50000001zmDIAQ',
+            Parent_User_Setting__c = 'a6n0700000004BE',
             Region__c = 'a6g3W000000LPcvQAG'
         );
 
@@ -240,7 +240,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Event_subtype__c = 'RP Classic / RP Conference',
             Country__c = 'a6K3W000000Ch8dUAC',
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nG50000001zmDIAQ',
+            Parent_User_Setting__c = 'a6n0700000004BE',
             Region__c = 'a6g3W000000LPcvQAG'
         );
         insert hippoevent2;
@@ -291,7 +291,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Department_Sync__c = 'test department',
             Country__c = 'a6K3W000000Ch8dUAC',
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nG50000001zmDIAQ',
+            Parent_User_Setting__c = 'a6n0700000004BE',
             Region__c = 'a6g3W000000LPcvQAG'
         );
 
@@ -338,7 +338,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Department_Sync__c = 'test department',
             Country__c = 'a6K3W000000Ch8dUAC',
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nG50000001zmDIAQ',
+            Parent_User_Setting__c = 'a6nAY0000001LSe',
             Region__c = 'a6g3W000000LPcyQAG'
         );
 
@@ -378,7 +378,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Department_Sync__c = 'test department',
             Country__c = 'a6K3W000000Ch8dUAC',
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nG50000001zmDIAQ',
+            Parent_User_Setting__c = 'a6n0700000004BE',
             Region__c = 'a6g3W000000LPcvQAG'
         );
 
@@ -425,7 +425,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Department_Sync__c = 'test department',
             Country__c = 'a6K3W000000Ch8dUAC',
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nG50000001zmDIAQ',
+            Parent_User_Setting__c = 'a6n0700000004BE',
             Region__c = 'a6g3W000000LPcvQAG'
         );
 
@@ -474,7 +474,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Department_Sync__c = 'test department',
             Country__c = 'a6K3W000000Ch8dUAC',
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nG50000001zmDIAQ',
+            Parent_User_Setting__c = 'a6n0700000004BE',
             Region__c = 'a6g3W000000LPcvQAG'
         );
         Test.startTest();
@@ -524,7 +524,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Department_Sync__c = 'test department',
             Country__c = 'a6K3W000000Ch8dUAC',
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nG50000001zmDIAQ',
+            Parent_User_Setting__c = 'a6n0700000004BE',
             Region__c = 'a6g3W000000LPcvQAG'
         );
 
@@ -566,7 +566,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Department_Sync__c = 'test department',
             Country__c = 'a6K3W000000Ch8dUAC',
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nG50000001zmDIAQ',
+            Parent_User_Setting__c = 'a6n0700000004BE',
             Region__c = 'a6g3W000000LPcvQAG'
         );
         Test.startTest();
@@ -612,7 +612,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Department_Sync__c = 'test department',
             Country__c = 'a6K3W000000Ch8dUAC',
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nG50000001zmDIAQ',
+            Parent_User_Setting__c = 'a6n0700000004BE',
             Region__c = 'a6g3W000000LPcvQAG'
         );
         Test.startTest();
@@ -640,7 +640,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
 
         System.debug(attendees);
 
-        System.assertEquals(3, attendees.size(), 'Duplicate Event Attendees created.');
+        System.assertEquals(2, attendees.size(), 'No duplicate attendees.');
     }
 
     @isTest(SeeAllData=true)
@@ -663,7 +663,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
                 Event_subtype__c = 'RP Classic / RP Conference',
                 Country__c = 'a6K3W000000Ch8dUAC',
                 VIA_HIP_Subtype__c = 'Commercial',
-                Parent_User_Setting__c = 'a6nG50000001qhMIAQ',
+                Parent_User_Setting__c = 'a6n0700000004BE',
                 Region__c = 'a6g3W000000LPcvQAG'
             );
 
@@ -715,7 +715,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Department_Sync__c = 'test department',
             Country__c = 'a6K3W000000Ch8XUAS',
             VIA_HIP_Subtype__c = 'Medical',
-            Parent_User_Setting__c = 'a6nG50000001zmDIAQ',
+            Parent_User_Setting__c = 'a6nAY0000001LSe',
             Region__C = 'a6g3W000000LPcvQAG'
         );
 
@@ -746,11 +746,11 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Title_Sync__c = 'test requesting party title',
             Requesting_Party_Location_Sync__c = 'test location',
             Requesting_Party_Department_Sync__c = 'test department',
-            Channel__c = 'Live',
+            Channel__c = 'Live and Online',
             Event_subtype__c = 'RP Classic / RP Conference',
             Country__c = 'a6K3W000000Ch8UUAS',
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nG50000001yBpIAI',
+            Parent_User_Setting__c = 'a6nAY0000001LdtYAE',
             Region__c = 'a6g3W000000LPcvQAG',
             Event_venue__c = 'Coffee Beans UK',
             Address__c = '102 Derham Rd',
@@ -812,11 +812,11 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Title_Sync__c = 'test requesting party title',
             Requesting_Party_Location_Sync__c = 'test location',
             Requesting_Party_Department_Sync__c = 'test department',
-            Channel__c = 'Webinar',
+            Channel__c = 'Live and Online',
             Event_subtype__c = 'RP Classic / RP Conference',
             Country__c = 'a6K3W000000Ch8UUAS', // Assuming this is UK Country ID
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nG50000001yBpIAI',
+            Parent_User_Setting__c = 'a6nAY0000001LdtYAE',
             Region__c = 'a6g3W000000LPcvQAG',
             Event_venue__c = 'Coffee Beans UK',
             Address__c = '102 Derham Rd',
@@ -900,11 +900,11 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Title_Sync__c = 'test requesting party title',
             Requesting_Party_Location_Sync__c = 'test location',
             Requesting_Party_Department_Sync__c = 'test department',
-            Channel__c = 'Live',
+            Channel__c = 'Live and Online',
             Event_subtype__c = 'RP Classic / RP Conference',
             Country__c = 'a6K3W000000Ch8UUAS',
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nG50000001yBpIAI',
+            Parent_User_Setting__c = 'a6nAY0000001LdtYAE',
             Region__c = 'a6g3W000000LPcvQAG',
             Event_venue__c = 'Coffee Beans UK',
             Address__c = '102 Derham Rd',
@@ -1030,7 +1030,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
                 Event_subtype__c = 'RP Classic / RP Conference',
                 Country__c = 'a6K3W000000Ch8UUAS',
                 VIA_HIP_Subtype__c = 'Commercial',
-                Parent_User_Setting__c = 'a6nG50000001yBpIAI',
+                Parent_User_Setting__c = 'a6nAY0000001LdtYAE',
                 Region__c = 'a6g3W000000LPcvQAG',
                 Event_venue__c = 'Coffee Beans UK',
                 Address__c = '102 Derham Rd',
@@ -1084,5 +1084,50 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             System.assertEquals(500.00, exp.EPD_Planned_Cost__c, 'Expense planned cost should match the interaction amount.');
             System.assertEquals('GBP', exp.CurrencyIsoCode, 'Expense currency should be GBP.');
         }
+    }
+
+    @IsTest(SeeAllData=true)
+    static void testHippoEventTerminateUKWithoutMedEvent() {
+        // UK draft Hippo Event (no Medical Event yet)
+        Hippo_Event__c hippoEvent = new Hippo_Event__c(
+            Name = 'UK Terminate – no MedEvent',
+            Start_Event_Date__c = Date.today(),
+            End_Event_Date__c = Date.today(),
+            TrackingNumber__c = 'track‑term‑001',
+            Status__c = 'Draft',
+            Type__c = 'Roundtable',
+            Requesting_Party_Name_Sync__c = 'Requester',
+            Requesting_Party_Title_Sync__c = 'Title',
+            Requesting_Party_Location_Sync__c = 'Location',
+            Requesting_Party_Department_Sync__c = 'Dept',
+            Channel__c = 'Webinar',
+            Event_subtype__c = 'RP Classic / RP Conference',
+            Country__c = 'a6K3W000000Ch8UUAS', // UK country id
+            VIA_HIP_Subtype__c = 'Commercial',
+            Parent_User_Setting__c = 'a6nAY0000001LdtYAE',
+            Region__c = 'a6g3W000000LPcvQAG'
+        );
+        insert hippoEvent;
+
+        User ukUser = [SELECT Id FROM User WHERE Name = 'Jonas Willmann' LIMIT 1];
+
+        Test.startTest();
+        System.runAs(ukUser) {
+            Hippo_Event__c toTerminate = [SELECT Id, Status__c FROM Hippo_Event__c WHERE Id = :hippoEvent.Id];
+            toTerminate.Status__c = 'Terminated';
+
+            Boolean def = VS_EventTriggerHandler.isSkipTriggerForTest;
+            try {
+                VS_EventTriggerHandler.isSkipTriggerForTest = true;
+                update toTerminate;
+            } finally {
+                VS_EventTriggerHandler.isSkipTriggerForTest = def;
+            }
+        }
+        Test.stopTest();
+
+        // No Medical Event should have been created, and no exception thrown
+        List<Medical_Event_vod__c> medEvents = [SELECT Id FROM Medical_Event_vod__c WHERE VIA_Hippo_Event__c = :hippoEvent.Id];
+        System.assertEquals(0, medEvents.size(), 'Terminating a UK Hippo Event with no existing Medical Event must not create one.');
     }
 }
