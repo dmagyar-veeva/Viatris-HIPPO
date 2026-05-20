@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Any_transportation_hospitality_Details__c</fullName>
+    <description>Will any transportation and/or hospitality (i.e., hotel and meals) provided to HCP(s) adhere to the limitations and maximum amount per HCP as stated in the local country Standards for Interactions with the Healthcare Community (i.e., not be lavish or luxurious, must be reasonable and proportionate)?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Will any transportation and/or hospitality (i.e., hotel and meals) provided to HCP(s) adhere to the limitations and maximum amount per HCP as stated in the local country Standards for Interactions with the Healthcare Community?</inlineHelpText>
+    <label>Any transportation hospitality Details</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

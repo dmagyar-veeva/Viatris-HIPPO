@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Educational_Support_Rationale__c</fullName>
+    <description>Rationale for providing HCP Educational Support (if the event will occur outside of the HCP&apos;s country of practice, include justification).</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Rationale for providing HCP Educational Support (if the event will occur outside of the HCP&apos;s country of practice, include justification).</inlineHelpText>
+    <label>Educational Support Rationale</label>
+    <length>12000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>6</visibleLines>
+</CustomField>

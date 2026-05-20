@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tthird_party_organization_Name__c</fullName>
+    <description>For a Company-organized Event, identify whether a Third Party Provider will be used or whether Viatris  will organize it directly.
+For Event Sponsorship, identify the third party organization to receive Viatris&apos;s financial support for the event.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>For a Company-organized Event, identify whether a Third Party Provider will be used or whether Viatris  will organize it directly.
+For Event Sponsorship, identify the third party organization to receive Viatris&apos;s financial support for the event.</inlineHelpText>
+    <label>Tthird party organization Name</label>
+    <length>255</length>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

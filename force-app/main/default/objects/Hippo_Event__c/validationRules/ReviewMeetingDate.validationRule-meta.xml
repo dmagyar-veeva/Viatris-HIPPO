@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ReviewMeetingDate</fullName>
+    <active>false</active>
+    <errorConditionFormula>Review_Meeting_Date__c &lt;  TODAY()</errorConditionFormula>
+    <errorDisplayField>Review_Meeting_Date__c</errorDisplayField>
+    <errorMessage>Review Meeting Date cannot be selected in the past.</errorMessage>
+</ValidationRule>

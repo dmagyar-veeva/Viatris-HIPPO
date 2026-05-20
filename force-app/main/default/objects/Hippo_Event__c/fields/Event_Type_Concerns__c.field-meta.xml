@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Event_Type_Concerns__c</fullName>
+    <description>The request concerns what type of event or activity:  Conference/Congress, Meeting (specify Masterclass, Roundtable, Symposium or Site Visit), or project? Indicate in box provided.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The request concerns what type of event or activity:  Conference/Congress, Meeting (specify Masterclass, Roundtable, Symposium or Site Visit), or project? Indicate in box provided.</inlineHelpText>
+    <label>Event Type Concerns</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Master Class</fullName>
+                <default>false</default>
+                <label>Master Class</label>
+            </value>
+            <value>
+                <fullName>Roundtable</fullName>
+                <default>false</default>
+                <label>Roundtable</label>
+            </value>
+            <value>
+                <fullName>Symposium</fullName>
+                <default>false</default>
+                <label>Symposium</label>
+            </value>
+            <value>
+                <fullName>Site Visit</fullName>
+                <default>false</default>
+                <label>Site Visit</label>
+            </value>
+            <value>
+                <fullName>Meeting</fullName>
+                <default>false</default>
+                <label>Meeting</label>
+            </value>
+            <value>
+                <fullName>Project</fullName>
+                <default>false</default>
+                <label>Project</label>
+            </value>
+            <value>
+                <fullName>Commercial Advisory Board</fullName>
+                <default>false</default>
+                <label>Commercial Advisory Board</label>
+            </value>
+            <value>
+                <fullName>Conference</fullName>
+                <default>false</default>
+                <label>Conference</label>
+            </value>
+            <value>
+                <fullName>Congress</fullName>
+                <default>false</default>
+                <label>Congress</label>
+            </value>
+            <value>
+                <fullName>CME (Continuing Medical Education)</fullName>
+                <default>false</default>
+                <label>CME (Continuing Medical Education)</label>
+            </value>
+            <value>
+                <fullName>Local Speaker Programs</fullName>
+                <default>false</default>
+                <label>Local Speaker Programs</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

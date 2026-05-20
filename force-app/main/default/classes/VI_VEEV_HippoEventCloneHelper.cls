@@ -42,7 +42,8 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
     private static final Map<String, String> FIELD_MAPPING_FR = new Map<String, String>{
         'Sum_of_Financial_Amounts__c' => 'MYL_Planned_Cost_Total__c',
         'Business_Unit__c' => '',
-        'Event_subtype__c' => '',
+        'VIA_HIP_EventTypeMedicalIntegration__c' => 'Event_Type__c',
+        'Event_subtype__c' => 'EPD_FR_MED_Event_Subtype__c',
         'Event_Location__c' => 'EPD_FR_MED_City__c',
         'zipcode__c' => 'EPD_FR_MED_Postal_Code__c',
         'Address__c' => 'EPD_FR_MED_Address_Line_1__c',
@@ -87,7 +88,6 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
                 Medical_Event_vod__c medEvent = new Medical_Event_vod__c();
                 populateMedEventInstance(newItem, medEvent, newItem.Country_name__c);
                 populateMedEventCategory(newItem, medEvent);
-                populateMedEventSubtype(newItem, medEvent);
 
                 medEventsToInsert.add(medEvent);
             }
@@ -214,7 +214,6 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
 
                 populateMedEventInstance((Hippo_Event__c) newItemsMap.get(hippoId), updateMap.get(hippoId), countryName);
                 populateMedEventCategory((Hippo_Event__c) newItemsMap.get(hippoId), updateMap.get(hippoId));
-                populateMedEventSubtype((Hippo_Event__c) newItemsMap.get(hippoId), updateMap.get(hippoId));
                 medEventsToUpdate.add(updateMap.get(hippoId));
             }
         }
@@ -883,18 +882,16 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
                 String medEventField = FIELD_MAPPING.get(hippoField);
                 medEvent.put(medEventField, hippoEvent.get(hippoField));
                 System.debug('Mapped ' + hippoField + ' to ' + medEventField);
-                System.debug('Mapped ' + hippoField + ' to ' + medEventField + (hippoField.equals('Event_subtype__c') ? ' (Event_subtype__c populated with: ' + hippoEvent.get(hippoField) + ')' : ''));
             }
         }
         //daniel.magyar@veeva.com - if France, add additional fields
         if (countryName.equals(FRANCE_ONLY)) {
             for (String hippoField : FIELD_MAPPING_FR.keySet()) {
-                System.debug('Processing FIELD_MAPPING_FR in addition in case of countryName = France: ' + hippoField);
+                System.debug('Processing FIELD_MAPPING_FR: ' + hippoField);
                 if (String.isNotBlank(FIELD_MAPPING_FR.get(hippoField))) {
                     String medEventField = FIELD_MAPPING_FR.get(hippoField);
                     medEvent.put(medEventField, hippoEvent.get(hippoField));
-                    System.debug('Mapped ' + hippoField + ' to ' + medEventField + ' in case of France.');
-                    System.debug('Mapped ' + hippoField + ' to ' + medEventField + (hippoField.equals('Event_subtype__c') ? ' (Event_subtype__c populated with: ' + hippoEvent.get(hippoField) + ')' : ''));
+                    System.debug('Mapped ' + hippoField + ' to ' + medEventField);
                 }
             }
 
@@ -906,11 +903,10 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
         } else if (countryName.equals(UK_ONLY)) {
             //daniel.magyar@veeva.com - UK requirements 05.10.2024
             for (String hippoField : FIELD_MAPPING_UK.keySet()) {
-                System.debug('Processing FIELD_MAPPING_UK in addition in case of countryName = United Kingdom: ' + hippoField);
+                System.debug('Processing FIELD_MAPPING_UK: ' + hippoField);
                 if (String.isNotBlank(FIELD_MAPPING_UK.get(hippoField))) {
                     String medEventField = FIELD_MAPPING_UK.get(hippoField);
                     medEvent.put(medEventField, hippoEvent.get(hippoField));
-                    System.debug('Mapped ' + hippoField + ' to ' + medEventField + ' in case of United Kingdom.');
                 }
 
                 // Update the VIA_Status__c based on Status_Formula__c values
@@ -939,12 +935,6 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
                     System.debug('Set Location__c for UK: ' + location);
                 }
             }
-        }
-        try {
-            medEvent.Event_Type__c = getMedicalEvenTypeCalculated(hippoEvent);
-            System.debug('Event_Type__c successfully set to: ' + medEvent.Event_Type__c);
-        } catch (Exception e) {
-            System.debug('Error setting Event_Type__c: ' + e.getMessage());
         }
 
         medEvent.VIA_Country_Code__c = COUNTRY_MAP.get(hippoEvent.Country_name__c);
@@ -1017,50 +1007,6 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
     }
 
     /**
-     * @description  retuers a medical event type value based on the parent hippo event Event_subtype and Business_unit values
-     * @author zoltan.nagy@veeva.com | 12-21-2023
-     * @param hippoEvent
-     * @return String
-     **/
-    private static String getMedicalEvenTypeCalculated(Hippo_Event__c hippoEvent) {
-        String retval = '';
-
-        User createdByUser = [SELECT Id, Division, Title, Name FROM User WHERE Id = :hippoEvent.CreatedById];
-
-        System.debug('Event Subtype: ' + hippoEvent.Event_subtype__c);
-        System.debug('Division: ' + createdByUser.Division);
-        System.debug('Title: ' + createdByUser.Title);
-        System.debug('The running user for getMedicalEvenTypeCalculated is: ' + createdByUser.Name + ' ' + hippoEvent.CreatedById);
-
-        Boolean eventTypeCase = (String.isNotBlank(hippoEvent.Event_subtype__c) && String.isNotBlank(createdByUser.Division) && String.isNotBlank(createdByUser.Title));
-        System.debug('Event Type Case: ' + eventTypeCase);
-
-        if (eventTypeCase && new List<String>{ 'RP Classic / RP Conference', 'RP Repetitive' }.contains(hippoEvent.Event_subtype__c) && new List<String>{ 'Prescription', 'Hospital' }.contains(createdByUser.Division) && new List<String>{ 'Rep', 'FLM', 'KAM' }.contains(createdByUser.Title)) {
-            System.debug('Criteria for RPS met');
-            retval = 'RPS';
-        } else {
-            System.debug('Criteria for RPS not met');
-        }
-
-        if (eventTypeCase && new List<String>{ 'Staff Classic', 'Staff Repetitive' }.contains(hippoEvent.Event_subtype__c) && new List<String>{ 'Prescription', 'Hospital' }.contains(createdByUser.Division) && new List<String>{ 'Rep', 'FLM', 'KAM' }.contains(createdByUser.Title)) {
-            System.debug('Criteria for STAFF met');
-            retval = 'STAFF';
-        } else {
-            System.debug('Criteria for STAFF not met');
-        }
-
-        if (eventTypeCase && hippoEvent.Event_subtype__c == 'RP Classic / RP Conference' && 'Pharmacy'.equals(createdByUser.Division) && new List<String>{ 'Rep', 'FLM', 'KAM' }.contains(createdByUser.Title)) {
-            System.debug('Criteria for Conference met');
-            retval = 'Conference';
-        } else {
-            System.debug('Criteria for Conference not met');
-        }
-
-        System.debug('Returned Event Type: ' + retval);
-        return retval;
-    }
-
-    /**
      * @description decides if the given Hippo Interaction (attendee) is representing a speaker
      * @author zoltan.nagy@veeva.com | 12-22-2023
      * @param interaction
@@ -1128,34 +1074,6 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
                 medEvent.VIA_Medical_Event_Category__c = 'Hybrid';
             } else if ('N/A'.equals(channel)) {
                 medEvent.VIA_Medical_Event_Category__c = 'N/A';
-            }
-        }
-    }
-
-    /**
-     * @description populate Medical_Event_vod__c.EPD_FR_MED_Event_Subtype__c field based on Hippo_Event__c.Event_subtype__c for France
-     * @author daniel.magyar@veeva.com | 01-16-2024
-     * @param hippoEvent
-     * @param medEvent
-     **/
-    private static void populateMedEventSubtype(Hippo_Event__c hippoEvent, Medical_Event_vod__c medEvent) {
-        String eventSubtype = hippoEvent.Event_subtype__c;
-        System.debug('Event Subtype: ' + eventSubtype);
-        User createdByUser = [SELECT Division FROM User WHERE Id = :hippoEvent.CreatedById];
-        System.debug('Division: ' + createdByUser.Division);
-
-        if (eventSubtype != null && hippoEvent.Country_name__c == FRANCE_ONLY) {
-            if ('RP Classic / RP Conference'.equals(eventSubtype)) {
-                medEvent.EPD_FR_MED_Event_Subtype__c = 'Pharmacy'.equals(createdByUser.Division) ? 'Conference' : 'Classic';
-                System.debug('Assigned Subtype: ' + medEvent.EPD_FR_MED_Event_Subtype__c);
-            } else if ('RP Repetitive'.equals(eventSubtype)) {
-                medEvent.EPD_FR_MED_Event_Subtype__c = 'RP Repetitive';
-            } else if ('Staff Classic'.equals(eventSubtype)) {
-                medEvent.EPD_FR_MED_Event_Subtype__c = 'STAFF';
-            } else if ('Staff Repetitive'.equals(eventSubtype)) {
-                medEvent.EPD_FR_MED_Event_Subtype__c = 'STAFF Repetitive';
-            } else if ('NA / Other'.equals(eventSubtype)) {
-                medEvent.EPD_FR_MED_Event_Subtype__c = 'NA / Other';
             }
         }
     }

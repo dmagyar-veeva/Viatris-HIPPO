@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Event_Type__c</fullName>
+    <description>This is a sample custom field for event type with no special processing.</description>
+    <externalId>false</externalId>
+    <label>Event Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>KOL</fullName>
+                <default>false</default>
+                <label>KOL</label>
+            </value>
+            <value>
+                <fullName>Support</fullName>
+                <default>false</default>
+                <label>Support</label>
+            </value>
+            <value>
+                <fullName>Research</fullName>
+                <default>false</default>
+                <label>Research</label>
+            </value>
+            <value>
+                <fullName>Education</fullName>
+                <default>false</default>
+                <label>Education</label>
+            </value>
+            <value>
+                <fullName>Day Event</fullName>
+                <default>false</default>
+                <label>Day Event</label>
+            </value>
+            <value>
+                <fullName>Evening Event</fullName>
+                <default>false</default>
+                <label>Evening Event</label>
+            </value>
+            <value>
+                <fullName>Congress Event</fullName>
+                <default>false</default>
+                <label>Congress Event</label>
+            </value>
+            <value>
+                <fullName>No Budget Event</fullName>
+                <default>false</default>
+                <label>No Budget Event</label>
+            </value>
+            <value>
+                <fullName>MEGS</fullName>
+                <default>false</default>
+                <label>MEGS</label>
+            </value>
+            <value>
+                <fullName>Global Event</fullName>
+                <default>false</default>
+                <label>Global Event</label>
+            </value>
+            <value>
+                <fullName>RNT</fullName>
+                <default>false</default>
+                <label>RNT</label>
+            </value>
+            <value>
+                <fullName>RPS</fullName>
+                <default>false</default>
+                <label>RPS</label>
+            </value>
+            <value>
+                <fullName>Donations</fullName>
+                <default>false</default>
+                <label>Donations</label>
+            </value>
+            <value>
+                <fullName>STAFF</fullName>
+                <default>false</default>
+                <label>STAFF</label>
+            </value>
+            <value>
+                <fullName>Opportunity</fullName>
+                <default>false</default>
+                <label>Opportunity</label>
+            </value>
+            <value>
+                <fullName>Conference</fullName>
+                <default>false</default>
+                <label>Conference</label>
+            </value>
+            <value>
+                <fullName>Masterclass</fullName>
+                <default>false</default>
+                <label>Masterclass</label>
+            </value>
+            <value>
+                <fullName>Roundtable</fullName>
+                <default>false</default>
+                <label>Roundtable</label>
+            </value>
+            <value>
+                <fullName>Commercial Advisory Board</fullName>
+                <default>false</default>
+                <label>Commercial Advisory Board</label>
+            </value>
+            <value>
+                <fullName>Congress</fullName>
+                <default>false</default>
+                <label>Congress</label>
+            </value>
+            <value>
+                <fullName>Site Visit</fullName>
+                <default>false</default>
+                <label>Site Visit</label>
+            </value>
+            <value>
+                <fullName>Symposium</fullName>
+                <default>false</default>
+                <label>Symposium</label>
+            </value>
+            <value>
+                <fullName>Education Support</fullName>
+                <default>false</default>
+                <label>Education Support</label>
+            </value>
+            <value>
+                <fullName>Group Meeting/Detail</fullName>
+                <default>false</default>
+                <label>Group Meeting/Detail</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VIA_HIP_Is_Support_Unmet_Medical_Report__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( TEXT(VIA_HIP_Is_Supports_Unmet_Medical_Need__c) != null, TEXT(VIA_HIP_Is_Supports_Unmet_Medical_Need__c),
+IF(VIA_HIP_Is_Support_Unmet_Medical_Need_CB__c = true, &quot;Yes&quot;,
+IF(VIA_HIP_Is_Support_Unmet_Medical_Need_CB__c= false, &quot;No&quot;,&quot;&quot;)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Is Supports Unmet Medical Need</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EPD_FR_MED_Event_Subtype__c</fullName>
+    <description>20-March-14-CV: Medical FR, created for requirement R-0895</description>
+    <externalId>false</externalId>
+    <label>Event Subtype</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Event_Type__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Classic</fullName>
+                <default>false</default>
+                <label>Classic</label>
+            </value>
+            <value>
+                <fullName>Repetitive</fullName>
+                <default>false</default>
+                <label>Repetitive</label>
+            </value>
+            <value>
+                <fullName>STAFF</fullName>
+                <default>false</default>
+                <label>STAFF</label>
+            </value>
+            <value>
+                <fullName>STAFF Repetitive</fullName>
+                <default>false</default>
+                <label>STAFF Repetitive</label>
+            </value>
+            <value>
+                <fullName>Breakfast</fullName>
+                <default>false</default>
+                <label>Breakfast</label>
+            </value>
+            <value>
+                <fullName>Lunch</fullName>
+                <default>false</default>
+                <label>Lunch</label>
+            </value>
+            <value>
+                <fullName>Snack</fullName>
+                <default>false</default>
+                <label>Snack</label>
+            </value>
+            <value>
+                <fullName>Dinner</fullName>
+                <default>false</default>
+                <label>Dinner</label>
+            </value>
+            <value>
+                <fullName>Event</fullName>
+                <default>false</default>
+                <label>Event</label>
+            </value>
+            <value>
+                <fullName>Collation</fullName>
+                <default>false</default>
+                <label>Collation</label>
+            </value>
+            <value>
+                <fullName>Conference</fullName>
+                <default>false</default>
+                <label>Conference</label>
+            </value>
+            <value>
+                <fullName>NA / Other</fullName>
+                <default>false</default>
+                <label>NA / Other</label>
+            </value>
+            <value>
+                <fullName>RP Repetitive</fullName>
+                <default>false</default>
+                <label>RP Repetitive</label>
+            </value>
+            <value>
+                <fullName>Impromptu lunch</fullName>
+                <default>false</default>
+                <label>Impromptu lunch</label>
+            </value>
+            <value>
+                <fullName>Impromptu breakfast / snack</fullName>
+                <default>false</default>
+                <label>Impromptu breakfast / snack</label>
+            </value>
+            <value>
+                <fullName>Repetitive staff lunch</fullName>
+                <default>false</default>
+                <label>Repetitive staff lunch</label>
+            </value>
+            <value>
+                <fullName>Repetitive staff breakfast / snack</fullName>
+                <default>false</default>
+                <label>Repetitive staff breakfast / snack</label>
+            </value>
+            <value>
+                <fullName>Repetitive RP lunch / dinner without snack</fullName>
+                <default>false</default>
+                <label>Repetitive RP lunch / dinner without snack</label>
+            </value>
+            <value>
+                <fullName>Repetitive RP lunch / dinner with snack</fullName>
+                <default>false</default>
+                <label>Repetitive RP lunch / dinner with snack</label>
+            </value>
+            <value>
+                <fullName>Classic RP lunch / dinner without snack</fullName>
+                <default>false</default>
+                <label>Classic RP lunch / dinner without snack</label>
+            </value>
+            <value>
+                <fullName>Classic RP lunch / dinner with snack</fullName>
+                <default>false</default>
+                <label>Classic RP lunch / dinner with snack</label>
+            </value>
+            <value>
+                <fullName>Classic staff lunch</fullName>
+                <default>false</default>
+                <label>Classic staff lunch</label>
+            </value>
+            <value>
+                <fullName>Classic staff breakfast / snack</fullName>
+                <default>false</default>
+                <label>Classic staff breakfast / snack</label>
+            </value>
+            <value>
+                <fullName>Day Event</fullName>
+                <default>false</default>
+                <label>Day Event</label>
+            </value>
+            <value>
+                <fullName>Evening Event</fullName>
+                <default>false</default>
+                <label>Evening Event</label>
+            </value>
+            <value>
+                <fullName>Lunch &amp; Learn</fullName>
+                <default>false</default>
+                <label>Lunch &amp; Learn</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Education Support</controllingFieldValue>
+            <controllingFieldValue>Group Meeting/Detail</controllingFieldValue>
+            <controllingFieldValue>Conference</controllingFieldValue>
+            <controllingFieldValue>Masterclass</controllingFieldValue>
+            <controllingFieldValue>Roundtable</controllingFieldValue>
+            <controllingFieldValue>Congress</controllingFieldValue>
+            <controllingFieldValue>Commercial Advisory Board</controllingFieldValue>
+            <controllingFieldValue>Site Visit</controllingFieldValue>
+            <controllingFieldValue>Symposium</controllingFieldValue>
+            <valueName>Day Event</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Education Support</controllingFieldValue>
+            <controllingFieldValue>Group Meeting/Detail</controllingFieldValue>
+            <controllingFieldValue>Conference</controllingFieldValue>
+            <controllingFieldValue>Masterclass</controllingFieldValue>
+            <controllingFieldValue>Roundtable</controllingFieldValue>
+            <controllingFieldValue>Congress</controllingFieldValue>
+            <controllingFieldValue>Commercial Advisory Board</controllingFieldValue>
+            <controllingFieldValue>Site Visit</controllingFieldValue>
+            <controllingFieldValue>Symposium</controllingFieldValue>
+            <valueName>Evening Event</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Education Support</controllingFieldValue>
+            <controllingFieldValue>Group Meeting/Detail</controllingFieldValue>
+            <controllingFieldValue>Conference</controllingFieldValue>
+            <controllingFieldValue>Masterclass</controllingFieldValue>
+            <controllingFieldValue>Roundtable</controllingFieldValue>
+            <controllingFieldValue>Congress</controllingFieldValue>
+            <controllingFieldValue>Commercial Advisory Board</controllingFieldValue>
+            <controllingFieldValue>Site Visit</controllingFieldValue>
+            <controllingFieldValue>Symposium</controllingFieldValue>
+            <valueName>Lunch &amp; Learn</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Group Meeting/Detail</controllingFieldValue>
+            <valueName>Impromptu lunch</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Group Meeting/Detail</controllingFieldValue>
+            <valueName>Impromptu breakfast / snack</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>STAFF</controllingFieldValue>
+            <valueName>STAFF</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>STAFF</controllingFieldValue>
+            <valueName>STAFF Repetitive</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Opportunity</controllingFieldValue>
+            <controllingFieldValue>RNT</controllingFieldValue>
+            <valueName>Breakfast</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Opportunity</controllingFieldValue>
+            <controllingFieldValue>Conference</controllingFieldValue>
+            <controllingFieldValue>RNT</controllingFieldValue>
+            <valueName>Lunch</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Opportunity</controllingFieldValue>
+            <valueName>Collation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Conference</controllingFieldValue>
+            <valueName>Dinner</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Conference</controllingFieldValue>
+            <valueName>Event</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Roundtable</controllingFieldValue>
+            <valueName>Repetitive staff lunch</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Roundtable</controllingFieldValue>
+            <valueName>Repetitive staff breakfast / snack</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Roundtable</controllingFieldValue>
+            <valueName>Repetitive RP lunch / dinner without snack</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Roundtable</controllingFieldValue>
+            <valueName>Repetitive RP lunch / dinner with snack</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Roundtable</controllingFieldValue>
+            <valueName>Classic RP lunch / dinner without snack</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Roundtable</controllingFieldValue>
+            <valueName>Classic RP lunch / dinner with snack</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Roundtable</controllingFieldValue>
+            <valueName>Classic staff lunch</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Roundtable</controllingFieldValue>
+            <valueName>Classic staff breakfast / snack</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RNT</controllingFieldValue>
+            <valueName>Snack</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RPS</controllingFieldValue>
+            <valueName>Classic</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>RPS</controllingFieldValue>
+            <valueName>Repetitive</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Event Type --></label>
+    <name>Event_Type__c</name>
+    <picklistValues>
+        <masterLabel>Commercial Advisory Board</masterLabel>
+        <translation><!-- Commercial Advisory Board --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Conference</masterLabel>
+        <translation><!-- Conference --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Congress</masterLabel>
+        <translation><!-- Congress --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Congress Event</masterLabel>
+        <translation><!-- Congress Event --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Day Event</masterLabel>
+        <translation><!-- Day Event --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Donations</masterLabel>
+        <translation><!-- Donations --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Education</masterLabel>
+        <translation><!-- Education --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Education Support</masterLabel>
+        <translation><!-- Education Support --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Evening Event</masterLabel>
+        <translation><!-- Evening Event --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Global Event</masterLabel>
+        <translation><!-- Global Event --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Group Meeting/Detail</masterLabel>
+        <translation><!-- Group Meeting/Detail --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>KOL</masterLabel>
+        <translation><!-- KOL --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>MEGS</masterLabel>
+        <translation><!-- MEGS --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Masterclass</masterLabel>
+        <translation><!-- Masterclass --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>No Budget Event</masterLabel>
+        <translation><!-- No Budget Event --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Opportunity</masterLabel>
+        <translation><!-- Opportunity --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>RNT</masterLabel>
+        <translation><!-- RNT --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>RPS</masterLabel>
+        <translation><!-- RPS --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Research</masterLabel>
+        <translation><!-- Research --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Roundtable</masterLabel>
+        <translation><!-- Roundtable --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>STAFF</masterLabel>
+        <translation><!-- STAFF --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Site Visit</masterLabel>
+        <translation><!-- Site Visit --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Support</masterLabel>
+        <translation><!-- Support --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Symposium</masterLabel>
+        <translation><!-- Symposium --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

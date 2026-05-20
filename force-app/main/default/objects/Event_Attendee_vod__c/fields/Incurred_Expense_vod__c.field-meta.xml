@@ -3,6 +3,7 @@
     <fullName>Incurred_Expense_vod__c</fullName>
     <defaultValue>true</defaultValue>
     <description>Attendees with the Incurred Expense checkbox checked will be posted as Attendees to Concur.</description>
+    <externalId>false</externalId>
     <label>Incurred Expense</label>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VIA_HIP_Origin_country_of_requestor__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(NOT(ISBLANK(Origin_country_of_request__c)),
+	Origin_country_of_request__c,
+	IF(NOT(ISBLANK(TEXT(Parent_User_Setting__r.Origin_country_of_request__c))),
+		TEXT(Parent_User_Setting__r.Origin_country_of_request__c),
+                Template_Version__r.Country__r.Name
+	)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Origin country of requestor/template</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

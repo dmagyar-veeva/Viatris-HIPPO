@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Approver_Step__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(TEXT(Event_Approver__r.Type__c),
+&apos;FLM Approver&apos;,$Label.hippoFLMApprover,
+&apos;Department Head Approver&apos;,$Label.hippoDepartmentHeadApprover, 
+&apos;RSS Approver&apos;,$Label.hippoRSSApprover, 
+&apos;Medical Approver&apos;,$Label.hippoMedicalApprover, 
+&apos;Compliance Approver&apos;,$Label.hippoComplianceApprover,
+&apos;Global Compliance Approver&apos;,$Label.hippoGlobalComplianceApprover,
+&apos;Regional Compliance Approver&apos;,$Label.hippoRegionalComplianceApprover,
+&apos;European Compliance Approver&apos;,$Label.hippoEuropeanComplianceApprover, 
+TEXT(Event_Approver__r.Type__c))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Approver Step</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

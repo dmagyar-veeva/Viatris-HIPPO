@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Sous-type</label>
+    <name>EPD_FR_MED_Event_Subtype__c</name>
+    <picklistValues>
+        <masterLabel>Breakfast</masterLabel>
+        <translation>Petit Déjeuner</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Classic</masterLabel>
+        <translation>RPS Classique</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Classic RP lunch / dinner with snack</masterLabel>
+        <translation>RP Classique - Déjeuner/Dîner avec collation</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Classic RP lunch / dinner without snack</masterLabel>
+        <translation>RP Classique - Déjeuner/Dîner sans collation</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Classic staff breakfast / snack</masterLabel>
+        <translation>Staff classique petit dejeuner/collation</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Classic staff lunch</masterLabel>
+        <translation>Staff classique déjeuner</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Collation</masterLabel>
+        <translation><!-- Collation --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Conference</masterLabel>
+        <translation><!-- Conference --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Day Event</masterLabel>
+        <translation><!-- Day Event --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Dinner</masterLabel>
+        <translation>Diner</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Evening Event</masterLabel>
+        <translation><!-- Evening Event --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Event</masterLabel>
+        <translation>Collation</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Impromptu breakfast / snack</masterLabel>
+        <translation>Repas Impromptu: Petit-déjeuner/Collation</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Impromptu lunch</masterLabel>
+        <translation>Repas Impromptu: Déjeuner</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Lunch</masterLabel>
+        <translation>Déjeuner</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Lunch &amp; Learn</masterLabel>
+        <translation><!-- Lunch &amp; Learn --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>NA / Other</masterLabel>
+        <translation><!-- NA / Other --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>RP Repetitive</masterLabel>
+        <translation><!-- RP Repetitive --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Repetitive</masterLabel>
+        <translation>RPS Répétitive</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Repetitive RP lunch / dinner with snack</masterLabel>
+        <translation>RP Répétitive - Déjeuner/Dîner avec collation</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Repetitive RP lunch / dinner without snack</masterLabel>
+        <translation>RP Répétitive - Déjeuner/Dîner sans collation</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Repetitive staff breakfast / snack</masterLabel>
+        <translation>Staff répétitif petit déjeuner/collation</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Repetitive staff lunch</masterLabel>
+        <translation>Staff répétitif déjeuner</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>STAFF</masterLabel>
+        <translation>STAFF Classique</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>STAFF Repetitive</masterLabel>
+        <translation>STAFF répétitif</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Snack</masterLabel>
+        <translation>Goûter</translation>
+    </picklistValues>
+</CustomFieldTranslation>

@@ -3,6 +3,7 @@
     <fullName>Contact_vod__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <description>The Contact attending the event.</description>
+    <externalId>false</externalId>
     <label>Contact</label>
     <referenceTo>Contact</referenceTo>
     <relationshipLabel>Event Attendees</relationshipLabel>

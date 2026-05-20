@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_the_content_in_Therapeutic_Areas__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Is the objective of the proposed event strictly to provide scientific, educational, and professional content directly related to the Company’s therapeutic areas (e.g., no entertainment)?
+• Attach an agenda, if available.
+• If yes, what product/therapeutic area will be discussed? Describe below:&quot;</description>
+    <externalId>false</externalId>
+    <inlineHelpText>2. Is the objective of the proposed event strictly to provide &lt;b&gt;scientific, educational, and professional content &lt;/b&gt;directly related to &lt;b&gt;the Company’s therapeutic areas&lt;/b&gt; (e.g., no entertainment)?</inlineHelpText>
+    <label>Is the content in Therapeutic Areas</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

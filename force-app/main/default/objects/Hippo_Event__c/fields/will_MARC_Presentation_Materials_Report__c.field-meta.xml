@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>will_MARC_Presentation_Materials_Report__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( TEXT(will_MARC_Presentation_Material_Picklist__c) != null, TEXT(will_MARC_Presentation_Material_Picklist__c),
+IF(will_MARC_Presentation_Materials__c = true, &quot;Yes&quot;,
+IF(will_MARC_Presentation_Materials__c= false, &quot;No&quot;,&quot;&quot;)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>will MARC/VMAP Presentation Materials</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

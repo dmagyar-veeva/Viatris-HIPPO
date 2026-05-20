@@ -72,4 +72,140 @@
         <shortDescription>Override Action - View Event Button</shortDescription>
         <value>View Event Details</value>
     </labels>
+    <labels>
+        <fullName>hippoApproved</fullName>
+        <categories>status</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>hippoLCApproved</shortDescription>
+        <value>Approved</value>
+    </labels>
+    <labels>
+        <fullName>hippoCommercialAdvisoryBoard</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CommercialAdvisoryBoard</shortDescription>
+        <value>Commercial Advisory Board</value>
+    </labels>
+    <labels>
+        <fullName>hippoConference</fullName>
+        <categories>Event type</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Conference</shortDescription>
+        <value>Conference</value>
+    </labels>
+    <labels>
+        <fullName>hippoCongress</fullName>
+        <categories>Event type</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Congress</shortDescription>
+        <value>Congress</value>
+    </labels>
+    <labels>
+        <fullName>hippoContinuingMedicalEducation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CME (Continuing Medical Education)​</shortDescription>
+        <value>CME (Continuing Medical Education)​</value>
+    </labels>
+    <labels>
+        <fullName>hippoLocalSpeakerPrograms</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Local Speaker Programs</shortDescription>
+        <value>Local Speaker Programs</value>
+    </labels>
+    <labels>
+        <fullName>hippoMasterClass</fullName>
+        <categories>Event type</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Master Class</shortDescription>
+        <value>Master Class</value>
+    </labels>
+    <labels>
+        <fullName>hippoMedical2MedicalEducationalEvent</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Medical-2-Medical Educational Event</shortDescription>
+        <value>Medical-2-Medical Educational Event</value>
+    </labels>
+    <labels>
+        <fullName>hippoMedicalAdvisoryBoard</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Medical Advisory Board</shortDescription>
+        <value>Medical Advisory Board</value>
+    </labels>
+    <labels>
+        <fullName>hippoMeeting</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Meeting</shortDescription>
+        <value>Meeting</value>
+    </labels>
+    <labels>
+        <fullName>hippoOther</fullName>
+        <categories>Event type</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Other</shortDescription>
+        <value>Other</value>
+    </labels>
+    <labels>
+        <fullName>hippoRegistered</fullName>
+        <categories>status</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Registered</shortDescription>
+        <value>Registered</value>
+    </labels>
+    <labels>
+        <fullName>hippoRoundtable</fullName>
+        <categories>Event type</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Roundtable</shortDescription>
+        <value>Roundtable</value>
+    </labels>
+    <labels>
+        <fullName>hippoSiteVisit</fullName>
+        <categories>Event type</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Site Visit</shortDescription>
+        <value>Site Visit</value>
+    </labels>
+    <labels>
+        <fullName>hippoSymposium</fullName>
+        <categories>Event type</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Symposium</shortDescription>
+        <value>Symposium</value>
+    </labels>
+    <labels>
+        <fullName>hippoTerminated</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>hippoLCTerminated</shortDescription>
+        <value>Terminated</value>
+    </labels>
+    <labels>
+        <fullName>hippoTrdPartyEventRegistration</fullName>
+        <categories>Event type</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>3rd Party Event Registration</shortDescription>
+        <value>3rd Party Event Registration</value>
+    </labels>
+    <labels>
+        <fullName>hippo_MasterclassWithoutSpace</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>hippo_MasterclassWithoutSpace</shortDescription>
+        <value>Masterclass</value>
+    </labels>
 </CustomLabels>

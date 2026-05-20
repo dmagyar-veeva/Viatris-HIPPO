@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validate_allowed_change_OwnerID</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF($Setup.Hippo_Tool_Settings__c.VIA_HIP_ControlChangeOwnerWithDate__c,ISCHANGED(OwnerId) &amp;&amp; !ISCHANGED(VIA_HIP_Submitted_To_Requestor_Date__c), FALSE)</errorConditionFormula>
+    <errorMessage>Change Owner manually forbidden</errorMessage>
+</ValidationRule>

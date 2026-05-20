@@ -25,6 +25,34 @@
                 </componentInstanceProperties>
                 <componentName>desktopDashboards:embeddedDashboard</componentName>
                 <identifier>desktopDashboards_embeddedDashboard</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!$User.Country_Code_vod__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>GB</rightValue>
+                    </criteria>
+                </visibilityRule>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>htmlReportId</name>
+                    <value>a4cTx0000004L97IAE</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>maxHeight</name>
+                    <value>400</value>
+                </componentInstanceProperties>
+                <componentName>myInsights</componentName>
+                <identifier>c_myInsights</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!$User.Profile_Name_vod__c}</leftValue>
+                        <operator>CONTAINS</operator>
+                        <rightValue>Steward</rightValue>
+                    </criteria>
+                </visibilityRule>
             </componentInstance>
         </itemInstances>
         <name>top</name>

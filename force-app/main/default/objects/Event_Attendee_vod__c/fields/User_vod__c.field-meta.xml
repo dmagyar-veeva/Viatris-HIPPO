@@ -3,6 +3,7 @@
     <fullName>User_vod__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <description>The User attending the event.</description>
+    <externalId>false</externalId>
     <label>User</label>
     <referenceTo>User</referenceTo>
     <relationshipName>Event_Attendee_vod</relationshipName>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Any_transfer_of_value_to_HCP__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If question 8 and/or 9 above has been answered YES, will any transfer of value to HCP(s) be captured in applicable local country reporting?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>If question 11 and/or 12 above has been answered YES, will any transfer of value to HCP(s) be captured in applicable local country reporting?</inlineHelpText>
+    <label>Any transfer of value to HCP OLD</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

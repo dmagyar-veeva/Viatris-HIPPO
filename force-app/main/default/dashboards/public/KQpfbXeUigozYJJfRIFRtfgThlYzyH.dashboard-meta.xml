@@ -53,8 +53,8 @@
                     <hideChatterPhotos>true</hideChatterPhotos>
                 </flexComponentProperties>
                 <groupingSortProperties/>
-                <header>UK HIPPO Upcoming Events</header>
-                <report>unfiled$public/UK_HIPPO_Upcoming_Events_v2_FaA</report>
+                <header>UK HIPPO Upcoming Events v2</header>
+                <report>UKHippoPublic/UK_HIPPO_Upcoming_Events_v2_deploy</report>
             </dashboardComponent>
             <rowIndex>0</rowIndex>
             <rowSpan>10</rowSpan>
@@ -64,7 +64,6 @@
     </dashboardGridLayout>
     <dashboardType>LoggedInUser</dashboardType>
     <isGridLayout>true</isGridLayout>
-    <owner>veeva.services@viatris.com</owner>
     <runningUser>veeva.services@viatris.com</runningUser>
     <textColor>#000000</textColor>
     <title>UK HIPPO Upcoming Events</title>

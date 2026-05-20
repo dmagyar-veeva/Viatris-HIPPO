@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Signature_vod__c</fullName>
     <description>Used to store the Signature</description>
+    <externalId>false</externalId>
     <label>Signature</label>
     <length>32768</length>
     <trackHistory>true</trackHistory>

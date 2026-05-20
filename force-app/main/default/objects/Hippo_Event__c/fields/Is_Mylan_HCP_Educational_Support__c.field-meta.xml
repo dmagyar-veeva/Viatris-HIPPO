@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Mylan_HCP_Educational_Support__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Is the HCP to be provided with Educational Support by Viatris a government official (per Viatris&apos;s Anti-Corruption Policy)? If yes, provide a description of why he/she is considered a government official.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Is the HCP to be provided with Educational Support by Viatris a government official (per &lt;i&gt;Viatris&apos;s Anti-Corruption Policy&lt;/i&gt;)? If yes, provide a description of why he/she is considered a government official.</inlineHelpText>
+    <label>Is Viatris HCP Educational Support</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -66,7 +66,7 @@
         <useApproverFieldOfRecordOwner>false</useApproverFieldOfRecordOwner>
         <userHierarchyField>Manager</userHierarchyField>
     </nextAutomatedApprover>
-    <processOrder>19</processOrder>
+    <processOrder>21</processOrder>
     <recallActions>
         <action>
             <name>VIA_Set_Approval_Status_to_Recalled</name>

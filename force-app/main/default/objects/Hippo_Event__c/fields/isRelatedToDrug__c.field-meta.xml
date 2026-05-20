@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>isRelatedToDrug__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Is this event related to Drug?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Is this event related to Drug?</inlineHelpText>
+    <label>Is this event related to Drug?</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

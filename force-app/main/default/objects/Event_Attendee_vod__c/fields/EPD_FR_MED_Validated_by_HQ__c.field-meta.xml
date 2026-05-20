@@ -3,6 +3,7 @@
     <fullName>EPD_FR_MED_Validated_by_HQ__c</fullName>
     <defaultValue>false</defaultValue>
     <description>29-March-14-CV: Created to enable the HQ to validate the invitees.</description>
+    <externalId>false</externalId>
     <label>Validated by HQ</label>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>

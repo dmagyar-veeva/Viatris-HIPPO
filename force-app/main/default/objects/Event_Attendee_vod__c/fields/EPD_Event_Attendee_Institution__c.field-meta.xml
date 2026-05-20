@@ -3,6 +3,7 @@
     <fullName>EPD_Event_Attendee_Institution__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <description>20131001 CV - UK: Created for Requirement R-0349</description>
+    <externalId>false</externalId>
     <label>Institution</label>
     <lookupFilter>
         <active>true</active>

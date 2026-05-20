@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_conducive_to_exchange__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Will the proposed event be conducted in a clinical, educational, or other setting (including hotel or other commercially available meeting facilities) conducive to the effective exchange of information?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>7. Will the proposed event be conducted in a clinical, educational, or other setting (including hotel or other commercially available meeting facilities) &lt;b&gt;conducive to the effective exchange of information?&lt;/b&gt;</inlineHelpText>
+    <label>Is conducive to exchange</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

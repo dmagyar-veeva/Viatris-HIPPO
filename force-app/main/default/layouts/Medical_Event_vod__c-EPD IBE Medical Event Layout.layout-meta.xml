@@ -4,6 +4,7 @@
     <customButtons>Record_a_Call_vod</customButtons>
     <customButtons>View_Signatures_vod</customButtons>
     <excludeButtons>Share</excludeButtons>
+    <excludeButtons>Submit</excludeButtons>
     <layoutSections>
         <customLabel>false</customLabel>
         <detailHeading>false</detailHeading>
@@ -237,8 +238,8 @@
         <fields>Attendee_Type_vod__c</fields>
         <fields>Status_vod__c</fields>
         <fields>EPD_Comments__c</fields>
+        <fields>Signature_Datetime_vod__c</fields>
         <fields>LAST_UPDATE</fields>
-        <fields>EPD_FR_MED_Speaker__c</fields>
         <relatedList>Event_Attendee_vod__c.Medical_Event_vod__c</relatedList>
         <sortField>Status_vod__c</sortField>
         <sortOrder>Desc</sortOrder>
@@ -247,7 +248,6 @@
         <fields>EPD_Type__c</fields>
         <fields>EPD_Planned_Cost__c</fields>
         <fields>EPD_Actual_Cost__c</fields>
-        <fields>VIA_Event_Attendee__c</fields>
         <fields>EPD_Comments__c</fields>
         <fields>NAME</fields>
         <relatedList>EPD_Event_Expense__c.EPD_Medical_Event__c</relatedList>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VIA_HIP_isMasterclassRoundtableSymposium__c</fullName>
+    <description>Is the proposed event one of the following types: Masterclass, Roundtable, Symposium or Site Visit?
+(Mark “No” if the event is a Commercial Advisory Board, Train-the-Trainer, Preceptorship, Focus Group or other type of event not indicated in the question above)</description>
+    <externalId>false</externalId>
+    <label>Is Masterclass Roundtable Symposium</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Yes_No</valueSetName>
+    </valueSet>
+</CustomField>

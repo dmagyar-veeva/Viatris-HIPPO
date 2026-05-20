@@ -3,6 +3,7 @@
     <customButtons>Manage_Attendees_vod</customButtons>
     <customButtons>View_Signatures_vod</customButtons>
     <excludeButtons>ChangeRecordType</excludeButtons>
+    <excludeButtons>Submit</excludeButtons>
     <layoutSections>
         <customLabel>true</customLabel>
         <detailHeading>true</detailHeading>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_an_advisory_board_details__c</fullName>
+    <description>If the Company-organized Event is an advisory board, provide a brief description of the unmet business need and purpose or goal of the advisory board.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>If the Company-organized Event is an advisory board, provide a brief description of the unmet business need and purpose or goal of the advisory board.</inlineHelpText>
+    <label>Is an advisory board details</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Educational_Support_HCP_Type__c</fullName>
+    <description>Specialty type of HCP to be provided with Educational Support.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Specialty type of HCP to be provided with Educational Support.</inlineHelpText>
+    <label>Educational Support HCP Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

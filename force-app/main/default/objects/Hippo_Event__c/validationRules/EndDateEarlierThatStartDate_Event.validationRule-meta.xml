@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EndDateEarlierThatStartDate_Event</fullName>
+    <active>false</active>
+    <description>It should not be possible to select an End date that is earlier than the start date.</description>
+    <errorConditionFormula>End_Event_Date__c  &lt;  Start_Event_Date__c</errorConditionFormula>
+    <errorDisplayField>End_Event_Date__c</errorDisplayField>
+    <errorMessage>End Date cannot be earlier than Start Date! Please, select a correct date.</errorMessage>
+</ValidationRule>

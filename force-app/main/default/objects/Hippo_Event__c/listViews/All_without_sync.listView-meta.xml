@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_without_sync</fullName>
+    <columns>NAME</columns>
+    <columns>Tracking_ID__c</columns>
+    <columns>Country__c</columns>
+    <columns>Region__c</columns>
+    <columns>Business_Unit__c</columns>
+    <columns>Start_Event_Date__c</columns>
+    <columns>End_Event_Date__c</columns>
+    <columns>IsInMarketingPlan__c</columns>
+    <columns>Type__c</columns>
+    <columns>Status_Formula__c</columns>
+    <columns>Number_Of_Interactions__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>Is_Service_Event__c</columns>
+    <columns>Organizer__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CREATEDBY_USER</field>
+        <operation>notEqual</operation>
+        <value>Integration Sync User</value>
+    </filters>
+    <label>All without synch events</label>
+</ListView>

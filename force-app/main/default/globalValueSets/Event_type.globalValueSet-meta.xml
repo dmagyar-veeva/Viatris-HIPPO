@@ -68,6 +68,7 @@
     <customValue>
         <fullName>3rd Party Event Registration</fullName>
         <default>false</default>
+        <isActive>false</isActive>
         <label>3rd Party Event Registration</label>
     </customValue>
     <customValue>

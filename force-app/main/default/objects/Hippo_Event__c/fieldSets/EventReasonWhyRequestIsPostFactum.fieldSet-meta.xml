@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FieldSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EventReasonWhyRequestIsPostFactum</fullName>
+    <description>0.4.3.3 Fill out the reason why this request is post factum</description>
+    <displayedFields>
+        <field>Post_factum_event_reason__c</field>
+        <isFieldManaged>false</isFieldManaged>
+        <isRequired>true</isRequired>
+    </displayedFields>
+    <label>Fill out the reason why this request is post factum</label>
+</FieldSet>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VIA_HIP_Cvent_Status__c</fullName>
+    <description>The status of Cvent integration for current record. Empty value means that no integration requests were initiated.</description>
+    <externalId>false</externalId>
+    <label>Cvent Status Internal</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Processing</fullName>
+                <default>false</default>
+                <label>Processing</label>
+            </value>
+            <value>
+                <fullName>Failed</fullName>
+                <default>false</default>
+                <label>Failed</label>
+            </value>
+            <value>
+                <fullName>Waiting for MR Status Update</fullName>
+                <default>false</default>
+                <label>Waiting for MR Status Update</label>
+            </value>
+            <value>
+                <fullName>Failed with MR Created</fullName>
+                <default>false</default>
+                <label>Failed with MR Created</label>
+            </value>
+            <value>
+                <fullName>Failed to Copy Event</fullName>
+                <default>false</default>
+                <label>Failed to Copy Event</label>
+            </value>
+            <value>
+                <fullName>Copy Event Success</fullName>
+                <default>false</default>
+                <label>Copy Event Success</label>
+            </value>
+            <value>
+                <fullName>Finished Successfully</fullName>
+                <default>false</default>
+                <label>Finished Successfully</label>
+            </value>
+            <value>
+                <fullName>Failed VenueSourcingRequest</fullName>
+                <default>false</default>
+                <label>Failed VenueSourcingRequest</label>
+            </value>
+            <value>
+                <fullName>Failed with MR Created VenueSourcingRequest</fullName>
+                <default>false</default>
+                <label>Failed with MR Created VenueSourcingRequest</label>
+            </value>
+            <value>
+                <fullName>Failed to Copy Event VenueSourcingRequest</fullName>
+                <default>false</default>
+                <label>Failed to Copy Event VenueSourcingRequest</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

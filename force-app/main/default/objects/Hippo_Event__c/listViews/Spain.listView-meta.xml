@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Spain</fullName>
+    <columns>NAME</columns>
+    <columns>Start_Event_Date__c</columns>
+    <columns>End_Event_Date__c</columns>
+    <columns>IsInMarketingPlan__c</columns>
+    <columns>Type__c</columns>
+    <columns>Status_Formula__c</columns>
+    <columns>Organizer__c</columns>
+    <columns>Number_Of_Interactions__c</columns>
+    <columns>Business_Unit__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>Country_name__c</columns>
+    <columns>Interactions__c</columns>
+    <columns>Approved_Interactions__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Country_name__c</field>
+        <operation>equals</operation>
+        <value>Spain</value>
+    </filters>
+    <filters>
+        <field>NAME</field>
+        <operation>contains</operation>
+        <value>XII Congreso SEHER de la Sociedad Española de Heridas</value>
+    </filters>
+    <label>Spain</label>
+    <sharedTo>
+        <role>SPAIN</role>
+    </sharedTo>
+</ListView>

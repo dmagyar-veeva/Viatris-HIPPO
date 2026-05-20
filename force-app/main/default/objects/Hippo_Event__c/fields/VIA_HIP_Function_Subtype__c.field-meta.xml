@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VIA_HIP_Function_Subtype__c</fullName>
+    <description>Displays a subtype of a record or N/A for 3rd party registered events without symposium</description>
+    <externalId>false</externalId>
+    <formula>IF(AND(
+TEXT(Organizer__c) == &apos;3rd Party Organized&apos;,
+with_Symposium__c == false
+), $Label.hippoSubtypeNA, CASE(VIA_HIP_Subtype__c,&quot;Commercial&quot;,$Label.hippoSubtypeCommercial,&quot;Medical&quot;,$Label.hippoSubtypeMedical,$Label.hippoSubtypeNA))</formula>
+    <label>Function</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

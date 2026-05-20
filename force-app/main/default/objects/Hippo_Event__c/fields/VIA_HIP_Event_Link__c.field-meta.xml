@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VIA_HIP_Event_Link__c</fullName>
+    <description>For exporting Hippo reports from Salesforce in Excel, there is a hyperlink to the Hippo records</description>
+    <externalId>false</externalId>
+    <formula>HYPERLINK(LEFT($Api.Partner_Server_URL_600,FIND(&quot;/services&quot;, $Api.Partner_Server_URL_600))&amp; Id, LEFT($Api.Partner_Server_URL_600,FIND(&quot;/services&quot;, $Api.Partner_Server_URL_600))&amp; Id )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Event Link</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

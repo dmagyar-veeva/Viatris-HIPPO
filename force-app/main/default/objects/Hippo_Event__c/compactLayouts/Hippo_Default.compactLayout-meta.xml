@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hippo_Default</fullName>
+    <fields>Name</fields>
+    <fields>Tracking_ID__c</fields>
+    <fields>Is_late_request__c</fields>
+    <fields>Status_Formula__c</fields>
+    <fields>Start_Event_Date__c</fields>
+    <fields>Interactions__c</fields>
+    <fields>Requesting_Party_Name__c</fields>
+    <label>Hippo Default</label>
+</CompactLayout>

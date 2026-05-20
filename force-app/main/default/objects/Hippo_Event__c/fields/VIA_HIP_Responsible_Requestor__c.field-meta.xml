@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VIA_HIP_Responsible_Requestor__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Describes who is responsible from Requestors to review the record.</description>
+    <externalId>false</externalId>
+    <label>Responsible Requestor</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Hippo_User_Settings__c.VIA_HIP_IsSyntheticUserSetting__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Hippo_User_Settings__c</referenceTo>
+    <relationshipLabel>Events (Responsible Requestor)</relationshipLabel>
+    <relationshipName>Responsible_Requestor_Events</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

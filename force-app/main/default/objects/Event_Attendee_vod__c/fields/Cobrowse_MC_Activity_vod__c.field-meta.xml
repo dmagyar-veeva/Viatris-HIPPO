@@ -3,6 +3,7 @@
     <fullName>Cobrowse_MC_Activity_vod__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <description>Stores the reference to the CoBrowse Multichannel Activity header record</description>
+    <externalId>false</externalId>
     <label>CoBrowse Activity</label>
     <referenceTo>Multichannel_Activity_vod__c</referenceTo>
     <relationshipLabel>Event Attendees</relationshipLabel>

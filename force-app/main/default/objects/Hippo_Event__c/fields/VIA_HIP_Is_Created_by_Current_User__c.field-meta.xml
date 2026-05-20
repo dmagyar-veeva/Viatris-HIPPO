@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VIA_HIP_Is_Created_by_Current_User__c</fullName>
+    <description>This formula will return TRUE if the current user is the one who created the record and FALSE otherwise. Can be used in list view filters or other logic.</description>
+    <externalId>false</externalId>
+    <formula>$User.Id = CreatedById</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Is Created by Current User</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

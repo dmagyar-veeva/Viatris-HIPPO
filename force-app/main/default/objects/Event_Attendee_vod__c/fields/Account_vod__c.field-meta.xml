@@ -3,6 +3,7 @@
     <fullName>Account_vod__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <description>The Account acting as an Attendee.</description>
+    <externalId>false</externalId>
     <label>Account</label>
     <referenceTo>Account</referenceTo>
     <relationshipLabel>Event Attendees</relationshipLabel>

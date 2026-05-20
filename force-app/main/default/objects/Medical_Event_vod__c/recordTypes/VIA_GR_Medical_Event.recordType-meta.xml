@@ -5,6 +5,84 @@
     <description>SFA Integration -  For Greece Medical events</description>
     <label>GR Medical Event</label>
     <picklistValues>
+        <picklist>EPD_FR_MED_Event_Subtype__c</picklist>
+        <values>
+            <fullName>Breakfast</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Classic</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dinner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Event</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lunch</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Repetitive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>STAFF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>STAFF Repetitive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Snack</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Event_Type__c</picklist>
+        <values>
+            <fullName>Commercial Advisory Board</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Conference</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Congress</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Education Support</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Group Meeting%2FDetail</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Masterclass</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Roundtable</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Site Visit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Symposium</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>VIA_Type__c</picklist>
         <values>
             <fullName>3rd Party Event Registration</fullName>

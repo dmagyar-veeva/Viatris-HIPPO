@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VIA_HIP_Location_and_or_Venue_Details__c</fullName>
+    <description>For Medical Sponsorship or Medical Advisory board or Collaborative Event, include details describing the event venue (with supporting documentation demonstrating that the event will be held at a venue that is appropriate and conducive to the main purpose of the meeting, the city and country where it is located, et cetera).</description>
+    <externalId>false</externalId>
+    <inlineHelpText>For Medical Sponsorship or Medical Advisory board or Collaborative Event, include details describing the event venue (with supporting documentation demonstrating that the event will be held at a venue that is appropriate and conducive to the main purpose of the meeting, the city and country where it is located, et cetera).</inlineHelpText>
+    <label>Location and/or Venue Details</label>
+    <length>32768</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

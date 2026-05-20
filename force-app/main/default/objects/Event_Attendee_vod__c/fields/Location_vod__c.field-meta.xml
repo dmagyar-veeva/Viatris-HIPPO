@@ -3,6 +3,7 @@
     <fullName>Location_vod__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <description>This is the associated Business Account</description>
+    <externalId>false</externalId>
     <label>Location</label>
     <referenceTo>Account</referenceTo>
     <relationshipLabel>Attendees (Location)</relationshipLabel>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Anti_Corruption_Policy_Details__c</fullName>
+    <description>Has the third party organization (if an Event Sponsorship) or Third Party Provider (if used for a Company-organized Event) been assessed for potential conflict of interest, in accordance with Viatris&apos;s Anti-Corruption Policy? If not, provide an explanation or consult with local Compliance for guidance prior to submitting this Summary.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Has the third party organization or Third Party Provider been assessed for potential conflict of interest, in accordance with Viatris&apos;s Anti-Corruption Policy? If not, provide an explanation to submitting this Summary.</inlineHelpText>
+    <label>Is Anti-Corruption Policy Details</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

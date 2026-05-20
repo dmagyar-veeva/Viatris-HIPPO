@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Event_description__c</fullName>
+    <description>For HCP Educational Support, include the city and country of the HCP&apos;s practice as well as the city and country  where the educational event will take place.
+For Event Sponsorship or a Company-organized Event, include details describing the event venue (with supporting documentation demonstrating that the event will be held at a venue that is appropriate and conducive to the main purpose of the meeting, the city and country where it is located, et cetera).</description>
+    <externalId>false</externalId>
+    <inlineHelpText>For HCP Educational Support, include the city and country of the HCP&apos;s practice as well as the city and country  where the educational event will take place.
+For Event Sponsorship or a Company-organized Event, include details describing the event venue</inlineHelpText>
+    <label>Event description dublicate</label>
+    <length>12000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>6</visibleLines>
+</CustomField>

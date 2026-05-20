@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_HCP_Advisory_Board_Number__c</fullName>
+    <description>If the Company-organized Event is an advisory board, identify the total number ofHCPs to be engaged as advisory board members.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>If the Company-organized Event is an advisory board, identify the total number of HCPs to be engaged as advisory board members.</inlineHelpText>
+    <label>Total HCP Advisory Board Number</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

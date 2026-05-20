@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VIA_HIP_Cvent_Post_Factum_Event__c</fullName>
+    <description>Defines the value for the Post Factum Event field that has to be sent to Cvent</description>
+    <externalId>false</externalId>
+    <formula>IF(
+    AND(Is_Post_Factum_Request__c, NOT(VIA_HIP_Is_Postfactum_Set_by_Batch__c)), 
+    &quot;Yes&quot;, 
+    &quot;&quot;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Cvent Post Factum Event</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

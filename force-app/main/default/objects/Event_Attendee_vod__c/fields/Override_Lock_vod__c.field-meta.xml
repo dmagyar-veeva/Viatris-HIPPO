@@ -3,6 +3,7 @@
     <fullName>Override_Lock_vod__c</fullName>
     <defaultValue>false</defaultValue>
     <description>Helper field for data loads.</description>
+    <externalId>false</externalId>
     <label>Override Lock</label>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>

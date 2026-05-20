@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Local_Regulatory_Authority_Details__c</fullName>
+    <description>Have the applicable local regulatory authority requirements been met (e.g., approval from bodies governing the medical profession)? Please see Addendum F attached for a non-exclusive list of such local regulatory authorities.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Have the applicable local regulatory authority requirements been met (e.g., approval from bodies governing the medical profession)? Please see Addendum F attached for a non-exclusive list of such local regulatory authorities.</inlineHelpText>
+    <label>Local Regulatory Authority Details</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

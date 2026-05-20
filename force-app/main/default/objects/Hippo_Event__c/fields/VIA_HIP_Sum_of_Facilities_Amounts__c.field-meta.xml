@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VIA_HIP_Sum_of_Facilities_Amounts__c</fullName>
+    <description>Contains the summary of all financial amount records linked to the Event with label &quot;Facilities&quot;. Will be used for connectivity with the CRM for France.</description>
+    <externalId>false</externalId>
+    <label>Sum of Facilities Amounts</label>
+    <summarizedField>Hippo_Event_Amount__c.Cost__c</summarizedField>
+    <summaryFilterItems>
+        <field>Hippo_Event_Amount__c.Label__c</field>
+        <operation>equals</operation>
+        <value>Facilities</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Hippo_Event_Amount__c.Event__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

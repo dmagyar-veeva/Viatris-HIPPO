@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VIA_HIP_isCopiedFromCreatedByBackoffice__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Describes if the record was copied from event created by backoffice.</description>
+    <externalId>false</externalId>
+    <label>Copied from created by backoffice</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

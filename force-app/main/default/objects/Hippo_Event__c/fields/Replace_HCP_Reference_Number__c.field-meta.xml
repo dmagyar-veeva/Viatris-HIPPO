@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Replace_HCP_Reference_Number__c</fullName>
+    <description>If this Summary is for an HCP to replace another HCP who can no longer attend, identify the initial Company contract management system (e.g., ContractPod). Reference #:</description>
+    <externalId>false</externalId>
+    <inlineHelpText>If this Summary is for an HCP to replace another HCP who can no longer attend, identify the initial Company contract management system (e.g., ContractPod). Reference #:</inlineHelpText>
+    <label>Replace HCP Reference #</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

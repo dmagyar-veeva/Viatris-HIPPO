@@ -3,6 +3,7 @@
     <fullName>Child_Account_vod__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <description>Lookup to the child account for the attendee</description>
+    <externalId>false</externalId>
     <label>Child Account</label>
     <referenceTo>Child_Account_vod__c</referenceTo>
     <relationshipLabel>Event Attendees</relationshipLabel>

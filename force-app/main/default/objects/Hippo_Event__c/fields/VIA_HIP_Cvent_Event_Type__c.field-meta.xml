@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VIA_HIP_Cvent_Event_Type__c</fullName>
+    <description>Defines the value for the Event Type field that has to be sent to Cvent</description>
+    <externalId>false</externalId>
+    <formula>IF(
+    ISPICKVAL(Type__c, &quot;Site Visit&quot;), 
+    &quot;Site Visit&quot;,
+    IF(
+        ISPICKVAL(Organizer__c, &quot;Company Organized&quot;), 
+        &quot;Company Organised&quot;,
+        IF(
+            ISPICKVAL(Organizer__c, &quot;3rd Party Organized&quot;), 
+            &quot;Third Party Organised&quot;, 
+            &quot;&quot;
+        )
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Cvent Event Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

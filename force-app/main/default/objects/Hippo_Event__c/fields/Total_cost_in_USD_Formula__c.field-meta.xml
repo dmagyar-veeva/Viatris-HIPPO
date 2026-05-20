@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_cost_in_USD_Formula__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(OR(ISBLANK(Currency_Rate__c), Currency_Rate__c = 0 ),&apos;&apos;,TEXT( FLOOR(100* (Total_Cost__c / Currency_Rate__c) )/ 100) + &apos; USD&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Total cost in USD formula</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Talk_Title_vod__c</fullName>
     <description>Title of the talk given at the event</description>
+    <externalId>false</externalId>
     <label>Talk Title</label>
     <length>1024</length>
     <trackHistory>false</trackHistory>

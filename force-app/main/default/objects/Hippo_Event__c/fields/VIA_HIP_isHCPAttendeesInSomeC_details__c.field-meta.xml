@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VIA_HIP_isHCPAttendeesInSomeC_details__c</fullName>
+    <description>HCP attendees participating in-person in this event are from the same country where the event is being held. Details</description>
+    <externalId>false</externalId>
+    <label>HCP attendees are from same country det</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

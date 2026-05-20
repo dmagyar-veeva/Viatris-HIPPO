@@ -3,6 +3,7 @@
     <fullName>EPD_FR_MED_Speaker__c</fullName>
     <defaultValue>false</defaultValue>
     <description>24-March-14-CV: Medical FR, created for Requirement R-0343</description>
+    <externalId>false</externalId>
     <label>Speaker</label>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>

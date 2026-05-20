@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>MYL_Attendee_with_RPPS_ID__c</fullName>
     <defaultValue>false</defaultValue>
+    <externalId>false</externalId>
     <label>Attendee with RPPS ID</label>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>

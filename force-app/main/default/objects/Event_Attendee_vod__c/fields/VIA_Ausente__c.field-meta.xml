@@ -2,6 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>VIA_Ausente__c</fullName>
     <defaultValue>false</defaultValue>
+    <externalId>false</externalId>
     <label>Ausente</label>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>

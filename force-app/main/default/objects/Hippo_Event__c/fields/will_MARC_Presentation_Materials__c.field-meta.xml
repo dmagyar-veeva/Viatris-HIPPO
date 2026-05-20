@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>will_MARC_Presentation_Materials__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Will the presentation materials, if any, be MARC approved?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>3. Will the presentation materials, if any, be &lt;b&gt;MARC approved&lt;/b&gt;?</inlineHelpText>
+    <label>will MARC/VMAP Presentation Materials</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

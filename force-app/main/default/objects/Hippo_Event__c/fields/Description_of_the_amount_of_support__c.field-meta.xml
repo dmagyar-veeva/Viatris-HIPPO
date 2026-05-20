@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Description_of_the_amount_of_support__c</fullName>
+    <description>Description of the amount of support to be provided by the Company for the registration fee(s) as well as reasonable travel, lodging, and meals for each HCP: (an estimated amount should be provided for each expense type (i.e., registration fee ‎€1000, airfare ‎€400, lodging ‎€600 and ‎meals ‎€300))
+
+ If Educational Support is to be provided to more than one HCP from the same country, for the same event, please complete the information here requested in the spreadsheet “Educational Support Bulk Upload Form ContractPod)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Description of the amount of support to be provided by the Company for the registration fee(s) as well as reasonable travel, lodging, and meals for each HCP.</inlineHelpText>
+    <label>Description of the amount of support</label>
+    <length>12000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>6</visibleLines>
+</CustomField>

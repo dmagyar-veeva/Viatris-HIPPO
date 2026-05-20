@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VIA_HIP_isRelatedToDrugDetailsFormula__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( isRelatedToDrugDetails__c != null, isRelatedToDrugDetails__c,
+IF (VIA_HIP_isRelatedToDrugDetailsFR_PK__c != null, VIA_HIP_isRelatedToDrugDetailsFR_PK__c,&quot;&quot;))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Please specify the name of the drug</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

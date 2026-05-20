@@ -31,13 +31,36 @@
 	<types>
 		<members>Event_Attendee_vod__c.VIA_Hippo_Interaction__c</members>
 		<members>Event_Attendee_vod__c.VIA_Hippo_Source__c</members>
+		<members>Hippo_Event__c.Event_Type__c</members>
+		<members>Hippo_Event__c.Event_subtype__c</members>
+		<members>Hippo_Event__c.VIA_HIP_EventTypeMedicalIntegration__c</members>
+		<members>Medical_Event_vod__c.EPD_FR_MED_Event_Subtype__c</members>
 		<members>Medical_Event_vod__c.EPD_FR_MED_Organization_Name__c</members>
+		<members>Medical_Event_vod__c.Event_Type__c</members>
 		<members>Medical_Event_vod__c.Location__c</members>
 		<members>Medical_Event_vod__c.VIA_Requesting_Party_Name__c</members>
 		<members>Medical_Event_vod__c.VIA_Type__c</members>
 		<name>CustomField</name>
 	</types>
 	<types>
+		<members>hippoApproved</members>
+		<members>hippoCommercialAdvisoryBoard</members>
+		<members>hippoConference</members>
+		<members>hippoCongress</members>
+		<members>hippoContinuingMedicalEducation</members>
+		<members>hippoLocalSpeakerPrograms</members>
+		<members>hippoMasterClass</members>
+		<members>hippoMedical2MedicalEducationalEvent</members>
+		<members>hippoMedicalAdvisoryBoard</members>
+		<members>hippoMeeting</members>
+		<members>hippoOther</members>
+		<members>hippoRegistered</members>
+		<members>hippoRoundtable</members>
+		<members>hippoSiteVisit</members>
+		<members>hippoSymposium</members>
+		<members>hippoTerminated</members>
+		<members>hippoTrdPartyEventRegistration</members>
+		<members>hippo_MasterclassWithoutSpace</members>
 		<members>Override_Action_Approve</members>
 		<members>Override_Action_Approve_Txt</members>
 		<members>Override_Action_Cancel</members>
@@ -52,6 +75,7 @@
 	<types>
 		<members>EPD_Event_Expense__c</members>
 		<members>Event_Attendee_vod__c</members>
+		<members>Hippo_Event__c</members>
 		<members>Medical_Event_vod__c</members>
 		<name>CustomObject</name>
 	</types>

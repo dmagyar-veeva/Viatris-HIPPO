@@ -4,6 +4,7 @@
     <customButtons>Record_a_Call_vod</customButtons>
     <customButtons>View_Signatures_vod</customButtons>
     <excludeButtons>Share</excludeButtons>
+    <excludeButtons>Submit</excludeButtons>
     <layoutSections>
         <customLabel>true</customLabel>
         <detailHeading>false</detailHeading>
@@ -191,8 +192,8 @@
         <fields>Attendee_Type_vod__c</fields>
         <fields>Status_vod__c</fields>
         <fields>EPD_Comments__c</fields>
+        <fields>Signature_Datetime_vod__c</fields>
         <fields>LAST_UPDATE</fields>
-        <fields>EPD_FR_MED_Speaker__c</fields>
         <relatedList>Event_Attendee_vod__c.Medical_Event_vod__c</relatedList>
         <sortField>Status_vod__c</sortField>
         <sortOrder>Desc</sortOrder>
@@ -208,14 +209,6 @@
     </relatedLists>
     <relatedLists>
         <relatedList>RelatedNoteList</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <fields>CreatedDate</fields>
-        <fields>StepStatus</fields>
-        <fields>OriginalActor</fields>
-        <fields>Actor</fields>
-        <fields>Comments</fields>
-        <relatedList>RelatedProcessHistoryList</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>

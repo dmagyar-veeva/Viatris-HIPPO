@@ -3,6 +3,7 @@
     <fullName>Meal_Opt_In_vod__c</fullName>
     <defaultValue>false</defaultValue>
     <description>This field is used to indicate if an event attendee accepted a meal.</description>
+    <externalId>false</externalId>
     <label>Meal Opt-In</label>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>

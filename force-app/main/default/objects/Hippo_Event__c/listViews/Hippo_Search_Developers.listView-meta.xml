@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hippo_Search_Developers</fullName>
+    <columns>NAME</columns>
+    <columns>Start_Event_Date__c</columns>
+    <columns>Type__c</columns>
+    <columns>Status_Formula__c</columns>
+    <columns>Number_Of_Interactions__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>Is_Service_Event__c</columns>
+    <columns>Organizer__c</columns>
+    <columns>VIA_HIP_Subtype__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>VIA_HIP_isCreatedByAboveMarket__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Hippo Search Developers</label>
+    <sharedTo>
+        <group>Hippo_Developers</group>
+    </sharedTo>
+</ListView>

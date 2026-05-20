@@ -30,4 +30,8 @@
         <masterLabel>Signed_vod</masterLabel>
         <translation>Signed</translation>
     </picklistValues>
+    <picklistValues>
+        <masterLabel>Terminated</masterLabel>
+        <translation><!-- Terminated --></translation>
+    </picklistValues>
 </CustomFieldTranslation>

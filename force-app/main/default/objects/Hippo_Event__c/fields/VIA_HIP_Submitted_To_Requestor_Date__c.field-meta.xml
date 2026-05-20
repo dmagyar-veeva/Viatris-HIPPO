@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VIA_HIP_Submitted_To_Requestor_Date__c</fullName>
+    <description>The date and time when the record was submitted by backoffice to responsible requestor</description>
+    <externalId>false</externalId>
+    <label>Submitted To Requestor Date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

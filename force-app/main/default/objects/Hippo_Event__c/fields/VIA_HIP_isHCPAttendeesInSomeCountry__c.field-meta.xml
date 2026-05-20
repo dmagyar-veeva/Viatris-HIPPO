@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VIA_HIP_isHCPAttendeesInSomeCountry__c</fullName>
+    <description>I confirm that the HCP attendees participating in-person in this event are from the same country where the event is being held. This does not apply if the event is a Symposium as part of an International Congress.        
+(Select “No” if the event (not a Symposium as part of an International Congress) is held in a centralized country and requires HCP attendees from different countries to travel in order to participate.)</description>
+    <externalId>false</externalId>
+    <label>Is HCP attendees are from same country</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Yes_No_NA</valueSetName>
+    </valueSet>
+</CustomField>

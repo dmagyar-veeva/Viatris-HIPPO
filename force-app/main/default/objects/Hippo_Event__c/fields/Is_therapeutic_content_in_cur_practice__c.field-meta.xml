@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_therapeutic_content_in_cur_practice__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Is the content of the proposed event in therapeutic area(s) in which the participating HCP(s) currently practice?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>4. Is the content of the proposed event in &lt;b&gt;therapeutic area(s)&lt;/b&gt; in which the &lt;b&gt;participating HCP(s) currently practice&lt;/b&gt;?</inlineHelpText>
+    <label>Is therapeutic content in cur practice</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

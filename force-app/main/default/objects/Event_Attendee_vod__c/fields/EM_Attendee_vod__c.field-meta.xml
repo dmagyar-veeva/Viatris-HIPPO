@@ -3,6 +3,7 @@
     <fullName>EM_Attendee_vod__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <description>This field is used by the system. It must be visible to users of Veeva Event Management.</description>
+    <externalId>false</externalId>
     <label>Attendee</label>
     <referenceTo>EM_Attendee_vod__c</referenceTo>
     <relationshipLabel>Event Attendees</relationshipLabel>
