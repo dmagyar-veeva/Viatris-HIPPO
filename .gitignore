@@ -55,3 +55,4 @@ force-app/main/default/classes/VS_InteractionTriggerHandlerTest.cls-meta.xml
 
 # Other
 .git_backup
+/git_backup/
