@@ -2,7 +2,7 @@
  * @description       : Application logic for creating edical Events and Atendies out from  Hippo events and Attendees.
  * @author            : zoltan.nagy@veeva.com
  * @group             :
- * @last modified on  : 16-02-2025
+ * @last modified on  : 21-05-2026
  * @last modified by  : daniel.magyar@veeva.com
  **/
 public without sharing class VI_VEEV_HippoEventCloneHelper {
@@ -70,7 +70,7 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
     /**
      * @description Hippo Event after insert. Creates Medial event from Hippo Events
      * @author zoltan.nagy@veeva.com | 11-01-2022
-     * @last modified on  : 05-08-2024
+     * @last modified on  : 21-05-2026
      * @last modified by  : daniel.magyar@veeva.com
      * @param newItems
      * @param newItemsMap
@@ -109,7 +109,7 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
     /**
      * @description Hippo Event after update. Updates MEdical Events following parent Hippo Event changes
      * @author zoltan.nagy@veeva.com | 11-01-2022
-     * @last modified on  : 05-08-2024
+     * @last modified on  : 21-05-2026
      * @last modified by  : daniel.magyar@veeva.com
      * @param oldItemsMap
      * @param newItemsMap
@@ -872,7 +872,7 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
      * @author zoltan.nagy@veeva.com | 11-01-2022
      * @param hippoEvent
      * @param medEvent
-     * @last modified on  : 16-02-2025
+     * @last modified on  : 21-05-2026
      * @last modified by  : zoltan.nagy@veeva.com
      **/
     private static void populateMedEventInstance(Hippo_Event__c hippoEvent, Medical_Event_vod__c medEvent, String countryName) {
