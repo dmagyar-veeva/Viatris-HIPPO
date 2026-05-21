@@ -4,25 +4,14 @@
     <description>Field used for integration between Medical Event objects in UAT and Production Veeva environments</description>
     <externalId>false</externalId>
     <formula>CASE( Type__c,
-    &quot;3rd Party Event Registration&quot;,$Label.hippoTrdPartyEventRegistration,
-    &quot;Commercial Advisory Board&quot;,$Label.hippoCommercialAdvisoryBoard,
-    &quot;Conference&quot;,$Label.hippoConference,
-    &quot;Congress&quot;,$Label.hippoCongress,
-    &quot;Master Class&quot;, 
-        IF(Template_Version__r.Country__r.Name = &quot;France&quot;,
-            $Label.hippo_MasterclassWithoutSpace,
-            $Label.hippoMasterClass
-        ),
-    &quot;Meeting&quot;,$Label.hippoMeeting,
-    &quot;Roundtable&quot;,$Label.hippoRoundtable,
-    &quot;Site Visit&quot;,$Label.hippoSiteVisit,
-    &quot;Symposium&quot;,$Label.hippoSymposium,
-    &quot;CME (Continuing Medical Education)&quot;,$Label.hippoContinuingMedicalEducation,
-    &quot;Local Speaker Programs&quot;,$Label.hippoLocalSpeakerPrograms,
-    &quot;Medical Advisory Board&quot;, $Label.hippoMedicalAdvisoryBoard,
-    &quot;Medical-2-Medical Educational Event&quot;, $Label.hippoMedical2MedicalEducationalEvent,
-    
-    $Label.hippoOther
+    &quot;Commercial Advisory Board&quot;, $Label.hippoCommercialAdvisoryBoard,
+    &quot;Conference&quot;, $Label.hippoConference,
+    &quot;Congress&quot;, $Label.hippoCongress,
+    &quot;Master Class&quot;, $Label.hippo_MasterclassWithoutSpace,
+    &quot;Roundtable&quot;, $Label.hippoRoundtable,
+    &quot;Site Visit&quot;, $Label.hippoSiteVisit,
+    &quot;Symposium&quot;, $Label.hippoSymposium,
+    null
 )</formula>
     <label>Event Type Medical Integration</label>
     <required>false</required>

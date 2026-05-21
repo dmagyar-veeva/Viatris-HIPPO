@@ -13,3 +13,6 @@ package.xml
 **/tsconfig.json
 
 **/*.ts
+
+force-app/main/default/classes/VS_EventTriggerHandler.cls
+force-app/main/default/classes/VS_EventTriggerHandler.cls-meta.xml

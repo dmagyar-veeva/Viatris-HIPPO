@@ -52,6 +52,8 @@ force-app/main/default/classes/VS_InteractionTriggerHandler.cls
 force-app/main/default/classes/VS_InteractionTriggerHandler.cls-meta.xml
 force-app/main/default/classes/VS_InteractionTriggerHandlerTest.cls
 force-app/main/default/classes/VS_InteractionTriggerHandlerTest.cls-meta.xml
+force-app/main/default/classes/VS_EventTriggerHandler.cls
+force-app/main/default/classes/VS_EventTriggerHandler.cls-meta.xml
 
 # Other
 .git_backup/

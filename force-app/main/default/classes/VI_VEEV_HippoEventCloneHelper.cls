@@ -78,6 +78,8 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
     public static void createMedicalEvents(List<SObject> newItems) {
         setBusinessUnitMap((List<Hippo_Event__c>) newItems);
 
+        Map<Id, Hippo_Event__c> hippoEventFormulas = new Map<Id, Hippo_Event__c>([SELECT Id, VIA_HIP_EventTypeMedicalIntegration__c FROM Hippo_Event__c WHERE Id IN :newItems]);
+
         List<Medical_Event_vod__c> medEventsToInsert = new List<Medical_Event_vod__c>();
         List<Event_Attendee_vod__c> attendeesToInsert = new List<Event_Attendee_vod__c>();
 
@@ -86,7 +88,7 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
         for (Hippo_Event__c newItem : (List<Hippo_Event__c>) newItems) {
             if (COUNTRY_MAP.containsKey(newItem.Country_name__c) && newItem.Status__c == HIPPO_EVENT_APPROVED_STATUS && VALID_VIA_HIP_SUBTYPES.contains(newItem.VIA_HIP_Subtype__c)) {
                 Medical_Event_vod__c medEvent = new Medical_Event_vod__c();
-                populateMedEventInstance(newItem, medEvent, newItem.Country_name__c);
+                populateMedEventInstance(newItem, medEvent, newItem.Country_name__c, hippoEventFormulas.get(newItem.Id));
                 populateMedEventCategory(newItem, medEvent);
 
                 medEventsToInsert.add(medEvent);
@@ -197,6 +199,8 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
         if (!hippoEventIds.isEmpty()) {
             Map<Id, Medical_Event_vod__c> updateMap = getHippoIdMedEventMap(hippoEventIds);
 
+            Map<Id, Hippo_Event__c> hippoEventFormulas = new Map<Id, Hippo_Event__c>([SELECT Id, VIA_HIP_EventTypeMedicalIntegration__c FROM Hippo_Event__c WHERE Id IN :hippoEventIds]);
+
             // If no Medical Event exists, it needs to be created
             for (Id hippoEventId : hippoEventIds) {
                 if (!updateMap.containsKey(hippoEventId)) {
@@ -212,7 +216,7 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
                     continue;
                 }
 
-                populateMedEventInstance((Hippo_Event__c) newItemsMap.get(hippoId), updateMap.get(hippoId), countryName);
+                populateMedEventInstance((Hippo_Event__c) newItemsMap.get(hippoId), updateMap.get(hippoId), countryName, hippoEventFormulas.get(hippoId));
                 populateMedEventCategory((Hippo_Event__c) newItemsMap.get(hippoId), updateMap.get(hippoId));
                 medEventsToUpdate.add(updateMap.get(hippoId));
             }
@@ -875,7 +879,7 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
      * @last modified on  : 21-05-2026
      * @last modified by  : zoltan.nagy@veeva.com
      **/
-    private static void populateMedEventInstance(Hippo_Event__c hippoEvent, Medical_Event_vod__c medEvent, String countryName) {
+    private static void populateMedEventInstance(Hippo_Event__c hippoEvent, Medical_Event_vod__c medEvent, String countryName, Hippo_Event__c queriedEvent) {
         for (String hippoField : FIELD_MAPPING.keySet()) {
             System.debug('Processing FIELD_MAPPING: ' + hippoField);
             if (String.isNotBlank(FIELD_MAPPING.get(hippoField))) {
@@ -890,8 +894,16 @@ public without sharing class VI_VEEV_HippoEventCloneHelper {
                 System.debug('Processing FIELD_MAPPING_FR: ' + hippoField);
                 if (String.isNotBlank(FIELD_MAPPING_FR.get(hippoField))) {
                     String medEventField = FIELD_MAPPING_FR.get(hippoField);
-                    medEvent.put(medEventField, hippoEvent.get(hippoField));
-                    System.debug('Mapped ' + hippoField + ' to ' + medEventField);
+                    
+                    Object value = null;
+                    if (hippoField == 'VIA_HIP_EventTypeMedicalIntegration__c' && queriedEvent != null) {
+                        value = queriedEvent.get(hippoField);
+                    } else {
+                        value = hippoEvent.get(hippoField);
+                    }
+                    
+                    medEvent.put(medEventField, value);
+                    System.debug('Mapped ' + hippoField + ' to ' + medEventField + ' with value: ' + value);
                 }
             }
 

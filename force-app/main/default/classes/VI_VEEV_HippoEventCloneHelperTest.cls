@@ -2,47 +2,98 @@
  * @description       :
  * @author            : laszlo.fodor@veeva.com
  * @group             :
- * @last modified on  : 05-08-2024
+ * @last modified on  : 05-21-2026
  * @last modified by  : daniel.magyar@veeva.com
  **/
 @isTest
 global class VI_VEEV_HippoEventCloneHelperTest {
     static Hippo_Event__c hippoEvent;
+    
+    private static Map<String, Id> countryIdMap;
+    private static Map<String, Id> userSettingIdMap;
+    private static Map<String, User> runAsUserMap;
+    private static Id regionId;
+
+    private static void initializeIds() {
+        if (countryIdMap != null) return;
+        
+        countryIdMap = new Map<String, Id>();
+        for (Hippo_Country__c c : [SELECT Id, Name FROM Hippo_Country__c WHERE Name IN ('Spain', 'France', 'United Kingdom')]) {
+            countryIdMap.put(c.Name, c.Id);
+        }
+        
+        List<Hippo_Region__c> regions = [SELECT Id FROM Hippo_Region__c LIMIT 1];
+        if (!regions.isEmpty()) regionId = regions[0].Id;
+        
+        userSettingIdMap = new Map<String, Id>();
+        runAsUserMap = new Map<String, User>();
+        List<Hippo_User_Settings__c> allSettings = [SELECT Id, User__c, Country__r.Name FROM Hippo_User_Settings__c WHERE Enable__c = TRUE AND VIA_HIP_ParentHippoUserSetting__c = null];
+        
+        Set<Id> userIds = new Set<Id>();
+        for (Hippo_User_Settings__c us : allSettings) {
+            userIds.add(us.User__c);
+        }
+        Map<Id, User> usersMap = new Map<Id, User>([SELECT Id FROM User WHERE Id IN :userIds]);
+
+        for (Hippo_User_Settings__c us : allSettings) {
+            if (us.Country__r.Name != null && !userSettingIdMap.containsKey(us.Country__r.Name)) {
+                userSettingIdMap.put(us.Country__r.Name, us.Id);
+                runAsUserMap.put(us.Country__r.Name, usersMap.get(us.User__c));
+            }
+        }
+        
+        if (!allSettings.isEmpty()) {
+            Id firstSettingId = allSettings[0].Id;
+            User firstUser = usersMap.get(allSettings[0].User__c);
+            for (String c : new List<String>{'Spain', 'France', 'United Kingdom'}) {
+                if (!userSettingIdMap.containsKey(c)) {
+                    userSettingIdMap.put(c, firstSettingId);
+                    runAsUserMap.put(c, firstUser);
+                }
+            }
+        }
+    }
+
 
     @isTest(SeeAllData=true)
     static void testHippoEventCreateES() {
-        Hippo_Event__c event = new Hippo_Event__c(
-            Name = 'test1',
-            Start_Event_Date__c = System.today(),
-            End_Event_Date__c = System.today(),
-            TrackingNumber__c = 'test tracking number',
-            Status__c = 'Approved',
-            Type__c = 'Roundtable',
-            Requesting_Party_Name_Sync__c = 'test requesting party name',
-            Requesting_Party_Title_Sync__c = 'test requesting party title',
-            Requesting_Party_Location_Sync__c = 'test location',
-            Requesting_Party_Department_Sync__c = 'test department',
-            Country__c = 'a6K3W000000Ch8XUAS',
-            VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nAY0000001LSe',
-            Region__c = 'a6g3W000000LPcyQAG'
-        );
+        initializeIds();
+        System.runAs(runAsUserMap.get('Spain')) {
+            Hippo_Event__c event = new Hippo_Event__c(
+                Name = 'test1',
+                Start_Event_Date__c = System.today(),
+                End_Event_Date__c = System.today(),
+                TrackingNumber__c = 'test tracking number',
+                Status__c = 'Approved',
+                Type__c = 'Roundtable',
+                Requesting_Party_Name_Sync__c = 'test requesting party name',
+                Requesting_Party_Title_Sync__c = 'test requesting party title',
+                Requesting_Party_Location_Sync__c = 'test location',
+                Requesting_Party_Department_Sync__c = 'test department',
+                Country__c = countryIdMap.get('Spain'),
+                VIA_HIP_Subtype__c = 'Commercial',
+                Parent_User_Setting__c = userSettingIdMap.get('Spain'),
+                Region__c = regionId
+            );
 
-        Test.startTest();
+            Test.startTest();
 
-        insert event;
+            insert event;
 
-        Test.stopTest();
+            Test.stopTest();
 
-        List<Medical_Event_vod__c> events = [SELECT Id, VIA_Hippo_Event__c, VIA_Country_Code__c, VIA_Status__c, VIA_Event_Type__c, RecordType.DeveloperName FROM Medical_Event_vod__c WHERE VIA_Hippo_Event__c = :event.Id];
+            List<Medical_Event_vod__c> events = [SELECT Id, VIA_Hippo_Event__c, VIA_Country_Code__c, VIA_Status__c, VIA_Event_Type__c, RecordType.DeveloperName FROM Medical_Event_vod__c WHERE VIA_Hippo_Event__c = :event.Id];
 
-        System.debug(events);
+            System.debug(events);
 
-        System.assertEquals(1, events.size());
+            System.assertEquals(1, events.size());
+        }
     }
 
     @IsTest(SeeAllData=true)
     static void testAttendeeCreateES() {
+        initializeIds();
+        System.runAs(runAsUserMap.get('Spain')) {
         // creating new hippo event - not approved
         Hippo_Event__c event = new Hippo_Event__c(
             Name = 'test_ES',
@@ -55,14 +106,11 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Title_Sync__c = 'test requesting party title',
             Requesting_Party_Location_Sync__c = 'test location',
             Requesting_Party_Department_Sync__c = 'test department',
-            Country__c = 'a6K3W000000Ch8XUAS',
+            Country__c = countryIdMap.get('Spain'),
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nAY0000001LSe',
-            Region__c = 'a6g3W000000LPcyQAG'
+            Parent_User_Setting__c = userSettingIdMap.get('Spain'),
+            Region__c = regionId
         );
-
-        // ES Country Id: a6K3W000000Ch8XUAS
-        // FR Country Id: a6K3W000000Ch8dUAC
 
         Test.startTest();
 
@@ -86,18 +134,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
         System.debug('Event Attendee inserted with ID: ' + hippoEventAttendee.Id);
 
         ID hippoEventAttendeeId = hippoEventAttendee.Id;
-
-        // delete hippoEventAttendee;
-
-        // Set Event approved
-        // event.Status__c = 'Approved';
-
-        // // Update Event with approved status
-
-        // update event;
-
-        // [SELECT Id FROM Event_Attendee_vod__c WHERE VIA_Event_HCP__c = _evenhHCPID]
-        //List<Event_Attendee_vod__c> attendees = [SELECT Id FROM Event_Attendee_vod__c WHERE VIA_Event_HCP__c = :hippoEventAttendeeId];
+ 
         List<Event_Attendee_vod__c> attendees = [SELECT Id, First_Name_vod__c, Last_Name_vod__c, EPD_FR_MED_Attendee_Specialty__c FROM Event_Attendee_vod__c WHERE VIA_Event_HCP__c = :hippoEventAttendeeId];
 
         System.debug('Attendees retrieved: ' + attendees);
@@ -106,10 +143,12 @@ global class VI_VEEV_HippoEventCloneHelperTest {
         System.assertEquals(1, attendees.size());
         System.assertNotEquals(null, attendees[0].First_Name_vod__c, 'First Name is populated.');
         System.assertNotEquals(null, attendees[0].Last_Name_vod__c, 'Last Name is populated.');
+            }
     }
 
     @IsTest(SeeAllData=true)
     static void testAttendeeCreateFR() {
+        initializeIds();
         // creating new hippo event - not approved
         Hippo_Event__c event = new Hippo_Event__c(
             Name = 'test_FR',
@@ -122,14 +161,11 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Title_Sync__c = 'test requesting party title',
             Requesting_Party_Location_Sync__c = 'test location',
             Requesting_Party_Department_Sync__c = 'test department',
-            Country__c = 'a6K3W000000Ch8dUAC',
+            Country__c = countryIdMap.get('France'),
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6n0700000004BE',
-            Region__c = 'a6g3W000000LPcvQAG'
+            Parent_User_Setting__c = userSettingIdMap.get('France'),
+            Region__c = regionId
         );
-
-        // ES Country Id: a6K3W000000Ch8XUAS
-        // FR Country Id: a6K3W000000Ch8dUAC
 
         Test.startTest();
 
@@ -151,17 +187,6 @@ global class VI_VEEV_HippoEventCloneHelperTest {
 
         ID hippoEventAttendeeId = hippoEventAttendee.Id;
 
-        // delete hippoEventAttendee;
-
-        // Set Event approved
-        // event.Status__c = 'Approved';
-
-        // // Update Event with approved status
-
-        // update event;
-
-        // [SELECT Id FROM Event_Attendee_vod__c WHERE VIA_Event_HCP__c = _evenhHCPID]
-        //List<Event_Attendee_vod__c> attendees = [SELECT Id FROM Event_Attendee_vod__c WHERE VIA_Event_HCP__c = :hippoEventAttendeeId];
         List<Event_Attendee_vod__c> attendees = [SELECT Id, First_Name_vod__c, Last_Name_vod__c, EPD_FR_MED_Attendee_Specialty__c FROM Event_Attendee_vod__c WHERE VIA_Event_HCP__c = :hippoEventAttendeeId];
 
         System.debug(attendees);
@@ -174,6 +199,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
 
     @isTest(SeeAllData=true)
     static void testHippoEventCreateFR() {
+        initializeIds();
         Hippo_Event__c hippoevent = new Hippo_Event__c(
             Name = 'test FR1',
             Start_Event_Date__c = System.today(),
@@ -186,12 +212,11 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Location_Sync__c = 'test location',
             Requesting_Party_Department_Sync__c = 'test department',
             Channel__c = 'Live and Online',
-            Event_subtype__c = 'RP Classic / RP Conference',
-            // Business_Unit__c = 'a6F1q000000FQEy',
-            Country__c = 'a6K3W000000Ch8dUAC',
+            Event_subtype__c = 'Classic RP lunch / dinner with snack',
+            Country__c = countryIdMap.get('France'),
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6n0700000004BE',
-            Region__c = 'a6g3W000000LPcvQAG'
+            Parent_User_Setting__c = userSettingIdMap.get('France'),
+            Region__c = regionId
         );
 
         Test.startTest();
@@ -215,7 +240,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
         System.assertEquals('Hippo Approved', medevent[0].VIA_Status__c, 'Status = Hippo Approved');
         System.assertEquals('Hippo approved', medevent[0].EPD_FR_MED_Event_Status__c, 'Status = Hippo approved');
         System.assertEquals('Hybrid', medevent[0].VIA_Medical_Event_Category__c, 'Medical Event Category is Hybrid based on the Channel: Live and Online');
-        System.assertEquals('Classic', medevent[0].EPD_FR_MED_Event_Subtype__c, 'Subtype = Classic');
+        System.assertEquals('Classic RP lunch / dinner with snack', medevent[0].EPD_FR_MED_Event_Subtype__c, 'Subtype = Classic RP lunch / dinner with snack');
         System.assertEquals('FR', medevent[0].VIA_Country_Code__c, 'France');
         System.assertEquals('test department', medevent[0].VIA_Requesting_Party_Department__c, 'The department should be inserted on the Medical Event.');
         System.assertEquals(medevent[0].OwnerId, attendee[0].User_vod__c, 'Owner Attendee set');
@@ -225,6 +250,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
 
     @IsTest(SeeAllData=true)
     static void testHippoEventUpdateFR() {
+        initializeIds();
         Hippo_Event__c hippoevent2 = new Hippo_Event__c(
             Name = 'test FR2',
             Start_Event_Date__c = System.today(),
@@ -237,11 +263,11 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Location_Sync__c = 'test location',
             Requesting_Party_Department_Sync__c = 'test department',
             Channel__c = 'Webinar',
-            Event_subtype__c = 'RP Classic / RP Conference',
-            Country__c = 'a6K3W000000Ch8dUAC',
+            Event_subtype__c = 'Classic RP lunch / dinner with snack',
+            Country__c = countryIdMap.get('France'),
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6n0700000004BE',
-            Region__c = 'a6g3W000000LPcvQAG'
+            Parent_User_Setting__c = userSettingIdMap.get('France'),
+            Region__c = regionId
         );
         insert hippoevent2;
 
@@ -270,7 +296,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
 
         System.assertEquals(1, updatedmedevent.size(), 'There should be one updated medical event');
         System.assertEquals('Remote', updatedmedevent[0].VIA_Medical_Event_Category__c, 'Medical Event Category is Remote');
-        System.assertEquals('Classic', updatedmedevent[0].EPD_FR_MED_Event_Subtype__c, 'Subtype = Classic');
+        System.assertEquals('Classic RP lunch / dinner with snack', updatedmedevent[0].EPD_FR_MED_Event_Subtype__c, 'Subtype = Classic RP lunch / dinner with snack');
         System.assertEquals(updatedmedevent[0].OwnerId, attendee[0].User_vod__c, 'Owner Attendee set');
         System.assertEquals('SYSEMP', attendee[0].Expense_Attendee_Type_vod__c, 'SYSEMP set on Owner Attendee');
         System.assertEquals('Invited', attendee[0].Status_vod__c, 'Invité set on Owner Attendee');
@@ -278,6 +304,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
 
     @IsTest(SeeAllData=true)
     static void testAttendeeDeleteFR() {
+        initializeIds();
         Hippo_Event__c event = new Hippo_Event__c(
             Name = 'test_FR3',
             Start_Event_Date__c = System.today(),
@@ -289,10 +316,10 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Title_Sync__c = 'test requesting party title',
             Requesting_Party_Location_Sync__c = 'test location',
             Requesting_Party_Department_Sync__c = 'test department',
-            Country__c = 'a6K3W000000Ch8dUAC',
+            Country__c = countryIdMap.get('France'),
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6n0700000004BE',
-            Region__c = 'a6g3W000000LPcvQAG'
+            Parent_User_Setting__c = userSettingIdMap.get('France'),
+            Region__c = regionId
         );
 
         Test.startTest();
@@ -325,6 +352,8 @@ global class VI_VEEV_HippoEventCloneHelperTest {
 
     @IsTest(SeeAllData=true)
     static void testAttendeeDeleteES() {
+        initializeIds();
+        System.runAs(runAsUserMap.get('France')) {
         Hippo_Event__c event = new Hippo_Event__c(
             Name = 'test_FR3',
             Start_Event_Date__c = System.today(),
@@ -336,10 +365,10 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Title_Sync__c = 'test requesting party title',
             Requesting_Party_Location_Sync__c = 'test location',
             Requesting_Party_Department_Sync__c = 'test department',
-            Country__c = 'a6K3W000000Ch8dUAC',
+            Country__c = countryIdMap.get('France'),
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nAY0000001LSe',
-            Region__c = 'a6g3W000000LPcyQAG'
+            Parent_User_Setting__c = userSettingIdMap.get('Spain'),
+            Region__c = regionId
         );
 
         Test.startTest();
@@ -361,10 +390,12 @@ global class VI_VEEV_HippoEventCloneHelperTest {
         System.debug(attendees);
 
         System.assertNotEquals(1, attendees.size(), 'Deleted Event_Attendee_vod__c');
+            }
     }
 
     @IsTest(SeeAllData=true)
     static void testAttendeeCreateFromInteractionFR() {
+        initializeIds();
         Hippo_Event__c event = new Hippo_Event__c(
             Name = 'test_FR',
             Start_Event_Date__c = System.today(),
@@ -376,10 +407,10 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Title_Sync__c = 'test requesting party title',
             Requesting_Party_Location_Sync__c = 'test location',
             Requesting_Party_Department_Sync__c = 'test department',
-            Country__c = 'a6K3W000000Ch8dUAC',
+            Country__c = countryIdMap.get('France'),
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6n0700000004BE',
-            Region__c = 'a6g3W000000LPcvQAG'
+            Parent_User_Setting__c = userSettingIdMap.get('France'),
+            Region__c = regionId
         );
 
         Test.startTest();
@@ -411,6 +442,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
 
     @IsTest(SeeAllData=true)
     static void testAttendeeUpsertFromInteractionFR() {
+        initializeIds();
         // creating new hippo event - not approved
         Hippo_Event__c event = new Hippo_Event__c(
             Name = 'test_FR',
@@ -423,10 +455,10 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Title_Sync__c = 'test requesting party title',
             Requesting_Party_Location_Sync__c = 'test location',
             Requesting_Party_Department_Sync__c = 'test department',
-            Country__c = 'a6K3W000000Ch8dUAC',
+            Country__c = countryIdMap.get('France'),
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6n0700000004BE',
-            Region__c = 'a6g3W000000LPcvQAG'
+            Parent_User_Setting__c = userSettingIdMap.get('France'),
+            Region__c = regionId
         );
 
         Test.startTest();
@@ -461,6 +493,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
 
     @IsTest(SeeAllData=true)
     static void testAttendeeUpdateFromInteractionFR() {
+        initializeIds();
         Hippo_Event__c event = new Hippo_Event__c(
             Name = 'test_FR',
             Start_Event_Date__c = System.today(),
@@ -472,10 +505,10 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Title_Sync__c = 'test requesting party title',
             Requesting_Party_Location_Sync__c = 'test location',
             Requesting_Party_Department_Sync__c = 'test department',
-            Country__c = 'a6K3W000000Ch8dUAC',
+            Country__c = countryIdMap.get('France'),
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6n0700000004BE',
-            Region__c = 'a6g3W000000LPcvQAG'
+            Parent_User_Setting__c = userSettingIdMap.get('France'),
+            Region__c = regionId
         );
         Test.startTest();
 
@@ -511,6 +544,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
 
     @IsTest(SeeAllData=true)
     static void testAttendeeInsertFromInteractionDraftFR() {
+        initializeIds();
         Hippo_Event__c event = new Hippo_Event__c(
             Name = 'test_FR',
             Start_Event_Date__c = System.today(),
@@ -522,10 +556,10 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Title_Sync__c = 'test requesting party title',
             Requesting_Party_Location_Sync__c = 'test location',
             Requesting_Party_Department_Sync__c = 'test department',
-            Country__c = 'a6K3W000000Ch8dUAC',
+            Country__c = countryIdMap.get('France'),
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6n0700000004BE',
-            Region__c = 'a6g3W000000LPcvQAG'
+            Parent_User_Setting__c = userSettingIdMap.get('France'),
+            Region__c = regionId
         );
 
         Test.startTest();
@@ -553,6 +587,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
 
     @IsTest(SeeAllData=true)
     static void testAttendeeUpdateFromInteractionFromDraftToApprovedFR() {
+        initializeIds();
         Hippo_Event__c event = new Hippo_Event__c(
             Name = 'test_FR',
             Start_Event_Date__c = System.today(),
@@ -564,10 +599,10 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Title_Sync__c = 'test requesting party title',
             Requesting_Party_Location_Sync__c = 'test location',
             Requesting_Party_Department_Sync__c = 'test department',
-            Country__c = 'a6K3W000000Ch8dUAC',
+            Country__c = countryIdMap.get('France'),
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6n0700000004BE',
-            Region__c = 'a6g3W000000LPcvQAG'
+            Parent_User_Setting__c = userSettingIdMap.get('France'),
+            Region__c = regionId
         );
         Test.startTest();
 
@@ -599,6 +634,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
 
     @IsTest(SeeAllData=true)
     static void testAttendeeUpdateFromEventHCPandInteractionFR() {
+        initializeIds();
         Hippo_Event__c event = new Hippo_Event__c(
             Name = 'test_FR',
             Start_Event_Date__c = System.today(),
@@ -610,10 +646,10 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Title_Sync__c = 'test requesting party title',
             Requesting_Party_Location_Sync__c = 'test location',
             Requesting_Party_Department_Sync__c = 'test department',
-            Country__c = 'a6K3W000000Ch8dUAC',
+            Country__c = countryIdMap.get('France'),
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6n0700000004BE',
-            Region__c = 'a6g3W000000LPcvQAG'
+            Parent_User_Setting__c = userSettingIdMap.get('France'),
+            Region__c = regionId
         );
         Test.startTest();
 
@@ -645,6 +681,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
 
     @isTest(SeeAllData=true)
     static void testEventTypePopulationOnEventFR() {
+        initializeIds();
         User testUser = [SELECT Id, Division, Title, Name FROM User WHERE Username = 'elisabeth.silva@viatris.com.fullemea' LIMIT 1];
 
         System.runAs(testUser) {
@@ -660,11 +697,11 @@ global class VI_VEEV_HippoEventCloneHelperTest {
                 Requesting_Party_Location_Sync__c = 'test location',
                 Requesting_Party_Department_Sync__c = 'test department',
                 Channel__c = 'Live and Online',
-                Event_subtype__c = 'RP Classic / RP Conference',
-                Country__c = 'a6K3W000000Ch8dUAC',
+                Event_subtype__c = 'Classic RP lunch / dinner with snack',
+                Country__c = countryIdMap.get('France'),
                 VIA_HIP_Subtype__c = 'Commercial',
-                Parent_User_Setting__c = 'a6n0700000004BE',
-                Region__c = 'a6g3W000000LPcvQAG'
+                Parent_User_Setting__c = userSettingIdMap.get('France'),
+                Region__c = regionId
             );
 
             Test.startTest();
@@ -689,9 +726,9 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             }
             System.assertEquals(1, medevent.size());
             System.assertEquals('Hippo Approved', medevent[0].VIA_Status__c, 'Status = Hippo approved');
-            System.assertEquals('RPS', medevent[0].Event_type__c, 'Event type = RPS');
+            System.assertEquals('Roundtable', medevent[0].Event_type__c, 'Event type = Roundtable (Direct)');
             System.assertEquals('Hybrid', medevent[0].VIA_Medical_Event_Category__c, 'Medical Event Category is Hybrid based on the Channel: Live and Online');
-            System.assertEquals('Classic', medevent[0].EPD_FR_MED_Event_Subtype__c, 'Subtype = Classic');
+            System.assertEquals('Classic RP lunch / dinner with snack', medevent[0].EPD_FR_MED_Event_Subtype__c, 'Subtype = Classic RP lunch / dinner with snack');
             System.assertEquals('FR', medevent[0].VIA_Country_Code__c, 'France');
             System.assertEquals('test department', medevent[0].VIA_Requesting_Party_Department__c, 'The department should be inserted on the Medical Event.');
             System.assertEquals(medevent[0].OwnerId, attendee[0].User_vod__c, 'Owner Attendee set');
@@ -702,6 +739,8 @@ global class VI_VEEV_HippoEventCloneHelperTest {
 
     @isTest(SeeAllData=true)
     static void testHippoEventCreateESMedicalAffairs() {
+        initializeIds();
+        System.runAs(runAsUserMap.get('Spain')) {
         Hippo_Event__c event = new Hippo_Event__c(
             Name = 'test1',
             Start_Event_Date__c = System.today(),
@@ -713,10 +752,10 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Title_Sync__c = 'test requesting party title',
             Requesting_Party_Location_Sync__c = 'test location',
             Requesting_Party_Department_Sync__c = 'test department',
-            Country__c = 'a6K3W000000Ch8XUAS',
+            Country__c = countryIdMap.get('Spain'),
             VIA_HIP_Subtype__c = 'Medical',
-            Parent_User_Setting__c = 'a6nAY0000001LSe',
-            Region__C = 'a6g3W000000LPcvQAG'
+            Parent_User_Setting__c = userSettingIdMap.get('Spain'),
+            Region__C = regionId
         );
 
         Test.startTest();
@@ -730,10 +769,12 @@ global class VI_VEEV_HippoEventCloneHelperTest {
         System.debug(events);
 
         System.assertEquals(0, events.size());
+            }
     }
     @IsTest(SeeAllData=true)
     static void testHippoEventUpdateUK() {
-        User jonasW = [SELECT Id FROM User WHERE Name = 'Jonas Willmann' LIMIT 1];
+        initializeIds();
+        User runAsUK = runAsUserMap.get('United Kingdom');
 
         Hippo_Event__c hippoevent2 = new Hippo_Event__c(
             Name = 'test UK',
@@ -747,11 +788,11 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Location_Sync__c = 'test location',
             Requesting_Party_Department_Sync__c = 'test department',
             Channel__c = 'Live and Online',
-            Event_subtype__c = 'RP Classic / RP Conference',
-            Country__c = 'a6K3W000000Ch8UUAS',
+            Event_subtype__c = 'Classic RP lunch / dinner with snack',
+            Country__c = countryIdMap.get('United Kingdom'),
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nAY0000001LdtYAE',
-            Region__c = 'a6g3W000000LPcvQAG',
+            Parent_User_Setting__c = userSettingIdMap.get('United Kingdom'),
+            Region__c = regionId,
             Event_venue__c = 'Coffee Beans UK',
             Address__c = '102 Derham Rd',
             City__c = 'Norwich',
@@ -763,7 +804,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
 
         Hippo_Event__c existingHippoEvent = [SELECT Id, Status__c FROM Hippo_Event__c WHERE Id = :hippoevent2.Id];
 
-        System.runAs(jonasW) {
+        System.runAs(runAsUK) {
             existingHippoEvent.Status__c = 'Approved';
             boolean defaultValue = VS_EventTriggerHandler.isSkipTriggerForTest;
 
@@ -798,7 +839,8 @@ global class VI_VEEV_HippoEventCloneHelperTest {
 
     @IsTest(SeeAllData=true)
     static void testHippoEventUpdateAndTerminateUK() {
-        User jonasW = [SELECT Id FROM User WHERE Name = 'Jonas Willmann' LIMIT 1];
+        initializeIds();
+        User runAsUK = runAsUserMap.get('United Kingdom');
 
         // Create a new Hippo Event for UK
         Hippo_Event__c hippoevent2 = new Hippo_Event__c(
@@ -813,11 +855,11 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Location_Sync__c = 'test location',
             Requesting_Party_Department_Sync__c = 'test department',
             Channel__c = 'Live and Online',
-            Event_subtype__c = 'RP Classic / RP Conference',
-            Country__c = 'a6K3W000000Ch8UUAS', // Assuming this is UK Country ID
+            Event_subtype__c = 'Classic RP lunch / dinner with snack',
+            Country__c = countryIdMap.get('United Kingdom'), // Assuming this is UK Country ID
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nAY0000001LdtYAE',
-            Region__c = 'a6g3W000000LPcvQAG',
+            Parent_User_Setting__c = userSettingIdMap.get('United Kingdom'),
+            Region__c = regionId,
             Event_venue__c = 'Coffee Beans UK',
             Address__c = '102 Derham Rd',
             City__c = 'Norwich',
@@ -830,7 +872,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
         // Approve the Hippo Event first
         Hippo_Event__c existingHippoEvent = [SELECT Id, Status__c FROM Hippo_Event__c WHERE Id = :hippoevent2.Id];
 
-        System.runAs(jonasW) {
+        System.runAs(runAsUK) {
             existingHippoEvent.Status__c = 'Approved';
             boolean defaultValue = VS_EventTriggerHandler.isSkipTriggerForTest;
 
@@ -849,7 +891,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
         Hippo_Event__c hippoEventToTerminate = [SELECT Id, Status__c FROM Hippo_Event__c WHERE Id = :existingHippoEvent.Id];
         hippoEventToTerminate.Status__c = 'Terminated';
 
-        System.runAs(jonasW) {
+        System.runAs(runAsUK) {
             boolean defaultValue = VS_EventTriggerHandler.isSkipTriggerForTest;
 
             try {
@@ -885,8 +927,9 @@ global class VI_VEEV_HippoEventCloneHelperTest {
 
     @IsTest(SeeAllData=true)
     static void testHippoEventUpdateUKwithExpenses() {
+        initializeIds();
         // Fetch a test user
-        User jonasW = [SELECT Id FROM User WHERE Name = 'Jonas Willmann' LIMIT 1];
+        User runAsUK = runAsUserMap.get('United Kingdom');
 
         // Create a Hippo_Event__c record for the UK
         Hippo_Event__c hippoevent2 = new Hippo_Event__c(
@@ -901,11 +944,11 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Location_Sync__c = 'test location',
             Requesting_Party_Department_Sync__c = 'test department',
             Channel__c = 'Live and Online',
-            Event_subtype__c = 'RP Classic / RP Conference',
-            Country__c = 'a6K3W000000Ch8UUAS',
+            Event_subtype__c = 'Classic RP lunch / dinner with snack',
+            Country__c = countryIdMap.get('United Kingdom'),
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nAY0000001LdtYAE',
-            Region__c = 'a6g3W000000LPcvQAG',
+            Parent_User_Setting__c = userSettingIdMap.get('United Kingdom'),
+            Region__c = regionId,
             Event_venue__c = 'Coffee Beans UK',
             Address__c = '102 Derham Rd',
             City__c = 'Norwich',
@@ -930,7 +973,7 @@ global class VI_VEEV_HippoEventCloneHelperTest {
 
         Hippo_Event__c existingHippoEvent = [SELECT Id, Status__c FROM Hippo_Event__c WHERE Id = :hippoevent2.Id];
 
-        System.runAs(jonasW) {
+        System.runAs(runAsUK) {
             existingHippoEvent.Status__c = 'Approved';
 
             try {
@@ -1010,11 +1053,13 @@ global class VI_VEEV_HippoEventCloneHelperTest {
 
     @IsTest(SeeAllData=true)
     static void testHippoEventUpdateUKwithInteractionExpensesWithoutEventHCP() {
+        initializeIds();
+        System.runAs(runAsUserMap.get('United Kingdom')) {
         // Get a test user (adjust the query as needed)
-        User jonasW = [SELECT Id FROM User WHERE Name = 'Jonas Willmann' LIMIT 1];
+        User runAsUK = runAsUserMap.get('United Kingdom');
 
         // Create a UK Hippo_Event__c record.
-        System.runAs(jonasW) {
+        System.runAs(runAsUK) {
             Hippo_Event__c ukEvent = new Hippo_Event__c(
                 Name = 'Test UK Without HCP',
                 Start_Event_Date__c = Date.today(),
@@ -1027,11 +1072,11 @@ global class VI_VEEV_HippoEventCloneHelperTest {
                 Requesting_Party_Location_Sync__c = 'Test Location',
                 Requesting_Party_Department_Sync__c = 'Test Dept',
                 Channel__c = 'Webinar',
-                Event_subtype__c = 'RP Classic / RP Conference',
-                Country__c = 'a6K3W000000Ch8UUAS',
+                Event_subtype__c = 'Classic RP lunch / dinner with snack',
+                Country__c = countryIdMap.get('United Kingdom'),
                 VIA_HIP_Subtype__c = 'Commercial',
-                Parent_User_Setting__c = 'a6nAY0000001LdtYAE',
-                Region__c = 'a6g3W000000LPcvQAG',
+                Parent_User_Setting__c = userSettingIdMap.get('United Kingdom'),
+                Region__c = regionId,
                 Event_venue__c = 'Coffee Beans UK',
                 Address__c = '102 Derham Rd',
                 City__c = 'Norwich',
@@ -1084,10 +1129,13 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             System.assertEquals(500.00, exp.EPD_Planned_Cost__c, 'Expense planned cost should match the interaction amount.');
             System.assertEquals('GBP', exp.CurrencyIsoCode, 'Expense currency should be GBP.');
         }
+            }
     }
 
     @IsTest(SeeAllData=true)
     static void testHippoEventTerminateUKWithoutMedEvent() {
+        initializeIds();
+        System.runAs(runAsUserMap.get('United Kingdom')) {
         // UK draft Hippo Event (no Medical Event yet)
         Hippo_Event__c hippoEvent = new Hippo_Event__c(
             Name = 'UK Terminate – no MedEvent',
@@ -1101,18 +1149,18 @@ global class VI_VEEV_HippoEventCloneHelperTest {
             Requesting_Party_Location_Sync__c = 'Location',
             Requesting_Party_Department_Sync__c = 'Dept',
             Channel__c = 'Webinar',
-            Event_subtype__c = 'RP Classic / RP Conference',
-            Country__c = 'a6K3W000000Ch8UUAS', // UK country id
+            Event_subtype__c = 'Classic RP lunch / dinner with snack',
+            Country__c = countryIdMap.get('United Kingdom'), // UK country id
             VIA_HIP_Subtype__c = 'Commercial',
-            Parent_User_Setting__c = 'a6nAY0000001LdtYAE',
-            Region__c = 'a6g3W000000LPcvQAG'
+            Parent_User_Setting__c = userSettingIdMap.get('United Kingdom'),
+            Region__c = regionId
         );
         insert hippoEvent;
 
-        User ukUser = [SELECT Id FROM User WHERE Name = 'Jonas Willmann' LIMIT 1];
+        User runAsUK = runAsUserMap.get('United Kingdom');
 
         Test.startTest();
-        System.runAs(ukUser) {
+        System.runAs(runAsUK) {
             Hippo_Event__c toTerminate = [SELECT Id, Status__c FROM Hippo_Event__c WHERE Id = :hippoEvent.Id];
             toTerminate.Status__c = 'Terminated';
 
@@ -1129,5 +1177,72 @@ global class VI_VEEV_HippoEventCloneHelperTest {
         // No Medical Event should have been created, and no exception thrown
         List<Medical_Event_vod__c> medEvents = [SELECT Id FROM Medical_Event_vod__c WHERE VIA_Hippo_Event__c = :hippoEvent.Id];
         System.assertEquals(0, medEvents.size(), 'Terminating a UK Hippo Event with no existing Medical Event must not create one.');
+            }
     }
+
+    @isTest(SeeAllData=true)
+    static void testHippoEventCreateFR_AllTypesAndSubtypes() {
+        initializeIds();
+        System.runAs(runAsUserMap.get('France')) {
+        Map<String, String> typeToExpectedTypeMap = new Map<String, String>{
+            'Commercial Advisory Board' => 'Commercial Advisory Board',
+            'Conference' => 'Conference',
+            'Congress' => 'Congress',
+            'Master Class' => 'Masterclass',
+            'Roundtable' => 'Roundtable',
+            'Site Visit' => 'Site Visit',
+            'Symposium' => 'Symposium',
+            'Meeting' => null
+        };
+        
+        List<String> subtypes = new List<String>{
+            'Classic staff lunch'
+        };
+
+        List<Hippo_Event__c> eventsToInsert = new List<Hippo_Event__c>();
+        
+        Integer i = 0;
+        for (String type : typeToExpectedTypeMap.keySet()) {
+            for (String subtype : subtypes) {
+                Hippo_Event__c evt = new Hippo_Event__c(
+                    Name = 'Test FR ' + i,
+                    Start_Event_Date__c = System.today(),
+                    End_Event_Date__c = System.today(),
+                    TrackingNumber__c = 'trk-' + i,
+                    Status__c = 'Approved',
+                    Type__c = type,
+                    Event_subtype__c = subtype,
+                    Country__c = countryIdMap.get('France'),
+                    Region__c = regionId,
+                    Parent_User_Setting__c = userSettingIdMap.get('France'),
+                    VIA_HIP_Subtype__c = 'Commercial'
+                );
+                eventsToInsert.add(evt);
+                i++;
+            }
+        }
+        
+        Test.startTest();
+        insert eventsToInsert;
+        Test.stopTest();
+        
+        List<Medical_Event_vod__c> medEvents = [
+            SELECT VIA_Hippo_Event__r.Type__c, VIA_Hippo_Event__r.Event_subtype__c, Event_Type__c, EPD_FR_MED_Event_Subtype__c
+            FROM Medical_Event_vod__c
+            WHERE VIA_Hippo_Event__c IN :eventsToInsert
+        ];
+        
+        System.assertEquals(eventsToInsert.size(), medEvents.size(), 'All Medical Events should be created.');
+
+        for (Medical_Event_vod__c me : medEvents) {
+            String originalType = me.VIA_Hippo_Event__r.Type__c;
+            String originalSubtype = me.VIA_Hippo_Event__r.Event_subtype__c;
+            String expectedType = typeToExpectedTypeMap.get(originalType);
+            
+            System.assertEquals(expectedType, me.Event_Type__c, 'Mismatch for Event Type: ' + originalType);
+            System.assertEquals(originalSubtype, me.EPD_FR_MED_Event_Subtype__c, 'Mismatch for Subtype: ' + originalSubtype);
+        }
+            }
+    }
+
 }
